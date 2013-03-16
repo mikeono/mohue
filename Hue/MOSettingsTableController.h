@@ -8,6 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MOSettingsTableController : UITableViewController
+typedef enum MOSettingsTableRow {
+  MOSettingsTableRowConnect,
+  MOSettingsTableRowAllOn,
+  MOSettingsTableRowAllOff,
+  MOSettingsTableRowLightRed,
+  MOSettingsTableRowPartay,
+  MOSettingsTableRowAddTestSchedule,
+  MOSettingsTableRowRemoveTestSchedule,
+  MOSettingsTableRowGetSchedules,
+  MOSettingsTableRowCount
+} MOSettingsTableRow;
+
+@interface MOSettingsTableController : UITableViewController {
+  MOSettingsTableRow _rowMap[MOSettingsTableRowCount];
+  int _rowCount;
+}
+
 
 @end

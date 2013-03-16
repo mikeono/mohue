@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27077B0716F4B297007159DE /* MODictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 27077B0616F4B297007159DE /* MODictionary.m */; };
+		27077B0A16F4B2BF007159DE /* MOHueSchedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 27077B0916F4B2BF007159DE /* MOHueSchedule.m */; };
 		27451CEB16F01A7D0015A07B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27451CEA16F01A7D0015A07B /* UIKit.framework */; };
 		27451CED16F01A7D0015A07B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27451CEC16F01A7D0015A07B /* Foundation.framework */; };
 		27451CEF16F01A7D0015A07B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27451CEE16F01A7D0015A07B /* CoreGraphics.framework */; };
@@ -50,6 +52,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		27077B0516F4B297007159DE /* MODictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MODictionary.h; sourceTree = "<group>"; };
+		27077B0616F4B297007159DE /* MODictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MODictionary.m; sourceTree = "<group>"; };
+		27077B0816F4B2BF007159DE /* MOHueSchedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOHueSchedule.h; sourceTree = "<group>"; };
+		27077B0916F4B2BF007159DE /* MOHueSchedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOHueSchedule.m; sourceTree = "<group>"; };
 		27451CE716F01A7D0015A07B /* Hue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27451CEA16F01A7D0015A07B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		27451CEC16F01A7D0015A07B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -233,6 +239,10 @@
 			children = (
 				27451D4616F0237E0015A07B /* MOHueService.h */,
 				27451D4716F0237E0015A07B /* MOHueService.m */,
+				27077B0516F4B297007159DE /* MODictionary.h */,
+				27077B0616F4B297007159DE /* MODictionary.m */,
+				27077B0816F4B2BF007159DE /* MOHueSchedule.h */,
+				27077B0916F4B2BF007159DE /* MOHueSchedule.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -369,6 +379,8 @@
 				27451D3D16F01DCF0015A07B /* JSONKit.m in Sources */,
 				27451D4116F01E870015A07B /* MOSettingsTableController.m in Sources */,
 				27451D4816F0237E0015A07B /* MOHueService.m in Sources */,
+				27077B0716F4B297007159DE /* MODictionary.m in Sources */,
+				27077B0A16F4B2BF007159DE /* MOHueSchedule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,6 +595,7 @@
 				27451D3516F01A7E0015A07B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		27451D3616F01A7E0015A07B /* Build configuration list for PBXNativeTarget "HueTests" */ = {
 			isa = XCConfigurationList;
@@ -591,6 +604,7 @@
 				27451D3816F01A7E0015A07B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

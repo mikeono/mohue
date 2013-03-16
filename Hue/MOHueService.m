@@ -31,7 +31,7 @@ static MOHueService *instance = nil;
 #pragma mark - Getters and Setters
 
 - (NSString*)serverName {
-  return @"192.168.0.20"; //@"192.168.1.8";
+  return @"192.168.1.5";
 }
 
 #pragma mark - Making URL Requests
@@ -52,16 +52,24 @@ static MOHueService *instance = nil;
 
 - (NSMutableURLRequest*)startAsyncRequestWithPath:(NSString*)path body:(NSDictionary*)body method:(NSString*)method userCompletionHandler:(void (^)(NSURLResponse*, id, NSError*))userCompletionHandler {
   NSMutableURLRequest* request = [self requestWithPath: path body: body method: method];
- 
+  request.timeoutInterval = 5.0f;
+  
   [NSURLConnection sendAsynchronousRequest: request queue: _resultProcessingQueue completionHandler: ^(NSURLResponse* response, NSData* data, NSError* error) {
     
     // Do stuff with response
     NSString* responseString = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
     DBG(@"Got response: %@", responseString);
+    if ( error ) {
+      DBG(@"Got error %@", error);
+    }
+    
+    id responseObject = [data objectFromJSONData];
     
     // Call the user completion handler if it's set
     if ( userCompletionHandler ) {
-      userCompletionHandler(response, responseString, error);
+      dispatch_async( dispatch_get_main_queue(), ^{
+        userCompletionHandler(response, responseObject, error);
+      });
     }
   }];
   return request;
