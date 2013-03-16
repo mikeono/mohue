@@ -1,0 +1,598 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		27451CEB16F01A7D0015A07B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27451CEA16F01A7D0015A07B /* UIKit.framework */; };
+		27451CED16F01A7D0015A07B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27451CEC16F01A7D0015A07B /* Foundation.framework */; };
+		27451CEF16F01A7D0015A07B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27451CEE16F01A7D0015A07B /* CoreGraphics.framework */; };
+		27451CF516F01A7D0015A07B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27451CF316F01A7D0015A07B /* InfoPlist.strings */; };
+		27451CF716F01A7D0015A07B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 27451CF616F01A7D0015A07B /* main.m */; };
+		27451CFB16F01A7D0015A07B /* MOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 27451CFA16F01A7D0015A07B /* MOAppDelegate.m */; };
+		27451CFD16F01A7D0015A07B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 27451CFC16F01A7D0015A07B /* Default.png */; };
+		27451CFF16F01A7D0015A07B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27451CFE16F01A7D0015A07B /* Default@2x.png */; };
+		27451D0116F01A7D0015A07B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27451D0016F01A7D0015A07B /* Default-568h@2x.png */; };
+		27451D0416F01A7D0015A07B /* MOFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27451D0316F01A7D0015A07B /* MOFirstViewController.m */; };
+		27451D0616F01A7D0015A07B /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 27451D0516F01A7D0015A07B /* first.png */; };
+		27451D0816F01A7D0015A07B /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27451D0716F01A7D0015A07B /* first@2x.png */; };
+		27451D0B16F01A7D0015A07B /* MOSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27451D0A16F01A7D0015A07B /* MOSecondViewController.m */; };
+		27451D0D16F01A7D0015A07B /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 27451D0C16F01A7D0015A07B /* second.png */; };
+		27451D0F16F01A7D0015A07B /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27451D0E16F01A7D0015A07B /* second@2x.png */; };
+		27451D1216F01A7D0015A07B /* MOFirstViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27451D1016F01A7D0015A07B /* MOFirstViewController_iPhone.xib */; };
+		27451D1516F01A7D0015A07B /* MOFirstViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27451D1316F01A7D0015A07B /* MOFirstViewController_iPad.xib */; };
+		27451D1816F01A7D0015A07B /* MOSecondViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27451D1616F01A7D0015A07B /* MOSecondViewController_iPhone.xib */; };
+		27451D1B16F01A7D0015A07B /* MOSecondViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27451D1916F01A7D0015A07B /* MOSecondViewController_iPad.xib */; };
+		27451D2316F01A7E0015A07B /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27451D2216F01A7E0015A07B /* SenTestingKit.framework */; };
+		27451D2416F01A7E0015A07B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27451CEA16F01A7D0015A07B /* UIKit.framework */; };
+		27451D2516F01A7E0015A07B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27451CEC16F01A7D0015A07B /* Foundation.framework */; };
+		27451D2D16F01A7E0015A07B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27451D2B16F01A7E0015A07B /* InfoPlist.strings */; };
+		27451D3016F01A7E0015A07B /* HueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27451D2F16F01A7E0015A07B /* HueTests.m */; };
+		27451D3D16F01DCF0015A07B /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 27451D3C16F01DCF0015A07B /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		27451D3E16F01DCF0015A07B /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 27451D3C16F01DCF0015A07B /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		27451D4116F01E870015A07B /* MOSettingsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27451D4016F01E870015A07B /* MOSettingsTableController.m */; };
+		27451D4216F01E870015A07B /* MOSettingsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27451D4016F01E870015A07B /* MOSettingsTableController.m */; };
+		27451D4816F0237E0015A07B /* MOHueService.m in Sources */ = {isa = PBXBuildFile; fileRef = 27451D4716F0237E0015A07B /* MOHueService.m */; };
+		27451D4916F0237E0015A07B /* MOHueService.m in Sources */ = {isa = PBXBuildFile; fileRef = 27451D4716F0237E0015A07B /* MOHueService.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		27451D2616F01A7E0015A07B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27451CDF16F01A7D0015A07B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 27451CE616F01A7D0015A07B;
+			remoteInfo = Hue;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		27451CE716F01A7D0015A07B /* Hue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hue.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		27451CEA16F01A7D0015A07B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		27451CEC16F01A7D0015A07B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		27451CEE16F01A7D0015A07B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		27451CF216F01A7D0015A07B /* Hue-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Hue-Info.plist"; sourceTree = "<group>"; };
+		27451CF416F01A7D0015A07B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		27451CF616F01A7D0015A07B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		27451CF816F01A7D0015A07B /* Hue-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hue-Prefix.pch"; sourceTree = "<group>"; };
+		27451CF916F01A7D0015A07B /* MOAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MOAppDelegate.h; sourceTree = "<group>"; };
+		27451CFA16F01A7D0015A07B /* MOAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MOAppDelegate.m; sourceTree = "<group>"; };
+		27451CFC16F01A7D0015A07B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		27451CFE16F01A7D0015A07B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		27451D0016F01A7D0015A07B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		27451D0216F01A7D0015A07B /* MOFirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MOFirstViewController.h; sourceTree = "<group>"; };
+		27451D0316F01A7D0015A07B /* MOFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MOFirstViewController.m; sourceTree = "<group>"; };
+		27451D0516F01A7D0015A07B /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
+		27451D0716F01A7D0015A07B /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
+		27451D0916F01A7D0015A07B /* MOSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MOSecondViewController.h; sourceTree = "<group>"; };
+		27451D0A16F01A7D0015A07B /* MOSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MOSecondViewController.m; sourceTree = "<group>"; };
+		27451D0C16F01A7D0015A07B /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
+		27451D0E16F01A7D0015A07B /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		27451D1116F01A7D0015A07B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MOFirstViewController_iPhone.xib; sourceTree = "<group>"; };
+		27451D1416F01A7D0015A07B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MOFirstViewController_iPad.xib; sourceTree = "<group>"; };
+		27451D1716F01A7D0015A07B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MOSecondViewController_iPhone.xib; sourceTree = "<group>"; };
+		27451D1A16F01A7D0015A07B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MOSecondViewController_iPad.xib; sourceTree = "<group>"; };
+		27451D2116F01A7E0015A07B /* HueTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HueTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		27451D2216F01A7E0015A07B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		27451D2A16F01A7E0015A07B /* HueTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HueTests-Info.plist"; sourceTree = "<group>"; };
+		27451D2C16F01A7E0015A07B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		27451D2E16F01A7E0015A07B /* HueTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HueTests.h; sourceTree = "<group>"; };
+		27451D2F16F01A7E0015A07B /* HueTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HueTests.m; sourceTree = "<group>"; };
+		27451D3B16F01DCF0015A07B /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		27451D3C16F01DCF0015A07B /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		27451D3F16F01E870015A07B /* MOSettingsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSettingsTableController.h; sourceTree = "<group>"; };
+		27451D4016F01E870015A07B /* MOSettingsTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSettingsTableController.m; sourceTree = "<group>"; };
+		27451D4616F0237E0015A07B /* MOHueService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOHueService.h; sourceTree = "<group>"; };
+		27451D4716F0237E0015A07B /* MOHueService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOHueService.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		27451CE416F01A7D0015A07B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27451CEB16F01A7D0015A07B /* UIKit.framework in Frameworks */,
+				27451CED16F01A7D0015A07B /* Foundation.framework in Frameworks */,
+				27451CEF16F01A7D0015A07B /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27451D1D16F01A7E0015A07B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27451D2316F01A7E0015A07B /* SenTestingKit.framework in Frameworks */,
+				27451D2416F01A7E0015A07B /* UIKit.framework in Frameworks */,
+				27451D2516F01A7E0015A07B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		27451CDE16F01A7D0015A07B = {
+			isa = PBXGroup;
+			children = (
+				27451CF016F01A7D0015A07B /* Hue */,
+				27451D2816F01A7E0015A07B /* HueTests */,
+				27451CE916F01A7D0015A07B /* Frameworks */,
+				27451CE816F01A7D0015A07B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		27451CE816F01A7D0015A07B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				27451CE716F01A7D0015A07B /* Hue.app */,
+				27451D2116F01A7E0015A07B /* HueTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		27451CE916F01A7D0015A07B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				27451CEA16F01A7D0015A07B /* UIKit.framework */,
+				27451CEC16F01A7D0015A07B /* Foundation.framework */,
+				27451CEE16F01A7D0015A07B /* CoreGraphics.framework */,
+				27451D2216F01A7E0015A07B /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		27451CF016F01A7D0015A07B /* Hue */ = {
+			isa = PBXGroup;
+			children = (
+				27451D3916F01D8F0015A07B /* Classes */,
+				27451D3A16F01DBD0015A07B /* Libraries */,
+				27451D0516F01A7D0015A07B /* first.png */,
+				27451D0716F01A7D0015A07B /* first@2x.png */,
+				27451D0C16F01A7D0015A07B /* second.png */,
+				27451D0E16F01A7D0015A07B /* second@2x.png */,
+				27451D1016F01A7D0015A07B /* MOFirstViewController_iPhone.xib */,
+				27451D1316F01A7D0015A07B /* MOFirstViewController_iPad.xib */,
+				27451D1616F01A7D0015A07B /* MOSecondViewController_iPhone.xib */,
+				27451D1916F01A7D0015A07B /* MOSecondViewController_iPad.xib */,
+				27451CF116F01A7D0015A07B /* Supporting Files */,
+			);
+			path = Hue;
+			sourceTree = "<group>";
+		};
+		27451CF116F01A7D0015A07B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				27451CF216F01A7D0015A07B /* Hue-Info.plist */,
+				27451CF316F01A7D0015A07B /* InfoPlist.strings */,
+				27451CF616F01A7D0015A07B /* main.m */,
+				27451CF816F01A7D0015A07B /* Hue-Prefix.pch */,
+				27451CFC16F01A7D0015A07B /* Default.png */,
+				27451CFE16F01A7D0015A07B /* Default@2x.png */,
+				27451D0016F01A7D0015A07B /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		27451D2816F01A7E0015A07B /* HueTests */ = {
+			isa = PBXGroup;
+			children = (
+				27451D2E16F01A7E0015A07B /* HueTests.h */,
+				27451D2F16F01A7E0015A07B /* HueTests.m */,
+				27451D2916F01A7E0015A07B /* Supporting Files */,
+			);
+			path = HueTests;
+			sourceTree = "<group>";
+		};
+		27451D2916F01A7E0015A07B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				27451D2A16F01A7E0015A07B /* HueTests-Info.plist */,
+				27451D2B16F01A7E0015A07B /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		27451D3916F01D8F0015A07B /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				27451CF916F01A7D0015A07B /* MOAppDelegate.h */,
+				27451CFA16F01A7D0015A07B /* MOAppDelegate.m */,
+				27451D4316F0230F0015A07B /* Controllers */,
+				27451D4416F023220015A07B /* Models */,
+				27451D4516F023440015A07B /* Views */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		27451D3A16F01DBD0015A07B /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				27451D3B16F01DCF0015A07B /* JSONKit.h */,
+				27451D3C16F01DCF0015A07B /* JSONKit.m */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		27451D4316F0230F0015A07B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				27451D3F16F01E870015A07B /* MOSettingsTableController.h */,
+				27451D4016F01E870015A07B /* MOSettingsTableController.m */,
+				27451D0216F01A7D0015A07B /* MOFirstViewController.h */,
+				27451D0316F01A7D0015A07B /* MOFirstViewController.m */,
+				27451D0916F01A7D0015A07B /* MOSecondViewController.h */,
+				27451D0A16F01A7D0015A07B /* MOSecondViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		27451D4416F023220015A07B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				27451D4616F0237E0015A07B /* MOHueService.h */,
+				27451D4716F0237E0015A07B /* MOHueService.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		27451D4516F023440015A07B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		27451CE616F01A7D0015A07B /* Hue */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27451D3316F01A7E0015A07B /* Build configuration list for PBXNativeTarget "Hue" */;
+			buildPhases = (
+				27451CE316F01A7D0015A07B /* Sources */,
+				27451CE416F01A7D0015A07B /* Frameworks */,
+				27451CE516F01A7D0015A07B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Hue;
+			productName = Hue;
+			productReference = 27451CE716F01A7D0015A07B /* Hue.app */;
+			productType = "com.apple.product-type.application";
+		};
+		27451D2016F01A7E0015A07B /* HueTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27451D3616F01A7E0015A07B /* Build configuration list for PBXNativeTarget "HueTests" */;
+			buildPhases = (
+				27451D1C16F01A7E0015A07B /* Sources */,
+				27451D1D16F01A7E0015A07B /* Frameworks */,
+				27451D1E16F01A7E0015A07B /* Resources */,
+				27451D1F16F01A7E0015A07B /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				27451D2716F01A7E0015A07B /* PBXTargetDependency */,
+			);
+			name = HueTests;
+			productName = HueTests;
+			productReference = 27451D2116F01A7E0015A07B /* HueTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		27451CDF16F01A7D0015A07B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MO;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Mike Onorato";
+			};
+			buildConfigurationList = 27451CE216F01A7D0015A07B /* Build configuration list for PBXProject "Hue" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 27451CDE16F01A7D0015A07B;
+			productRefGroup = 27451CE816F01A7D0015A07B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				27451CE616F01A7D0015A07B /* Hue */,
+				27451D2016F01A7E0015A07B /* HueTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		27451CE516F01A7D0015A07B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27451CF516F01A7D0015A07B /* InfoPlist.strings in Resources */,
+				27451CFD16F01A7D0015A07B /* Default.png in Resources */,
+				27451CFF16F01A7D0015A07B /* Default@2x.png in Resources */,
+				27451D0116F01A7D0015A07B /* Default-568h@2x.png in Resources */,
+				27451D0616F01A7D0015A07B /* first.png in Resources */,
+				27451D0816F01A7D0015A07B /* first@2x.png in Resources */,
+				27451D0D16F01A7D0015A07B /* second.png in Resources */,
+				27451D0F16F01A7D0015A07B /* second@2x.png in Resources */,
+				27451D1216F01A7D0015A07B /* MOFirstViewController_iPhone.xib in Resources */,
+				27451D1516F01A7D0015A07B /* MOFirstViewController_iPad.xib in Resources */,
+				27451D1816F01A7D0015A07B /* MOSecondViewController_iPhone.xib in Resources */,
+				27451D1B16F01A7D0015A07B /* MOSecondViewController_iPad.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27451D1E16F01A7E0015A07B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27451D2D16F01A7E0015A07B /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		27451D1F16F01A7E0015A07B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		27451CE316F01A7D0015A07B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27451CF716F01A7D0015A07B /* main.m in Sources */,
+				27451CFB16F01A7D0015A07B /* MOAppDelegate.m in Sources */,
+				27451D0416F01A7D0015A07B /* MOFirstViewController.m in Sources */,
+				27451D0B16F01A7D0015A07B /* MOSecondViewController.m in Sources */,
+				27451D3D16F01DCF0015A07B /* JSONKit.m in Sources */,
+				27451D4116F01E870015A07B /* MOSettingsTableController.m in Sources */,
+				27451D4816F0237E0015A07B /* MOHueService.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27451D1C16F01A7E0015A07B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27451D3016F01A7E0015A07B /* HueTests.m in Sources */,
+				27451D3E16F01DCF0015A07B /* JSONKit.m in Sources */,
+				27451D4216F01E870015A07B /* MOSettingsTableController.m in Sources */,
+				27451D4916F0237E0015A07B /* MOHueService.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		27451D2716F01A7E0015A07B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 27451CE616F01A7D0015A07B /* Hue */;
+			targetProxy = 27451D2616F01A7E0015A07B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		27451CF316F01A7D0015A07B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27451CF416F01A7D0015A07B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		27451D1016F01A7D0015A07B /* MOFirstViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27451D1116F01A7D0015A07B /* en */,
+			);
+			name = MOFirstViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		27451D1316F01A7D0015A07B /* MOFirstViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27451D1416F01A7D0015A07B /* en */,
+			);
+			name = MOFirstViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+		27451D1616F01A7D0015A07B /* MOSecondViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27451D1716F01A7D0015A07B /* en */,
+			);
+			name = MOSecondViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		27451D1916F01A7D0015A07B /* MOSecondViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27451D1A16F01A7D0015A07B /* en */,
+			);
+			name = MOSecondViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+		27451D2B16F01A7E0015A07B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27451D2C16F01A7E0015A07B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		27451D3116F01A7E0015A07B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"MO_DEBUG=1",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		27451D3216F01A7E0015A07B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		27451D3416F01A7E0015A07B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hue/Hue-Prefix.pch";
+				INFOPLIST_FILE = "Hue/Hue-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MO_DEBUG = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		27451D3516F01A7E0015A07B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hue/Hue-Prefix.pch";
+				INFOPLIST_FILE = "Hue/Hue-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MO_DEBUG = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		27451D3716F01A7E0015A07B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Hue.app/Hue";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hue/Hue-Prefix.pch";
+				INFOPLIST_FILE = "HueTests/HueTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		27451D3816F01A7E0015A07B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Hue.app/Hue";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hue/Hue-Prefix.pch";
+				INFOPLIST_FILE = "HueTests/HueTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		27451CE216F01A7D0015A07B /* Build configuration list for PBXProject "Hue" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27451D3116F01A7E0015A07B /* Debug */,
+				27451D3216F01A7E0015A07B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		27451D3316F01A7E0015A07B /* Build configuration list for PBXNativeTarget "Hue" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27451D3416F01A7E0015A07B /* Debug */,
+				27451D3516F01A7E0015A07B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		27451D3616F01A7E0015A07B /* Build configuration list for PBXNativeTarget "HueTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27451D3716F01A7E0015A07B /* Debug */,
+				27451D3816F01A7E0015A07B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 27451CDF16F01A7D0015A07B /* Project object */;
+}
