@@ -10,15 +10,16 @@
 
 @implementation MOScheduleList
 
-- (id)initWithAPIDictionary:(NSDictionary*)dictionary {
+- (id)init {
   if ( self = [super init] ) {
-    _dictionary = dictionary;
   }
   return self;
 }
 
-- (NSArray*)scheduleIds {
-  return [_dictionary allKeys];
+- (id)initWithAPIDictionary:(NSDictionary*)dictionary {
+  if ( self = [super init] ) {
+  }
+  return self;
 }
 
 @end

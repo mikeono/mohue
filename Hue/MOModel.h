@@ -13,14 +13,8 @@ typedef enum MOModelDetail {
   MOModelDetailDefault
 } MOModelDetail;
 
-@interface MOModel : NSObject {
-  NSDictionary* _dictionary;
-  NSArray* _array;
-}
+@interface MOModel : NSObject 
 
 @property (nonatomic, assign) MOModelDetail detail;
-
-@property (nonatomic, strong) NSDictionary* dictionary;
-@property (nonatomic, strong) NSArray* array;
 
 @end

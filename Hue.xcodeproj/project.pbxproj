@@ -42,6 +42,7 @@
 		27451D4816F0237E0015A07B /* MOHueServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 27451D4716F0237E0015A07B /* MOHueServiceManager.m */; };
 		27451D4916F0237E0015A07B /* MOHueServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 27451D4716F0237E0015A07B /* MOHueServiceManager.m */; };
 		27634CAE17110F8A00F95988 /* MOScheduleListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27634CAD17110F8A00F95988 /* MOScheduleListController.m */; };
+		27634CB117111FA300F95988 /* MOLightState.m in Sources */ = {isa = PBXBuildFile; fileRef = 27634CB017111FA300F95988 /* MOLightState.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,8 @@
 		27451D4716F0237E0015A07B /* MOHueServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOHueServiceManager.m; sourceTree = "<group>"; };
 		27634CAC17110F8A00F95988 /* MOScheduleListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOScheduleListController.h; sourceTree = "<group>"; };
 		27634CAD17110F8A00F95988 /* MOScheduleListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOScheduleListController.m; sourceTree = "<group>"; };
+		27634CAF17111FA300F95988 /* MOLightState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOLightState.h; sourceTree = "<group>"; };
+		27634CB017111FA300F95988 /* MOLightState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOLightState.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,6 +269,8 @@
 				27077B0E16F4B367007159DE /* MOScheduleList.m */,
 				27077B0816F4B2BF007159DE /* MOSchedule.h */,
 				27077B0916F4B2BF007159DE /* MOSchedule.m */,
+				27634CAF17111FA300F95988 /* MOLightState.h */,
+				27634CB017111FA300F95988 /* MOLightState.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -407,6 +412,7 @@
 				27077B1316F4B563007159DE /* MOModel.m in Sources */,
 				27077B1616F4B7E9007159DE /* MOHueScheduleService.m in Sources */,
 				27634CAE17110F8A00F95988 /* MOScheduleListController.m in Sources */,
+				27634CB117111FA300F95988 /* MOLightState.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

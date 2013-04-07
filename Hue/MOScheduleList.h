@@ -10,9 +10,10 @@
 
 @interface MOScheduleList : MOModel
 
+@property (nonatomic, strong) NSArray* schedules;
+
 - (id)initWithAPIDictionary:(NSDictionary*)dictionary;
 
-// Array of NSString indexes 
-- (NSArray*)scheduleIds;
+- (id)init;
 
 @end
