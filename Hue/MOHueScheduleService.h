@@ -10,4 +10,6 @@
 
 @interface MOHueScheduleService : NSObject
 
++ (void)getAllSchedules;
+
 @end

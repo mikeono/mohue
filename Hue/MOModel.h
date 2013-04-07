@@ -1,5 +1,5 @@
 //
-//  MOHueModel.h
+//  MOModel.h
 //  Hue
 //
 //  Created by Mike Onorato on 3/16/13.
@@ -8,6 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MOHueModel : NSObject
+typedef enum MOModelDetail {
+  MOModelDetailSummary,
+  MOModelDetailDefault
+} MOModelDetail;
+
+@interface MOModel : NSObject {
+  NSDictionary* _dictionary;
+  NSArray* _array;
+}
+
+@property (nonatomic, assign) MOModelDetail detail;
+
+@property (nonatomic, strong) NSDictionary* dictionary;
+@property (nonatomic, strong) NSArray* array;
 
 @end

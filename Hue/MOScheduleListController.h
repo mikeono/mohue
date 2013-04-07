@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class MOScheduleList;
+
 @interface MOScheduleListController : UITableViewController
+
+@property (nonatomic, strong) MOScheduleList* scheduleList;
 
 @end

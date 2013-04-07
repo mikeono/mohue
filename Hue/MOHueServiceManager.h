@@ -8,16 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MOHueService : NSObject <NSURLConnectionDelegate>
+@interface MOHueServiceManager : NSObject <NSURLConnectionDelegate>
 
 @property (nonatomic, strong) NSString* serverName;
 
-+ (MOHueService *)sharedInstance;
++ (MOHueServiceManager *)sharedInstance;
 
 #pragma mark - Making URL Requests
 
 - (NSMutableURLRequest*)requestWithPath:(NSString*)path body:(NSDictionary*)body method:(NSString*)method;
 
-- (NSMutableURLRequest*)startAsyncRequestWithPath:(NSString*)path body:(NSDictionary*)body  method:(NSString*)method userCompletionHandler:(void (^)(NSURLResponse*, id, NSError*))userCompletionHandler;
+- (NSMutableURLRequest*)startAsyncRequestWithPath:(NSString*)path body:(NSDictionary*)body  method:(NSString*)method completionHandler:(void (^)(id, NSError*))completionHandler;
 
 @end

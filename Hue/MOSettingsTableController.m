@@ -7,7 +7,8 @@
 //
 
 #import "MOSettingsTableController.h"
-#import "MOHueService.h"
+#import "MOHueServiceManager.h"
+#import "MOHueScheduleService.h"
 
 @interface MOSettingsTableController ()
 
@@ -103,19 +104,19 @@
     case MOSettingsTableRowConnect:
     {
       NSDictionary* requestBody = @{@"devicetype":@"iPhone", @"username":@"1234567890"};
-      [[MOHueService sharedInstance] startAsyncRequestWithPath: @"api" body: requestBody method: @"POST" userCompletionHandler: nil];
+      [[MOHueServiceManager sharedInstance] startAsyncRequestWithPath: @"api" body: requestBody method: @"POST" completionHandler: nil];
       break;
     }
     case MOSettingsTableRowAllOn:
     {
       NSDictionary* requestBody = @{@"on":@YES, @"effect":@"none", @"ct":@300, @"bri":@255};
-      [[MOHueService sharedInstance] startAsyncRequestWithPath: @"api/1234567890/groups/0/action" body: requestBody method: @"PUT" userCompletionHandler: nil];
+      [[MOHueServiceManager sharedInstance] startAsyncRequestWithPath: @"api/1234567890/groups/0/action" body: requestBody method: @"PUT" completionHandler: nil];
       break;
     }
     case MOSettingsTableRowAllOff:
     {
       NSDictionary* requestBody = @{@"on":@NO};
-      [[MOHueService sharedInstance] startAsyncRequestWithPath: @"api/1234567890/groups/0/action" body: requestBody method: @"PUT" userCompletionHandler: nil];
+      [[MOHueServiceManager sharedInstance] startAsyncRequestWithPath: @"api/1234567890/groups/0/action" body: requestBody method: @"PUT" completionHandler: nil];
       
       DBG(@"requestbody %@", requestBody);
       break;
@@ -123,13 +124,13 @@
     case MOSettingsTableRowLightRed:
     {
       NSDictionary* requestBody = @{@"on":@YES, @"hue":@30};
-      [[MOHueService sharedInstance] startAsyncRequestWithPath: @"api/1234567890/lights/2/state" body: requestBody method: @"PUT" userCompletionHandler: nil];
+      [[MOHueServiceManager sharedInstance] startAsyncRequestWithPath: @"api/1234567890/lights/2/state" body: requestBody method: @"PUT" completionHandler: nil];
       break;
     }
     case MOSettingsTableRowPartay:
     {
       NSDictionary* requestBody = @{@"on":@YES, @"effect":@"colorloop"};
-      [[MOHueService sharedInstance] startAsyncRequestWithPath: @"api/1234567890/groups/0/action" body: requestBody method: @"PUT" userCompletionHandler: nil];
+      [[MOHueServiceManager sharedInstance] startAsyncRequestWithPath: @"api/1234567890/groups/0/action" body: requestBody method: @"PUT" completionHandler: nil];
       break;
     }
     case MOSettingsTableRowAddTestSchedule:
@@ -148,21 +149,18 @@
       NSDictionary* command = @{@"address":@"/api/1234567890/lights/2/state", @"method":@"PUT", @"body":commandBody};
       NSDictionary* requestBody = @{@"name":@"schedule-2-1", @"description":@"schedule-2-1", @"command": command, @"time": timeString};
       
-      [[MOHueService sharedInstance] startAsyncRequestWithPath: @"api/1234567890/schedules" body: requestBody method: @"POST" userCompletionHandler: nil];
+      [[MOHueServiceManager sharedInstance] startAsyncRequestWithPath: @"api/1234567890/schedules" body: requestBody method: @"POST" completionHandler: nil];
       break;
     }
     case MOSettingsTableRowRemoveTestSchedule:
     {
       NSDictionary* requestBody = @{@"on":@YES, @"effect":@"colorloop"};
-      [[MOHueService sharedInstance] startAsyncRequestWithPath: @"api/1234567890/schedules" body: requestBody method: @"GET" userCompletionHandler: nil];
+      [[MOHueServiceManager sharedInstance] startAsyncRequestWithPath: @"api/1234567890/schedules" body: requestBody method: @"GET" completionHandler: nil];
       break;
     }
     case MOSettingsTableRowGetSchedules:
     {
-      [[MOHueService sharedInstance] startAsyncRequestWithPath: @"api/1234567890/schedules" body: nil method: @"GET" userCompletionHandler: ^(NSURLResponse* response, id resultObject, NSError* error) {
-        NSDictionary* schedulesDict;
-        
-      }];
+      [MOHueScheduleService getAllSchedules];
       break;
     }
     default:

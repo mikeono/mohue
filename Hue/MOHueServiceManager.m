@@ -6,18 +6,18 @@
 //  Copyright (c) 2013 Mike Onorato. All rights reserved.
 //
 
-#import "MOHueService.h"
+#import "MOHueServiceManager.h"
 #import "JSONKit.h"
 
-@interface MOHueService ()
+@interface MOHueServiceManager ()
 
 @property (nonatomic, strong) NSOperationQueue* resultProcessingQueue;
 
 @end
 
-@implementation MOHueService
+@implementation MOHueServiceManager
 
-static MOHueService *instance = nil;
+static MOHueServiceManager *instance = nil;
 
 - (id)init {
   self = [super init];
@@ -50,7 +50,7 @@ static MOHueService *instance = nil;
   return request;
 }
 
-- (NSMutableURLRequest*)startAsyncRequestWithPath:(NSString*)path body:(NSDictionary*)body method:(NSString*)method userCompletionHandler:(void (^)(NSURLResponse*, id, NSError*))userCompletionHandler {
+- (NSMutableURLRequest*)startAsyncRequestWithPath:(NSString*)path body:(NSDictionary*)body method:(NSString*)method completionHandler:(void (^)(id, NSError*))completionHandler {
   NSMutableURLRequest* request = [self requestWithPath: path body: body method: method];
   request.timeoutInterval = 5.0f;
   
@@ -66,9 +66,9 @@ static MOHueService *instance = nil;
     id responseObject = [data objectFromJSONData];
     
     // Call the user completion handler if it's set
-    if ( userCompletionHandler ) {
+    if ( completionHandler ) {
       dispatch_async( dispatch_get_main_queue(), ^{
-        userCompletionHandler(response, responseObject, error);
+        completionHandler(responseObject, error);
       });
     }
   }];
@@ -77,7 +77,7 @@ static MOHueService *instance = nil;
 
 #pragma mark - Static Methods
 
-+ (MOHueService *)sharedInstance {
++ (MOHueServiceManager *)sharedInstance {
   @synchronized( self )
   {
     if (instance == nil)

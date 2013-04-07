@@ -1,13 +1,18 @@
 //
-//  MOHueScheduleList.h
+//  MOScheduleList.h
 //  Hue
 //
 //  Created by Mike Onorato on 3/16/13.
 //  Copyright (c) 2013 Mike Onorato. All rights reserved.
 //
 
-#import "MODictionary.h"
+#import "MOModel.h"
 
-@interface MOHueScheduleList : MODictionary
+@interface MOScheduleList : MOModel
+
+- (id)initWithAPIDictionary:(NSDictionary*)dictionary;
+
+// Array of NSString indexes 
+- (NSArray*)scheduleIds;
 
 @end
