@@ -10,8 +10,12 @@
 
 @class MOScheduleList;
 
-@interface MOScheduleListController : UITableViewController
+@interface MOScheduleListController : UITableViewController {
+  MOScheduleList* _scheduleList;
+}
 
 @property (nonatomic, strong) MOScheduleList* scheduleList;
+
+- (id)init;
 
 @end

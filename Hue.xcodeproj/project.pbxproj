@@ -20,10 +20,8 @@
 		27451CFD16F01A7D0015A07B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 27451CFC16F01A7D0015A07B /* Default.png */; };
 		27451CFF16F01A7D0015A07B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27451CFE16F01A7D0015A07B /* Default@2x.png */; };
 		27451D0116F01A7D0015A07B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27451D0016F01A7D0015A07B /* Default-568h@2x.png */; };
-		27451D0416F01A7D0015A07B /* MOFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27451D0316F01A7D0015A07B /* MOFirstViewController.m */; };
 		27451D0616F01A7D0015A07B /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 27451D0516F01A7D0015A07B /* first.png */; };
 		27451D0816F01A7D0015A07B /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27451D0716F01A7D0015A07B /* first@2x.png */; };
-		27451D0B16F01A7D0015A07B /* MOSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27451D0A16F01A7D0015A07B /* MOSecondViewController.m */; };
 		27451D0D16F01A7D0015A07B /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 27451D0C16F01A7D0015A07B /* second.png */; };
 		27451D0F16F01A7D0015A07B /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27451D0E16F01A7D0015A07B /* second@2x.png */; };
 		27451D1216F01A7D0015A07B /* MOFirstViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27451D1016F01A7D0015A07B /* MOFirstViewController_iPhone.xib */; };
@@ -43,6 +41,7 @@
 		27451D4916F0237E0015A07B /* MOHueServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 27451D4716F0237E0015A07B /* MOHueServiceManager.m */; };
 		27634CAE17110F8A00F95988 /* MOScheduleListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27634CAD17110F8A00F95988 /* MOScheduleListController.m */; };
 		27634CB117111FA300F95988 /* MOLightState.m in Sources */ = {isa = PBXBuildFile; fileRef = 27634CB017111FA300F95988 /* MOLightState.m */; };
+		27634CB41711279400F95988 /* MOScheduleEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27634CB31711279400F95988 /* MOScheduleEditController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,12 +76,8 @@
 		27451CFC16F01A7D0015A07B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		27451CFE16F01A7D0015A07B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		27451D0016F01A7D0015A07B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		27451D0216F01A7D0015A07B /* MOFirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MOFirstViewController.h; sourceTree = "<group>"; };
-		27451D0316F01A7D0015A07B /* MOFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MOFirstViewController.m; sourceTree = "<group>"; };
 		27451D0516F01A7D0015A07B /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		27451D0716F01A7D0015A07B /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		27451D0916F01A7D0015A07B /* MOSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MOSecondViewController.h; sourceTree = "<group>"; };
-		27451D0A16F01A7D0015A07B /* MOSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MOSecondViewController.m; sourceTree = "<group>"; };
 		27451D0C16F01A7D0015A07B /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		27451D0E16F01A7D0015A07B /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		27451D1116F01A7D0015A07B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MOFirstViewController_iPhone.xib; sourceTree = "<group>"; };
@@ -105,6 +100,8 @@
 		27634CAD17110F8A00F95988 /* MOScheduleListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOScheduleListController.m; sourceTree = "<group>"; };
 		27634CAF17111FA300F95988 /* MOLightState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOLightState.h; sourceTree = "<group>"; };
 		27634CB017111FA300F95988 /* MOLightState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOLightState.m; sourceTree = "<group>"; };
+		27634CB21711279400F95988 /* MOScheduleEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOScheduleEditController.h; sourceTree = "<group>"; };
+		27634CB31711279400F95988 /* MOScheduleEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOScheduleEditController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,12 +247,10 @@
 			children = (
 				27451D3F16F01E870015A07B /* MOSettingsTableController.h */,
 				27451D4016F01E870015A07B /* MOSettingsTableController.m */,
-				27451D0216F01A7D0015A07B /* MOFirstViewController.h */,
-				27451D0316F01A7D0015A07B /* MOFirstViewController.m */,
-				27451D0916F01A7D0015A07B /* MOSecondViewController.h */,
-				27451D0A16F01A7D0015A07B /* MOSecondViewController.m */,
 				27634CAC17110F8A00F95988 /* MOScheduleListController.h */,
 				27634CAD17110F8A00F95988 /* MOScheduleListController.m */,
+				27634CB21711279400F95988 /* MOScheduleEditController.h */,
+				27634CB31711279400F95988 /* MOScheduleEditController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -402,8 +397,6 @@
 			files = (
 				27451CF716F01A7D0015A07B /* main.m in Sources */,
 				27451CFB16F01A7D0015A07B /* MOAppDelegate.m in Sources */,
-				27451D0416F01A7D0015A07B /* MOFirstViewController.m in Sources */,
-				27451D0B16F01A7D0015A07B /* MOSecondViewController.m in Sources */,
 				27451D3D16F01DCF0015A07B /* JSONKit.m in Sources */,
 				27451D4116F01E870015A07B /* MOSettingsTableController.m in Sources */,
 				27451D4816F0237E0015A07B /* MOHueServiceManager.m in Sources */,
@@ -413,6 +406,7 @@
 				27077B1616F4B7E9007159DE /* MOHueScheduleService.m in Sources */,
 				27634CAE17110F8A00F95988 /* MOScheduleListController.m in Sources */,
 				27634CB117111FA300F95988 /* MOLightState.m in Sources */,
+				27634CB41711279400F95988 /* MOScheduleEditController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

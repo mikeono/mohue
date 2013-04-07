@@ -14,12 +14,7 @@
 
 + (void)getAllSchedules {
   [[MOHueServiceManager sharedInstance] startAsyncRequestWithPath: @"api/1234567890/schedules" body: nil method: @"GET" completionHandler: ^(id resultObject, NSError* error) {
-    MOScheduleList* scheduleList = [[MOScheduleList alloc] initWithDictionary: resultObject];
-    NSArray* scheduleIds = scheduleList.scheduleIds;
-    
-    for ( NSString* scheduleId in scheduleIds ) {
-      
-    }
+    //MOScheduleList* scheduleList = [[MOScheduleList alloc] initWithAPIDictionary: resultObject];
   }];
 }
 
