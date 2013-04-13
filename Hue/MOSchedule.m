@@ -17,7 +17,7 @@
   return self;
 }
 
-#pragma mark - Primary properties
+#pragma mark - Getters and Setters
 
 - (MOLightState*)lightState {
   if ( _lightState == nil ) {
@@ -25,8 +25,6 @@
   }
   return _lightState;
 }
-
-#pragma mark - Derived properties
 
 - (NSString*)timeString {
   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -39,6 +37,8 @@
 - (NSString*)dayOfWeekString {
   return [MOSchedule stringForDayOfWeek: self.dayOfWeekMask];
 }
+
+
 
 #pragma mark - Static Methods
 

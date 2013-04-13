@@ -14,7 +14,19 @@
 #import "MOLightModeControl.h"
 #import "MOLightState.h"
 
-#define kMOScheduleEditTimePickerHeight 200.0f
+#define kMOScheduleEditTimePickerHeight 200
+
+#define kMOScheduleEditTimerDetailsRowDays 0
+#define kMOScheduleEditTimerDetailsRowName 1
+#define kMOScheduleEditTimerDetailsRowCount 2
+
+typedef enum MOScheduleEditSection {
+  MOScheduleEditSectionTime,
+  MOScheduleEditSectionMode,
+  MOScheduleEditSectionModeDetails,
+  MOScheduleEditSectionTimerDetails,
+  MOScheduleEditSectionCount
+} MOScheduleEditSection;
 
 @interface MOScheduleEditController () {
   MOScheduleEditSection _sections[MOScheduleEditSectionCount];
@@ -27,6 +39,7 @@
 @property (nonatomic, strong) UIDatePicker* timePicker;
 @property (nonatomic, strong) MOLightOnSettingControl* lightOnSettingControl;
 @property (nonatomic, strong) MOLightModeControl* lightModeControl;
+@property (nonatomic, strong) UITextField* nameField;
 
 @end
 
@@ -77,6 +90,7 @@
   self.lightModeControl.lightMode = self.schedule.lightState.on ? MOLightModeOn : MOLightModeOff;
   self.lightOnSettingControl.brightness = self.schedule.lightState.bri;
   self.lightOnSettingControl.ct = self.schedule.lightState.ct;
+  self.nameField.text = self.schedule.name;
 }
 
 #pragma mark - Getters and Setters
@@ -110,6 +124,15 @@
   return _lightModeControl;
 }
 
+- (UITextField*)nameField {
+  if ( _nameField == nil ) {
+    _nameField = [[UITextField alloc] init];
+    _nameField.placeholder = @"Label";
+    _nameField.textAlignment = UITextAlignmentRight;
+  }
+  return _nameField;
+}
+
 #pragma mark - Event Handling
 
 - (void)saveButtonPressed {
@@ -119,6 +142,7 @@
   self.schedule.lightState.on = (self.lightModeControl.lightMode == MOLightModeOn);
   self.schedule.lightState.bri = self.lightOnSettingControl.brightness;
   self.schedule.lightState.ct = self.lightOnSettingControl.ct;
+  self.schedule.name = self.nameField.text;
   
   // If in add mode, add the schedule to the list 
   if ( _isScheduleNew ) {
@@ -137,7 +161,7 @@
 - (void)configureSections {
   _sectionCount = 0;
   _sections[_sectionCount++] = MOScheduleEditSectionTime;
-  //_sections[_sectionCount++] = MOScheduleEditSectionTimerDetails;
+  _sections[_sectionCount++] = MOScheduleEditSectionTimerDetails;
   _sections[_sectionCount++] = MOScheduleEditSectionMode;
   _sections[_sectionCount++] = MOScheduleEditSectionModeDetails;
 }
@@ -163,18 +187,45 @@
     case MOScheduleEditSectionTimerDetails:
     {
       UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleValue1 reuseIdentifier: nil];
-      
+      switch ( indexPath.row ) {
+        case kMOScheduleEditTimerDetailsRowDays:
+        {
+          cell.textLabel.text = @"Recurrence";
+          cell.detailTextLabel.text = @"None";
+          cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+          break;
+        }
+        case kMOScheduleEditTimerDetailsRowName:
+        {
+          cell.textLabel.text = @"Label";
+          cell.selectionStyle = UITableViewCellSelectionStyleNone;
+          [cell.contentView addSubview: self.nameField];
+          float leftIndent = 85.0f;
+          float xPadding = 10.0f;
+          float yPadding = 10.0f;
+          float cellHeight = [self tableView: tableView heightForRowAtIndexPath: indexPath];
+          self.nameField.frame = CGRectMake(leftIndent + xPadding,
+                                            yPadding,
+                                            [self cellWidth] - leftIndent - 2 * xPadding,
+                                            cellHeight - 2 * yPadding);
+          break;
+        }
+        default:
+          break;
+      }
       return cell;
     }
     case MOScheduleEditSectionTime:
     {
       UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: nil];
+      cell.selectionStyle = UITableViewCellSelectionStyleNone;
       [cell.contentView addSubview: self.timePicker];
       return cell;
     }
     case MOScheduleEditSectionModeDetails:
     {
       UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: nil];
+      cell.selectionStyle = UITableViewCellSelectionStyleNone;
       [cell.contentView addSubview: self.lightOnSettingControl];
       self.lightOnSettingControl.frame = CGRectMake(0, 0, [self cellWidth], self.lightOnSettingControl.frame.size.height);
       return cell;
@@ -182,6 +233,7 @@
     case MOScheduleEditSectionMode:
     {
       UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: nil];
+      cell.selectionStyle = UITableViewCellSelectionStyleNone;
       [cell.contentView addSubview: self.lightModeControl];
       self.lightModeControl.frame = CGRectMake(0, 0, [self cellWidth], self.lightModeControl.frame.size.height);
       return cell;
@@ -223,18 +275,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  
-}
-
-#pragma mark - Event Handling
-
-- (void)addButtonPressed {
-  [self pushScheduleEditControllerForSchedule: nil];
-}
-
-- (void)pushScheduleEditControllerForSchedule:(MOSchedule*)schedule {
-  MOScheduleEditController* scheduleController = [[MOScheduleEditController alloc] initWithSchedule: nil];
-  [self.navigationController pushViewController: scheduleController animated: YES];
   
 }
 
