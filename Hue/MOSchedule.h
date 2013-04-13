@@ -26,8 +26,24 @@ typedef enum MODayOfWeek {
 
 @interface MOSchedule : MOModel
 
-@property (nonatomic, assign) NSUInteger timeInMinutes;
+#pragma mark - Primary properties
+
+@property (nonatomic, strong) NSDate* timeOfDay;
 @property (nonatomic, assign) MODayOfWeek dayOfWeekMask;
 @property (nonatomic, strong) MOLightState* lightState;
+
+#pragma mark - Derived properties
+
+@property (nonatomic, readonly) NSString* timeString;
+
+@property (nonatomic, readonly) NSString* dayOfWeekString;
+
+#pragma mark - Static methods
+
++ (NSString*)stringForDayOfWeek:(MODayOfWeek)dayOfWeek;
+
++ (NSString*)stringForDayOfWeekMask:(MODayOfWeek)dayOfWeekMask;
+
++ (NSArray*)daysOfTheWeek;
 
 @end

@@ -8,9 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum MOScheduleEditSection {
+  MOScheduleEditSectionTime,
+  MOScheduleEditSectionMode,
+  MOScheduleEditSectionModeDetails,
+  MOScheduleEditSectionTimerDetails,
+  MOScheduleEditSectionCount
+} MOScheduleEditSection;
+
 @class MOSchedule;
 
-@interface MOScheduleEditController : UIViewController
+@interface MOScheduleEditController : UITableViewController
 
 - (id)initWithSchedule:(MOSchedule*)schedule;
 

@@ -8,12 +8,16 @@
 
 #import "MOModel.h"
 
+@class MOSchedule;
+
 @interface MOScheduleList : MOModel
 
-@property (nonatomic, strong) NSArray* schedules;
+@property (nonatomic, strong) NSMutableArray* schedules;
 
 - (id)initWithAPIDictionary:(NSDictionary*)dictionary;
 
 - (id)init;
+
+- (void)addSchedule:(MOSchedule*)schedule;
 
 @end

@@ -10,6 +10,8 @@
 #import "MOScheduleList.h"
 #import "MOSchedule.h"
 #import "MOScheduleEditController.h"
+#import "MOScheduleListCell.h"
+#import "MOCache.h"
 
 @interface MOScheduleListController ()
 
@@ -26,6 +28,9 @@
     // Init nav bar buttons
     UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemAdd target: self action: @selector(addButtonPressed)];
     self.navigationItem.rightBarButtonItem = addButton;
+    
+    UIBarButtonItem* editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemEdit target: self action: @selector(editButtonPressed)];
+    self.navigationItem.leftBarButtonItem = editButton;
   }
   return self;
 }
@@ -34,6 +39,12 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear: animated];
+  
+  self.scheduleList = [MOCache sharedInstance].scheduleList;
 }
 
 #pragma mark - Getters and Setters
@@ -53,30 +64,32 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   return [self.scheduleList.schedules count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+  static NSString* CellIdentifier = @"Schedule_List_Cell";
+  MOScheduleListCell* cell = [tableView dequeueReusableCellWithIdentifier: CellIdentifier];
     
-    // Configure the cell...
+  if ( cell == nil ) {
+    cell = [[MOScheduleListCell alloc] initWithReuseIdentifier: CellIdentifier];
+  }
+  
+  cell.schedule = [self.scheduleList.schedules objectAtIndex: indexPath.row];
     
-    return cell;
+  return cell;
 }
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+  MOSchedule* schedule = [self.scheduleList.schedules objectAtIndex: indexPath.row];
+  [self pushScheduleEditControllerForSchedule: schedule];
 }
 
 #pragma mark - Event Handling
@@ -85,10 +98,14 @@
   [self pushScheduleEditControllerForSchedule: nil];
 }
 
-- (void)pushScheduleEditControllerForSchedule:(MOSchedule*)schedule {
-  MOScheduleEditController* scheduleController = [[MOScheduleEditController alloc] initWithSchedule: nil];
-  [self.navigationController pushViewController: scheduleController animated: YES];
+- (void)editButtonPressed {
 
+}
+
+- (void)pushScheduleEditControllerForSchedule:(MOSchedule*)schedule {
+  MOScheduleEditController* scheduleController = [[MOScheduleEditController alloc] initWithSchedule: schedule];
+  UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController: scheduleController];
+  [self presentViewController: navController animated: YES completion: nil];
 }
 
 @end
