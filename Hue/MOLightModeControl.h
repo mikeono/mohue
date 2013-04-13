@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum MOLightMode {
+  MOLightModeOn = 0,
+  MOLightModeOff = 1
+} MOLightMode;
+
 @interface MOLightModeControl : UIView
+
+@property (nonatomic, assign) MOLightMode lightMode;
 
 @end

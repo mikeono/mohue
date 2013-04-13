@@ -12,12 +12,14 @@
 #import "MOCache.h"
 #import "MOLightOnSettingControl.h"
 #import "MOLightModeControl.h"
+#import "MOLightState.h"
 
 #define kMOScheduleEditTimePickerHeight 200.0f
 
 @interface MOScheduleEditController () {
   MOScheduleEditSection _sections[MOScheduleEditSectionCount];
   int _sectionCount;
+  MOSchedule* _schedule;
 }
 
 @property (nonatomic, strong) MOSchedule* schedule;
@@ -33,10 +35,11 @@
 - (id)initWithSchedule:(MOSchedule*)schedule {
   if ( self = [super initWithStyle: UITableViewStyleGrouped] ) {
     // Init iVars
-    _schedule = schedule;
     _isScheduleNew = schedule ? NO : YES;
+    _schedule = schedule;
     
     [self configureSections];
+    [self reloadData];
     
     // Init navigation
     self.title = _isScheduleNew ? @"Edit Schedule" : @"Add Schedule";
@@ -65,6 +68,14 @@
   float pickerWidth = self.timePicker.superview.frame.size.width * pickerPercentOfSuperviewWidth;
   self.timePicker.frame = CGRectMake(0, 0, pickerWidth, pickerHeight);
   self.timePicker.center = self.timePicker.superview.center;
+}
+
+- (void)reloadData {
+  if ( _schedule.timeOfDay ) {
+    self.timePicker.date = _schedule.timeOfDay;
+  }
+  self.lightModeControl.lightMode = _schedule.lightState.on ? MOLightModeOn : MOLightModeOff;
+  self.lightOnSettingControl.brightness = _schedule.lightState.bri;
 }
 
 #pragma mark - Getters and Setters
@@ -104,6 +115,8 @@
   
   // Save the choices into the schedule
   self.schedule.timeOfDay = self.timePicker.date;
+  self.schedule.lightState.on = (self.lightModeControl.lightMode == MOLightModeOn);
+  self.schedule.lightState.bri = self.lightOnSettingControl.brightness;
   
   // If in add mode, add the schedule to the list 
   if ( _isScheduleNew ) {

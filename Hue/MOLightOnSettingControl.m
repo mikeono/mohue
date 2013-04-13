@@ -48,8 +48,18 @@
                                       labelHeight);
   _brightnessSlider.frame = CGRectMake(xPadding,
                                        _brightnessLabel.frame.origin.y + _brightnessLabel.frame.size.height + yPadding,
-                                       self.frame.size.width,
+                                       self.frame.size.width - 2 * xPadding,
                                        _brightnessSlider.frame.size.height);
+}
+
+#pragma mark - Getters and Setters
+
+- (NSUInteger)brightness {
+  return _brightnessSlider.value * 255;
+}
+
+- (void)setBrightness:(NSUInteger)brightness {
+  _brightnessSlider.value = brightness / 255.0f;
 }
 
 @end

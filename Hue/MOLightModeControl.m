@@ -26,7 +26,7 @@
     
     // Add subviews
     _segmentedControl = [[UISegmentedControl alloc] initWithItems: @[@"ON", @"OFF"]];
-    _segmentedControl.selectedSegmentIndex = 0;
+    self.lightMode = MOLightModeOn;
     [self addSubview: _segmentedControl];
   }
   return self;
@@ -36,6 +36,16 @@
   [super layoutSubviews];
   
   _segmentedControl.frame = self.bounds;
+}
+
+#pragma mark - Getters and Setters
+
+- (MOLightMode)lightMode {
+  return _segmentedControl.selectedSegmentIndex;
+}
+
+- (void)setLightMode:(MOLightMode)lightMode {
+  _segmentedControl.selectedSegmentIndex = lightMode;
 }
 
 @end

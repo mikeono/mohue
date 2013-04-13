@@ -7,8 +7,27 @@
 //
 
 #import "MOSchedule.h"
+#import "MOLightState.h"
 
 @implementation MOSchedule
+
+- (id)init {
+  if ( self = [super init] ) {
+    
+  }
+  return self;
+}
+
+#pragma mark - Primary properties
+
+- (MOLightState*)lightState {
+  if ( _lightState == nil ) {
+    _lightState = [[MOLightState alloc] init];
+  }
+  return _lightState;
+}
+
+#pragma mark - Derived properties
 
 - (NSString*)timeString {
   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
