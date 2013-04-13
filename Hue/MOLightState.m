@@ -10,4 +10,14 @@
 
 @implementation MOLightState
 
+- (id)init {
+  if ( self = [super init] ) {
+    _on = YES;
+    _bri = 255;
+    _ct = 326;
+    _colorMode = MOLightColorModeCT;
+  }
+  return self;
+}
+
 @end

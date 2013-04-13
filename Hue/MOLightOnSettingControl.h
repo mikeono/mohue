@@ -12,6 +12,10 @@
 
 @property (nonatomic, readonly) UISlider* brightnessSlider;
 
+@property (nonatomic, readonly) UISlider* ctSlider;
+
 @property (nonatomic, assign) NSUInteger brightness;
+
+@property (nonatomic, assign) NSUInteger ct;
 
 @end

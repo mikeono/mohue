@@ -71,11 +71,12 @@
 }
 
 - (void)reloadData {
-  if ( _schedule.timeOfDay ) {
-    self.timePicker.date = _schedule.timeOfDay;
+  if ( self.schedule.timeOfDay ) {
+    self.timePicker.date = self.schedule.timeOfDay;
   }
-  self.lightModeControl.lightMode = _schedule.lightState.on ? MOLightModeOn : MOLightModeOff;
-  self.lightOnSettingControl.brightness = _schedule.lightState.bri;
+  self.lightModeControl.lightMode = self.schedule.lightState.on ? MOLightModeOn : MOLightModeOff;
+  self.lightOnSettingControl.brightness = self.schedule.lightState.bri;
+  self.lightOnSettingControl.ct = self.schedule.lightState.ct;
 }
 
 #pragma mark - Getters and Setters
@@ -117,6 +118,7 @@
   self.schedule.timeOfDay = self.timePicker.date;
   self.schedule.lightState.on = (self.lightModeControl.lightMode == MOLightModeOn);
   self.schedule.lightState.bri = self.lightOnSettingControl.brightness;
+  self.schedule.lightState.ct = self.lightOnSettingControl.ct;
   
   // If in add mode, add the schedule to the list 
   if ( _isScheduleNew ) {
@@ -135,7 +137,7 @@
 - (void)configureSections {
   _sectionCount = 0;
   _sections[_sectionCount++] = MOScheduleEditSectionTime;
-  _sections[_sectionCount++] = MOScheduleEditSectionTimerDetails;
+  //_sections[_sectionCount++] = MOScheduleEditSectionTimerDetails;
   _sections[_sectionCount++] = MOScheduleEditSectionMode;
   _sections[_sectionCount++] = MOScheduleEditSectionModeDetails;
 }
