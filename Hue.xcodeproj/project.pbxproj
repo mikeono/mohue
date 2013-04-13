@@ -46,6 +46,8 @@
 		27ED394A1718D3D10002836C /* MOScheduleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ED39491718D3D10002836C /* MOScheduleTests.m */; };
 		27ED39541718E2880002836C /* MOGroupedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ED39531718E2880002836C /* MOGroupedTableViewCell.m */; };
 		27ED39581718EE330002836C /* MOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ED39571718EE330002836C /* MOCache.m */; };
+		27ED395D171913830002836C /* MOLightOnSettingControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ED395C171913830002836C /* MOLightOnSettingControl.m */; };
+		27ED3960171919810002836C /* MOLightModeControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ED395F171919810002836C /* MOLightModeControl.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +116,10 @@
 		27ED39531718E2880002836C /* MOGroupedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOGroupedTableViewCell.m; sourceTree = "<group>"; };
 		27ED39561718EE330002836C /* MOCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOCache.h; sourceTree = "<group>"; };
 		27ED39571718EE330002836C /* MOCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOCache.m; sourceTree = "<group>"; };
+		27ED395B171913830002836C /* MOLightOnSettingControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOLightOnSettingControl.h; sourceTree = "<group>"; };
+		27ED395C171913830002836C /* MOLightOnSettingControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOLightOnSettingControl.m; sourceTree = "<group>"; };
+		27ED395E171919810002836C /* MOLightModeControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOLightModeControl.h; sourceTree = "<group>"; };
+		27ED395F171919810002836C /* MOLightModeControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOLightModeControl.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +246,7 @@
 				27451CF916F01A7D0015A07B /* MOAppDelegate.h */,
 				27451CFA16F01A7D0015A07B /* MOAppDelegate.m */,
 				27ED394B1718E18B0002836C /* Common */,
+				27ED3959171913310002836C /* Light Control */,
 				27ED394C1718E1910002836C /* Schedules */,
 				27ED394D1718E1BD0002836C /* Other Features */,
 			);
@@ -351,6 +358,25 @@
 				27451D4016F01E870015A07B /* MOSettingsTableController.m */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		27ED3959171913310002836C /* Light Control */ = {
+			isa = PBXGroup;
+			children = (
+				27ED395A171913480002836C /* View */,
+			);
+			name = "Light Control";
+			sourceTree = "<group>";
+		};
+		27ED395A171913480002836C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				27ED395B171913830002836C /* MOLightOnSettingControl.h */,
+				27ED395C171913830002836C /* MOLightOnSettingControl.m */,
+				27ED395E171919810002836C /* MOLightModeControl.h */,
+				27ED395F171919810002836C /* MOLightModeControl.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -486,6 +512,8 @@
 				27ED39471718C7140002836C /* MOScheduleListCell.m in Sources */,
 				27ED39541718E2880002836C /* MOGroupedTableViewCell.m in Sources */,
 				27ED39581718EE330002836C /* MOCache.m in Sources */,
+				27ED395D171913830002836C /* MOLightOnSettingControl.m in Sources */,
+				27ED3960171919810002836C /* MOLightModeControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

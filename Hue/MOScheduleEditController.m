@@ -10,6 +10,8 @@
 #import "MOSchedule.h"
 #import "MOScheduleList.h"
 #import "MOCache.h"
+#import "MOLightOnSettingControl.h"
+#import "MOLightModeControl.h"
 
 #define kMOScheduleEditTimePickerHeight 200.0f
 
@@ -21,6 +23,8 @@
 @property (nonatomic, strong) MOSchedule* schedule;
 @property (nonatomic, assign) BOOL isScheduleNew;
 @property (nonatomic, strong) UIDatePicker* timePicker;
+@property (nonatomic, strong) MOLightOnSettingControl* lightOnSettingControl;
+@property (nonatomic, strong) MOLightModeControl* lightModeControl;
 
 @end
 
@@ -80,6 +84,20 @@
   return _timePicker;
 }
 
+- (MOLightOnSettingControl*)lightOnSettingControl {
+  if ( _lightOnSettingControl == nil ) {
+    _lightOnSettingControl = [[MOLightOnSettingControl alloc] init];
+  }
+  return _lightOnSettingControl;
+}
+
+- (MOLightModeControl*)lightModeControl {
+  if ( _lightModeControl == nil ) {
+    _lightModeControl = [[MOLightModeControl alloc] init];
+  }
+  return _lightModeControl;
+}
+
 #pragma mark - Event Handling
 
 - (void)saveButtonPressed {
@@ -104,9 +122,9 @@
 - (void)configureSections {
   _sectionCount = 0;
   _sections[_sectionCount++] = MOScheduleEditSectionTime;
+  _sections[_sectionCount++] = MOScheduleEditSectionTimerDetails;
   _sections[_sectionCount++] = MOScheduleEditSectionMode;
   _sections[_sectionCount++] = MOScheduleEditSectionModeDetails;
-  _sections[_sectionCount++] = MOScheduleEditSectionTimerDetails;
 }
 
 #pragma mark - Table view data source
@@ -139,12 +157,31 @@
       [cell.contentView addSubview: self.timePicker];
       return cell;
     }
+    case MOScheduleEditSectionModeDetails:
+    {
+      UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: nil];
+      [cell.contentView addSubview: self.lightOnSettingControl];
+      self.lightOnSettingControl.frame = CGRectMake(0, 0, [self cellWidth], self.lightOnSettingControl.frame.size.height);
+      return cell;
+    }
+    case MOScheduleEditSectionMode:
+    {
+      UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: nil];
+      [cell.contentView addSubview: self.lightModeControl];
+      self.lightModeControl.frame = CGRectMake(0, 0, [self cellWidth], self.lightModeControl.frame.size.height);
+      return cell;
+    }
     default: {
       UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: nil];
       return cell;
     }
   }
 
+}
+
+- (float)cellWidth {
+  // TODO(MO): Make this properly calculate for widths other than 320px
+  return self.tableView.frame.size.width - 20.0f;
 }
 
 #pragma mark - Table view delegate
@@ -154,6 +191,14 @@
     case MOScheduleEditSectionTime:
     {
       return kMOScheduleEditTimePickerHeight;
+    }
+    case MOScheduleEditSectionModeDetails:
+    {
+      return self.lightOnSettingControl.frame.size.height;
+    }
+    case MOScheduleEditSectionMode:
+    {
+      return self.lightModeControl.frame.size.height;
     }
     default:
     {
