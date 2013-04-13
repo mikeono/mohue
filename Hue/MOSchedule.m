@@ -13,6 +13,7 @@
 
 - (id)init {
   if ( self = [super init] ) {
+    _UUID = [MOModel generateUUID];
   }
   return self;
 }

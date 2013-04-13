@@ -8,8 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+@class MOSchedule;
+@class MOScheduleOccurrence;
+
 @interface MOHueScheduleService : NSObject
 
 + (void)getAllSchedules;
+
++ (void)getScheduleId:(NSString*)scheduleId;
+
++ (void)postScheduleOccurrence:(MOScheduleOccurrence*)scheduleOccurrence;
+
++ (void)postSchedule:(MOSchedule*)schedule;
+
++ (void)saveSchedule:(MOSchedule*)schedule;
 
 @end

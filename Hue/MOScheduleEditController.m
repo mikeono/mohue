@@ -13,6 +13,7 @@
 #import "MOLightOnSettingControl.h"
 #import "MOLightModeControl.h"
 #import "MOLightState.h"
+#import "MOHueScheduleService.h"
 
 #define kMOScheduleEditTimePickerHeight 200
 
@@ -144,7 +145,10 @@ typedef enum MOScheduleEditSection {
   self.schedule.lightState.ct = self.lightOnSettingControl.ct;
   self.schedule.name = self.nameField.text;
   
-  // If in add mode, add the schedule to the list 
+  // Save the schedule to the server
+  [MOHueScheduleService saveSchedule: self.schedule];
+  
+  // If in add mode, add the schedule to the list
   if ( _isScheduleNew ) {
     [[MOCache sharedInstance].scheduleList addSchedule: self.schedule];
   }
