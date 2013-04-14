@@ -50,6 +50,8 @@
 		27ED3960171919810002836C /* MOLightModeControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ED395F171919810002836C /* MOLightModeControl.m */; };
 		27ED39631719C4EF0002836C /* MOScheduleOccurrence.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ED39621719C4EE0002836C /* MOScheduleOccurrence.m */; };
 		27ED39661719D4340002836C /* NSDate+MO.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ED39651719D4340002836C /* NSDate+MO.m */; };
+		27ED396C171B49A60002836C /* MOHueServiceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ED396B171B49A60002836C /* MOHueServiceRequest.m */; };
+		27ED396F171B4CA60002836C /* MOHueService.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ED396E171B4CA60002836C /* MOHueService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +128,10 @@
 		27ED39621719C4EE0002836C /* MOScheduleOccurrence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOScheduleOccurrence.m; sourceTree = "<group>"; };
 		27ED39641719D4340002836C /* NSDate+MO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MO.h"; sourceTree = "<group>"; };
 		27ED39651719D4340002836C /* NSDate+MO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+MO.m"; sourceTree = "<group>"; };
+		27ED396A171B49A60002836C /* MOHueServiceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOHueServiceRequest.h; sourceTree = "<group>"; };
+		27ED396B171B49A60002836C /* MOHueServiceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOHueServiceRequest.m; sourceTree = "<group>"; };
+		27ED396D171B4CA60002836C /* MOHueService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOHueService.h; sourceTree = "<group>"; };
+		27ED396E171B4CA60002836C /* MOHueService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOHueService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,10 +161,12 @@
 		27077B1016F4B4E4007159DE /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				27ED396D171B4CA60002836C /* MOHueService.h */,
+				27ED396E171B4CA60002836C /* MOHueService.m */,
+				27ED396A171B49A60002836C /* MOHueServiceRequest.h */,
+				27ED396B171B49A60002836C /* MOHueServiceRequest.m */,
 				27451D4616F0237E0015A07B /* MOHueServiceManager.h */,
 				27451D4716F0237E0015A07B /* MOHueServiceManager.m */,
-				27077B1416F4B7E9007159DE /* MOHueScheduleService.h */,
-				27077B1516F4B7E9007159DE /* MOHueScheduleService.m */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -315,6 +323,7 @@
 		27ED394C1718E1910002836C /* Schedules */ = {
 			isa = PBXGroup;
 			children = (
+				27ED3970171B530B0002836C /* Service */,
 				27451D4416F023220015A07B /* Model */,
 				27451D4316F0230F0015A07B /* Controller */,
 				27451D4516F023440015A07B /* View */,
@@ -387,6 +396,15 @@
 				27ED395F171919810002836C /* MOLightModeControl.m */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		27ED3970171B530B0002836C /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				27077B1416F4B7E9007159DE /* MOHueScheduleService.h */,
+				27077B1516F4B7E9007159DE /* MOHueScheduleService.m */,
+			);
+			name = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -526,6 +544,8 @@
 				27ED3960171919810002836C /* MOLightModeControl.m in Sources */,
 				27ED39631719C4EF0002836C /* MOScheduleOccurrence.m in Sources */,
 				27ED39661719D4340002836C /* NSDate+MO.m in Sources */,
+				27ED396C171B49A60002836C /* MOHueServiceRequest.m in Sources */,
+				27ED396F171B4CA60002836C /* MOHueService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

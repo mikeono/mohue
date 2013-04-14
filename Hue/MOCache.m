@@ -27,7 +27,7 @@
   return _scheduleList;
 }
 
-#pragma mark - Public Methods
+#pragma mark - Static Methods
 
 + (MOCache*)sharedInstance {
   static MOCache *sharedInstance = nil;

@@ -82,11 +82,11 @@
 }
 
 - (NSUInteger)ct {
-  return (_ctSlider.value * (kMOMaxCt - kMOMinCt)) + kMOMinCt;
+  return ((1.0f - _ctSlider.value) * (kMOMaxCt - kMOMinCt)) + kMOMinCt;
 }
 
 - (void)setCt:(NSUInteger)ct {
-  _ctSlider.value = (ct - kMOMinCt) / (float) (kMOMaxCt - kMOMinCt);
+  _ctSlider.value = 1.0f - ((ct - kMOMinCt) / (float) (kMOMaxCt - kMOMinCt));
 }
 
 @end

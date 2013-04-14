@@ -7,7 +7,8 @@
 //
 
 #import "MOHueScheduleService.h"
-#import "MOHueServiceManager.h"
+#import "MOHueService.h"
+#import "MOHueServiceRequest.h"
 #import "MOScheduleList.h"
 #import "MOSchedule.h"
 #import "MOScheduleOccurrence.h"
@@ -17,9 +18,10 @@
 @implementation MOHueScheduleService
 
 + (void)getAllSchedules {
-  [[MOHueServiceManager sharedInstance] startAsyncRequestWithPath: @"api/1234567890/schedules" body: nil method: @"GET" completionHandler: ^(id resultObject, NSError* error) {
-    //MOScheduleList* scheduleList = [[MOScheduleList alloc] initWithAPIDictionary: resultObject];
+  MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"api/1234567890/schedules" bodyDict: nil httpMethod: kMOHTTPRequestMethodGet completionBlock:^(id resultObject, NSError* error) {
   }];
+  
+  [[MOHueService sharedInstance] executeAsyncRequest: hueRequest];
 }
 
 + (void)getScheduleId:(NSString*)scheduleId {
@@ -35,14 +37,19 @@
   [dateFormatter  setDateFormat: @"yyyy-MM-dd'T'HH:mm:ss"];
   NSString* timeString = [dateFormatter stringFromDate: scheduleOccurrence.date];
   
+  // Create body
   NSDictionary* commandBody = scheduleOccurrence.lightState.dictionary;
-  NSDictionary* command = @{@"address":@"/api/1234567890/lights/1/state", @"method":@"PUT", @"body":commandBody};
+  NSDictionary* command = @{@"address": @"/api/1234567890/lights/1/state",
+                            @"method": @"PUT",
+                            @"body": commandBody};
   NSDictionary* requestBody = @{@"name": scheduleOccurrence.occurrenceIdentifier,
                                 @"description": @"schedule-2-1",
                                 @"command": command,
                                 @"time": timeString};
   
-  [[MOHueServiceManager sharedInstance] startAsyncRequestWithPath: @"api/1234567890/schedules" body: requestBody method: @"POST" completionHandler: nil];
+  MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"api/1234567890/schedules" bodyDict: requestBody httpMethod: kMOHTTPRequestMethodPost completionBlock: nil];
+  
+  [[MOHueService sharedInstance] executeAsyncRequest: hueRequest];
 }
 
 + (void)postSchedule:(MOSchedule*)schedule {

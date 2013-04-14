@@ -41,6 +41,7 @@
     
     _occurrenceIdentifier = [NSString stringWithFormat: @"%@ %@", _scheduleUUID, dateString];
   }
+      DBG(@"Occ identifier name is %@", _occurrenceIdentifier);
   return _occurrenceIdentifier;
 }
 

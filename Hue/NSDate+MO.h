@@ -10,6 +10,4 @@
 
 @interface NSDate (MO)
 
-+ (NSDate*)dateInGMT;
-
 @end

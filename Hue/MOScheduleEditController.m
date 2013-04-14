@@ -92,6 +92,8 @@ typedef enum MOScheduleEditSection {
   self.lightOnSettingControl.brightness = self.schedule.lightState.bri;
   self.lightOnSettingControl.ct = self.schedule.lightState.ct;
   self.nameField.text = self.schedule.name;
+  
+  [self.tableView reloadData];
 }
 
 #pragma mark - Getters and Setters
@@ -195,7 +197,7 @@ typedef enum MOScheduleEditSection {
         case kMOScheduleEditTimerDetailsRowDays:
         {
           cell.textLabel.text = @"Recurrence";
-          cell.detailTextLabel.text = @"None";
+          cell.detailTextLabel.text = _schedule.dayOfWeekString;
           cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
           break;
         }

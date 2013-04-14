@@ -14,6 +14,7 @@
 - (id)init {
   if ( self = [super init] ) {
     _UUID = [MOModel generateUUID];
+    _dayOfWeekMask = MODayOfWeekAll;
   }
   return self;
 }
@@ -36,7 +37,7 @@
 }
 
 - (NSString*)dayOfWeekString {
-  return [MOSchedule stringForDayOfWeek: self.dayOfWeekMask];
+  return [MOSchedule stringForDayOfWeekMask: self.dayOfWeekMask];
 }
 
 

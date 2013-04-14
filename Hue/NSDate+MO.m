@@ -10,22 +10,4 @@
 
 @implementation NSDate (MO)
 
-+ (NSDate*)dateInGMT {
-  NSLog(@"newDate: %@", [NSDate date]);
-  
-  NSDate *newDate;
-  NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:~ NSTimeZoneCalendarUnit fromDate: [NSDate date]];
-  
-  newDate = [[NSCalendar currentCalendar] dateFromComponents: dateComponents];
-  NSLog(@"newDate: %@", newDate);
-  NSLog(@"newDate: %.0f", [newDate timeIntervalSinceReferenceDate]);
-  
-  [dateComponents setTimeZone: [NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
-  newDate = [[NSCalendar currentCalendar] dateFromComponents: dateComponents];
-  NSLog(@"newDate: %@", newDate);
-  NSLog(@"newDate: %.0f", [newDate timeIntervalSinceReferenceDate]);
-
-  return newDate;
-}
-
 @end

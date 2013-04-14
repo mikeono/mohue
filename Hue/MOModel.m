@@ -12,9 +12,11 @@
 
 + (NSString*)generateUUID {
   CFUUIDRef theUUID = CFUUIDCreate(NULL);
-  CFStringRef string = CFUUIDCreateString(NULL, theUUID);
+  CFStringRef cfString = CFUUIDCreateString(NULL, theUUID);
   CFRelease(theUUID);
-  return (__bridge_transfer NSString *) string;
+  NSString* nsString = (__bridge_transfer NSString *) cfString;
+  nsString = [nsString stringByReplacingOccurrencesOfString: @"-" withString: @""];
+  return [nsString substringToIndex: 18];
 }
 
 @end

@@ -12,6 +12,7 @@
 #import "MOScheduleEditController.h"
 #import "MOScheduleListCell.h"
 #import "MOCache.h"
+#import "MOHueScheduleService.h"
 
 @interface MOScheduleListController ()
 
@@ -43,6 +44,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear: animated];
+  
   
   self.scheduleList = [MOCache sharedInstance].scheduleList;
 }
