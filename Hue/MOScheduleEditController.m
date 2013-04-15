@@ -91,7 +91,7 @@ typedef enum MOScheduleEditSection {
   self.lightModeControl.lightMode = self.schedule.lightState.on ? MOLightModeOn : MOLightModeOff;
   self.lightOnSettingControl.brightness = self.schedule.lightState.bri;
   self.lightOnSettingControl.ct = self.schedule.lightState.ct;
-  self.nameField.text = self.schedule.name;
+  self.nameField.text = self.schedule.label;
   
   [self.tableView reloadData];
 }
@@ -145,7 +145,7 @@ typedef enum MOScheduleEditSection {
   self.schedule.lightState.on = (self.lightModeControl.lightMode == MOLightModeOn);
   self.schedule.lightState.bri = self.lightOnSettingControl.brightness;
   self.schedule.lightState.ct = self.lightOnSettingControl.ct;
-  self.schedule.name = self.nameField.text;
+  self.schedule.label = self.nameField.text;
   
   // Save the schedule to the server
   [MOHueScheduleService saveSchedule: self.schedule];

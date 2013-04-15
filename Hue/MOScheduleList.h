@@ -20,4 +20,6 @@
 
 - (void)addSchedule:(MOSchedule*)schedule;
 
+- (BOOL)containsUUID:(NSString*)scheduleUUID;
+
 @end

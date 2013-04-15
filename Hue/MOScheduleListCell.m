@@ -25,7 +25,7 @@
   _schedule = schedule;
   
   self.textLabel.text = _schedule.timeString;
-  self.detailTextLabel.text = _schedule.name; // _schedule.dayOfWeekString;
+  self.detailTextLabel.text = _schedule.label ? _schedule.label : @""; // _schedule.dayOfWeekString;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

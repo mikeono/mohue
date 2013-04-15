@@ -24,4 +24,8 @@ extern NSString* kMOLightColorModeCT;
 
 @property (nonatomic, readonly) NSDictionary* dictionary;
 
+- (id)init;
+
+- (id)initWithHueCommandDict:(NSDictionary*)hueCommandDict;
+
 @end

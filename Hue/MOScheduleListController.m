@@ -32,6 +32,8 @@
     
     UIBarButtonItem* editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemEdit target: self action: @selector(editButtonPressed)];
     self.navigationItem.leftBarButtonItem = editButton;
+    
+    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(receivedScheduleFromHue) name: kMOReceivedScheduleFromHue object: nil];
   }
   return self;
 }
@@ -45,8 +47,11 @@
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear: animated];
   
-  
+  // Reload schedules into table from cache
   self.scheduleList = [MOCache sharedInstance].scheduleList;
+  
+  // Sync schedules down from server
+  [MOHueScheduleService syncDownSchedules];
 }
 
 #pragma mark - Getters and Setters
@@ -95,6 +100,10 @@
 }
 
 #pragma mark - Event Handling
+
+- (void)receivedScheduleFromHue {
+  self.scheduleList = [MOCache sharedInstance].scheduleList;
+}
 
 - (void)addButtonPressed {
   [self pushScheduleEditControllerForSchedule: nil];

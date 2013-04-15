@@ -8,14 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString* kMOReceivedScheduleFromHue;
+
 @class MOSchedule;
 @class MOScheduleOccurrence;
 
 @interface MOHueScheduleService : NSObject
 
-+ (void)getAllSchedules;
++ (void)syncDownSchedules;
 
-+ (void)getScheduleId:(NSString*)scheduleId;
++ (void)syncDownScheduleWithHueId:(NSString*)hueScheduleId;
+
++ (void)getAllSchedules;
 
 + (void)postScheduleOccurrence:(MOScheduleOccurrence*)scheduleOccurrence;
 

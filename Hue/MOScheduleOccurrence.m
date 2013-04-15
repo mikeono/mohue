@@ -22,8 +22,21 @@
   if ( self = [super init] ) {
     _scheduleUUID = schedule.UUID;
     _lightState = schedule.lightState;
-    _name = schedule.name;
+    _label = schedule.label;
+    _additionalFields = schedule.additionalFields;
     _date = [MOScheduleOccurrence dateByCombiningTime: schedule.timeOfDay withDay: day];
+  }
+  return self;
+}
+
+- (id)initWithHueOccurrenceDict:(NSDictionary*)hueOccurrenceDictionary {
+  if ( self = [super init] ) {
+    //Structure: { "name": occurrenceIdentifier, "description": additionalFields, "command":{"body": commandBodyDict}, "time": "2013-04-14T23:00:50"}
+    _occurrenceIdentifier = [hueOccurrenceDictionary valueForKey: @"name"];
+    [MOScheduleOccurrence scheduleUUIDFromOccurrenceIdentifier: _occurrenceIdentifier];
+    
+    // TODO(MO): Convert to using a schedule object property and populate that here
+    
   }
   return self;
 }
@@ -59,6 +72,12 @@
   _occurrenceIdentifier = nil;
 }
 
+#pragma mark - Parsing hue data
+
+- (void)parseAdditionalFields {
+  
+}
+
 #pragma mark - Static Methods
 
 // TODO(MO): Make this faster by using NSDateComponents
@@ -81,5 +100,12 @@
   return [dateFormatter dateFromString: dateString];
 }
 
++ (NSString*)scheduleUUIDFromOccurrenceIdentifier:(NSString*)occurrenceIdentifier {
+  NSArray* components = [occurrenceIdentifier componentsSeparatedByString: @" "];
+  if ( [components count] > 0 ) {
+    return [components objectAtIndex: 0];
+  }
+  return nil;
+}
 
 @end

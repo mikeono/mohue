@@ -7,6 +7,7 @@
 //
 
 #import "MOScheduleList.h"
+#import "MOSchedule.h"
 
 @implementation MOScheduleList
 
@@ -31,10 +32,24 @@
   return _schedules;
 }
 
-#pragma mark - Mutations
+#pragma mark - Mutation
 
 - (void)addSchedule:(MOSchedule*)schedule {
   [self.schedules addObject: schedule];
+  
+  // TODO(MO): Sort by time
+  
+}
+
+#pragma mark - Reading
+
+- (BOOL)containsUUID:(NSString*)scheduleUUID {
+  for ( MOSchedule* schedule in _schedules ) {
+    if ( [schedule.UUID isEqualToString: scheduleUUID] ) {
+      return YES;
+    }
+  }
+  return NO;
 }
 
 @end

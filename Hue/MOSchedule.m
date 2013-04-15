@@ -8,6 +8,8 @@
 
 #import "MOSchedule.h"
 #import "MOLightState.h"
+#import "MOScheduleOccurrence.h"
+#import "NSDate+Hue.h"
 
 @implementation MOSchedule
 
@@ -15,6 +17,33 @@
   if ( self = [super init] ) {
     _UUID = [MOModel generateUUID];
     _dayOfWeekMask = MODayOfWeekAll;
+    _label = @"";
+  }
+  return self;
+}
+
+- (id)initWithHueOccurrenceDict:(NSDictionary*)hueOccurrenceDictionary {
+  if ( self = [super init] ) {
+    // Structure: { "name": occurrenceIdentifier, "description": additionalFields, "command":{"body": commandBodyDict}, "time": "2013-04-14T23:00:50"}
+    
+    // Parse UUID
+    NSString* occurrenceIdentifier = [hueOccurrenceDictionary valueForKey: @"name"];
+    _UUID = [MOScheduleOccurrence scheduleUUIDFromOccurrenceIdentifier: occurrenceIdentifier];
+    
+    // Parse Additional Fields
+    NSString* additionalFieldsString = [hueOccurrenceDictionary valueForKey: @"description"];
+    NSArray* additionalFields = [additionalFieldsString componentsSeparatedByString: @"-"];
+    NSString* dayOfWeekMaskString = [additionalFields objectAtIndex: 0];
+    _dayOfWeekMask = dayOfWeekMaskString.integerValue;
+    _label = [additionalFields objectAtIndex: 1];
+    
+    // Parse Command Body Dict
+    NSDictionary* commandBodyDict = [[hueOccurrenceDictionary valueForKey: @"command"] valueForKey: @"body"];
+    _lightState = [[MOLightState alloc] initWithHueCommandDict: commandBodyDict];
+    
+    // Parse Time
+    NSString* dateString = [hueOccurrenceDictionary valueForKey: @"time"];
+    _timeOfDay = [NSDate dateFromHueString: dateString];
   }
   return self;
 }
@@ -40,7 +69,10 @@
   return [MOSchedule stringForDayOfWeekMask: self.dayOfWeekMask];
 }
 
-
+- (NSString*)additionalFields {
+  DBG(@"Additional fields %@", [NSString stringWithFormat: @"%d-%@", self.dayOfWeekMask, self.label]);
+  return [NSString stringWithFormat: @"%d-%@", self.dayOfWeekMask, self.label];
+}
 
 #pragma mark - Static Methods
 

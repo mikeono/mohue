@@ -8,6 +8,7 @@
 
 #import "MOLightState.h"
 #import "JSONKit.h"
+#import "NSDictionary+MO.h"
 
 NSString* kMOLightColorModeHS = @"hs";
 NSString* kMOLightColorModeXY = @"xy";
@@ -21,6 +22,21 @@ NSString* kMOLightColorModeCT = @"ct";
     _bri = 255;
     _ct = 326;
     _colorMode = kMOLightColorModeCT;
+  }
+  return self;
+}
+
+- (id)initWithHueCommandDict:(NSDictionary*)dict {
+  if ( self = [super init] ) {
+    // Structure {"bri":bri,"ct":ct,"colorMode":colorMode,"on":on}
+    _on = [dict numberForKey: @"on"].boolValue;
+    _bri = [dict numberForKey: @"bri"].integerValue;
+    _hue = [dict numberForKey: @"hue"].integerValue;
+    _sat = [dict numberForKey: @"sat"].integerValue;
+    _xy = [dict pointForKey: @"xy"];
+    _ct = [dict numberForKey: @""].integerValue;
+    _colorMode = [dict valueForKey: @"colorMode"];
+    
   }
   return self;
 }

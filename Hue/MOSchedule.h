@@ -30,9 +30,15 @@ typedef enum MODayOfWeek {
 @property (nonatomic, strong) NSDate* timeOfDay;
 @property (nonatomic, assign) MODayOfWeek dayOfWeekMask;
 @property (nonatomic, strong) MOLightState* lightState;
-@property (nonatomic, strong) NSString* name;
+@property (nonatomic, strong) NSString* label;
+
 @property (nonatomic, readonly) NSString* timeString;
 @property (nonatomic, readonly) NSString* dayOfWeekString;
+@property (nonatomic, readonly) NSString* additionalFields;
+
+- (id)init;
+
+- (id)initWithHueOccurrenceDict:(NSDictionary*)hueOccurrenceDictionary;
 
 #pragma mark - Static methods
 

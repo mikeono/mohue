@@ -43,11 +43,8 @@
     
     id responseObject = [data objectFromJSONData];
     
-    // Call the user completion handler if it's set
     if ( hueRequest.completionBlock ) {
-      dispatch_async( dispatch_get_main_queue(), ^{
-        hueRequest.completionBlock(responseObject, error);
-      });
+      hueRequest.completionBlock(responseObject, error);
     }
   }];
 }
