@@ -26,4 +26,32 @@
   return dateFormatter;
 }
 
++ (NSDateFormatter*)occurrenceIdentifierDateFormatter {
+  NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+  NSTimeZone *gmt = [NSTimeZone timeZoneWithAbbreviation: @"GMT"];
+  [dateFormatter setTimeZone: gmt];
+  [dateFormatter  setDateFormat: @"MMddyyyy"];
+  return dateFormatter;
+}
+
+// TODO(MO): Make this faster by using NSDateComponents
++ (NSDate*)dateByCombiningTime:(NSDate*)time withDay:(NSDate*)day {
+  NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+  NSTimeZone *gmt = [NSTimeZone timeZoneWithAbbreviation: @"GMT"];
+  [dateFormatter setTimeZone: gmt];
+  
+  // Format time
+  [dateFormatter  setDateFormat: @"HHmmss"];
+  NSString* timeString = [dateFormatter stringFromDate: time];
+  
+  // Format day
+  [dateFormatter  setDateFormat: @"MMddyyyy"];
+  NSString* dayString = [dateFormatter stringFromDate: day];
+  
+  // Concat and Parse
+  NSString* dateString = [NSString stringWithFormat: @"%@%@", dayString, timeString];
+  [dateFormatter  setDateFormat: @"MMddyyyyHHmmss"];
+  return [dateFormatter dateFromString: dateString];
+}
+
 @end

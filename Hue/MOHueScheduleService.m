@@ -25,12 +25,12 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
 + (void)postScheduleOccurrence:(MOScheduleOccurrence*)scheduleOccurrence {
   
   // Create body
-  NSDictionary* commandBody = scheduleOccurrence.lightState.dictionary;
+  NSDictionary* commandBody = scheduleOccurrence.schedule.lightState.dictionary;
   NSDictionary* command = @{@"address": @"/api/1234567890/lights/1/state",
                             @"method": @"PUT",
                             @"body": commandBody};
   NSDictionary* requestBody = @{@"name": scheduleOccurrence.occurrenceIdentifier,
-                                @"description": scheduleOccurrence.additionalFields,
+                                @"description": scheduleOccurrence.schedule.additionalFields,
                                 @"command": command,
                                 @"time": scheduleOccurrence.date.hueDateString};
   

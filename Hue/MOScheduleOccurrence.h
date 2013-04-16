@@ -13,19 +13,15 @@
 
 @interface MOScheduleOccurrence : MOModel
 
-@property (nonatomic, readonly) MOLightState* lightState;
-@property (nonatomic, readonly) NSDate* date;
-@property (nonatomic, readonly) NSString* label;
-@property (nonatomic, readonly) NSString* scheduleUUID;
-@property (nonatomic, readonly) NSString* additionalFields;
 @property (nonatomic, readonly) NSString* occurrenceIdentifier;
+@property (nonatomic, readonly) NSDate* date;
+@property (nonatomic, readonly) NSString* scheduleUUID;
+@property (nonatomic, readonly) MOSchedule* schedule;
 
 
 - (id)initWithSchedule:(MOSchedule*)schedule day:(NSDate*)day;
 
 - (id)initWithHueOccurrenceDict:(NSDictionary*)hueOccurrenceDictionary;
-
-+ (NSDate*)dateByCombiningTime:(NSDate*)time withDay:(NSDate*)day;
 
 + (NSString*)scheduleUUIDFromOccurrenceIdentifier:(NSString*)occurrenceIdentifier;
 
