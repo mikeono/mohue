@@ -9,13 +9,15 @@
 #import <Foundation/Foundation.h>
 
 typedef enum MOModelDetail {
-  MOModelDetailSummary,
-  MOModelDetailDefault
+  MOModelDetailDefault = 0,
+  MOModelDetailSummary
 } MOModelDetail;
 
-@interface MOModel : NSObject 
+@interface MOModel : NSObject {
+  MOModelDetail _levelOfDetail;
+}
 
-@property (nonatomic, assign) MOModelDetail detail;
+@property (nonatomic, assign) MOModelDetail levelOfDetail;
 
 + (NSString*)generateUUID;
 

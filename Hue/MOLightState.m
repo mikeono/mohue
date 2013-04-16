@@ -36,7 +36,6 @@ NSString* kMOLightColorModeCT = @"ct";
     _xy = [dict pointForKey: @"xy"];
     _ct = [dict numberForKey: @""].integerValue;
     _colorMode = [dict valueForKey: @"colorMode"];
-    
   }
   return self;
 }
