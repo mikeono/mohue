@@ -14,25 +14,10 @@
 
 - (id)init {
   if ( self = [super init] ) {
-    
-  }
-  return self;
-}
-
-#pragma mark - Getters and Setters
-
-- (MOScheduleList*)scheduleList {
-  if ( _scheduleList == nil ) {
     _scheduleList = [[MOScheduleList alloc] init];
-  }
-  return _scheduleList;
-}
-
-- (MOScheduleOccurrenceList*)occurrenceList {
-  if ( _occurrenceList == nil ) {
     _occurrenceList = [[MOScheduleOccurrenceList alloc] init];
   }
-  return _occurrenceList;
+  return self;
 }
 
 #pragma mark - Static Methods
