@@ -36,8 +36,7 @@
 
 - (id)initWithHueOccurrenceDict:(NSDictionary*)dict {
   if ( self = [super init] ) {
-    
-    // Structure: { "name": occurrenceIdentifier, "description": additionalFields, "command":{"body": commandBodyDict}, "time": "2013-04-14T23:00:50"}
+    // Input Structure: { "name": occurrenceIdentifier, "description": additionalFields, "command":{"body": commandBodyDict}, "time": "2013-04-14T23:00:50"}
     
     // Populate occurrence fields
     _occurrenceIdentifier = [dict valueForKey: @"name"];
@@ -46,6 +45,16 @@
     
     // Populate schedule
     _schedule = [[MOSchedule alloc] initWithHueOccurrenceDict: dict];
+  }
+  return self;
+}
+
+- (id)initWithHueIdString:(NSString*)hueIdString occurrenceIdentifier:(NSString*)occurrenceIdentifier {
+  if ( self = [super init] ) {
+    _occurrenceIdentifier = occurrenceIdentifier;
+    _scheduleUUID = [MOScheduleOccurrence scheduleUUIDFromOccurrenceIdentifier: _occurrenceIdentifier];
+    _hueIdString = hueIdString;
+    _levelOfDetail = MOModelDetailSummary;
   }
   return self;
 }

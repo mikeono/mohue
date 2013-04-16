@@ -15,45 +15,11 @@
 #import "NSDate+Hue.h"
 #import "MOLightState.h"
 #import "MOCache.h"
+#import "MOHueScheduleOccurrenceService.h"
 
 NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
 
 @implementation MOHueScheduleService
-
-#pragma mark - Posting Schedules
-
-+ (void)postScheduleOccurrence:(MOScheduleOccurrence*)scheduleOccurrence {
-  
-  // Create body
-  NSDictionary* commandBody = scheduleOccurrence.schedule.lightState.dictionary;
-  NSDictionary* command = @{@"address": @"/api/1234567890/lights/1/state",
-                            @"method": @"PUT",
-                            @"body": commandBody};
-  NSDictionary* requestBody = @{@"name": scheduleOccurrence.occurrenceIdentifier,
-                                @"description": scheduleOccurrence.schedule.additionalFields,
-                                @"command": command,
-                                @"time": scheduleOccurrence.date.hueDateString};
-  
-  MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"api/1234567890/schedules" bodyDict: requestBody httpMethod: kMOHTTPRequestMethodPost completionBlock: nil];
-  
-  [[MOHueService sharedInstance] executeAsyncRequest: hueRequest];
-}
-
-+ (void)postSchedule:(MOSchedule*)schedule {
-  
-  // Create 1 occurrence and post it
-  MOScheduleOccurrence* scheduleOccurrence = [[MOScheduleOccurrence alloc] initWithSchedule: schedule day:[NSDate date]];
-  
-  [MOHueScheduleService postScheduleOccurrence: scheduleOccurrence];
-}
-
-+ (void)saveSchedule:(MOSchedule*)schedule {
-  
-  // If schedule exists, remove it
-  
-  // Post schedule
-  [MOHueScheduleService postSchedule: schedule];
-}
 
 #pragma mark - Getting Schedules
 
@@ -97,7 +63,7 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
       
       // Create MOSchedule and add it to MOCache
       MOSchedule* schedule = [[MOSchedule alloc] initWithHueOccurrenceDict: resultObject];
-    
+      
       // MOCache is not thread safe so add schedule on main thread
       dispatch_async( dispatch_get_main_queue(), ^{
         [[[MOCache sharedInstance] scheduleList] addSchedule: schedule];
@@ -113,6 +79,48 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
   }];
   
   [[MOHueService sharedInstance] executeAsyncRequest: hueRequest];
+}
+
+#pragma mark - Posting Schedules
+
++ (void)postScheduleOccurrence:(MOScheduleOccurrence*)scheduleOccurrence {
+  
+  // Create body
+  NSDictionary* commandBody = scheduleOccurrence.schedule.lightState.dictionary;
+  NSDictionary* command = @{@"address": @"/api/1234567890/groups/0/action",
+                            @"method": kMOHTTPRequestMethodPut,
+                            @"body": commandBody};
+  NSDictionary* requestBody = @{@"name": scheduleOccurrence.occurrenceIdentifier,
+                                @"description": scheduleOccurrence.schedule.additionalFields,
+                                @"command": command,
+                                @"time": scheduleOccurrence.date.hueDateString};
+  
+  MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"api/1234567890/schedules" bodyDict: requestBody httpMethod: kMOHTTPRequestMethodPost completionBlock: nil];
+  
+  [[MOHueService sharedInstance] executeAsyncRequest: hueRequest];
+}
+
++ (void)postSchedule:(MOSchedule*)schedule {
+  
+  // Create 1 occurrence and post it
+  MOScheduleOccurrence* scheduleOccurrence = [[MOScheduleOccurrence alloc] initWithSchedule: schedule day:[NSDate date]];
+  
+  [MOHueScheduleService postScheduleOccurrence: scheduleOccurrence];
+}
+
++ (void)saveSchedule:(MOSchedule*)schedule {
+  
+  // If schedule exists, remove it
+  [MOHueScheduleOccurrenceService deleteAllOccurrencesOfUUID: schedule.UUID withCompletion: ^(BOOL success) {
+    if ( success ) {
+      DBG(@"Deleted all occurrences successfully");
+    } else {
+      DBG(@"Deleted all occurrences with errors");
+    }
+  }];
+  
+  // Post schedule
+  [MOHueScheduleService postSchedule: schedule];
 }
 
 @end

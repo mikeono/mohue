@@ -8,6 +8,7 @@
 
 #import "MOCache.h"
 #import "MOScheduleList.h"
+#import "MOScheduleOccurrenceList.h"
 
 @implementation MOCache
 
@@ -25,6 +26,13 @@
     _scheduleList = [[MOScheduleList alloc] init];
   }
   return _scheduleList;
+}
+
+- (MOScheduleOccurrenceList*)occurrenceList {
+  if ( _occurrenceList == nil ) {
+    _occurrenceList = [[MOScheduleOccurrenceList alloc] init];
+  }
+  return _occurrenceList;
 }
 
 #pragma mark - Static Methods

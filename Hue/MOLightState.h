@@ -20,7 +20,7 @@ extern NSString* kMOLightColorModeCT;
 @property (nonatomic, assign) NSUInteger sat;
 @property (nonatomic, assign) CGPoint xy;
 @property (nonatomic, assign) NSUInteger ct;
-@property (nonatomic, assign) NSString* colorMode;
+@property (nonatomic, strong) NSString* colorMode;
 
 @property (nonatomic, readonly) NSDictionary* dictionary;
 

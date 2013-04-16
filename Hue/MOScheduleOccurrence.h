@@ -14,14 +14,17 @@
 @interface MOScheduleOccurrence : MOModel
 
 @property (nonatomic, readonly) NSString* occurrenceIdentifier;
-@property (nonatomic, readonly) NSDate* date;
 @property (nonatomic, readonly) NSString* scheduleUUID;
+@property (nonatomic, readonly) NSString* hueIdString;
+@property (nonatomic, readonly) NSDate* date;
 @property (nonatomic, readonly) MOSchedule* schedule;
 
 
 - (id)initWithSchedule:(MOSchedule*)schedule day:(NSDate*)day;
 
 - (id)initWithHueOccurrenceDict:(NSDictionary*)hueOccurrenceDictionary;
+
+- (id)initWithHueIdString:(NSString*)hueIdString occurrenceIdentifier:(NSString*)occurrenceIdentifier;
 
 + (NSString*)scheduleUUIDFromOccurrenceIdentifier:(NSString*)occurrenceIdentifier;
 
