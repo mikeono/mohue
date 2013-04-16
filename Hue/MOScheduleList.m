@@ -7,6 +7,7 @@
 //
 
 #import "MOScheduleList.h"
+#import "MOSchedule.h"
 
 @implementation MOScheduleList
 
@@ -20,6 +21,35 @@
   if ( self = [super init] ) {
   }
   return self;
+}
+
+#pragma mark - Getters and Setters
+
+- (NSArray*)schedules {
+  if ( _schedules == nil ) {
+    _schedules = [[NSMutableArray alloc] init];
+  }
+  return _schedules;
+}
+
+#pragma mark - Mutation
+
+- (void)addSchedule:(MOSchedule*)schedule {
+  [self.schedules addObject: schedule];
+  
+  // TODO(MO): Sort by time
+  
+}
+
+#pragma mark - Reading
+
+- (BOOL)containsUUID:(NSString*)scheduleUUID {
+  for ( MOSchedule* schedule in _schedules ) {
+    if ( [schedule.UUID isEqualToString: scheduleUUID] ) {
+      return YES;
+    }
+  }
+  return NO;
 }
 
 @end

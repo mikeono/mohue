@@ -16,8 +16,6 @@
 
 #pragma mark - Making URL Requests
 
-- (NSMutableURLRequest*)requestWithPath:(NSString*)path body:(NSDictionary*)body method:(NSString*)method;
-
 - (NSMutableURLRequest*)startAsyncRequestWithPath:(NSString*)path body:(NSDictionary*)body  method:(NSString*)method completionHandler:(void (^)(id, NSError*))completionHandler;
 
 @end

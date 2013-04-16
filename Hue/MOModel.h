@@ -17,4 +17,6 @@ typedef enum MOModelDetail {
 
 @property (nonatomic, assign) MOModelDetail detail;
 
++ (NSString*)generateUUID;
+
 @end
