@@ -8,23 +8,16 @@
 
 #import "MOCache.h"
 #import "MOScheduleList.h"
+#import "MOScheduleOccurrenceList.h"
 
 @implementation MOCache
 
 - (id)init {
   if ( self = [super init] ) {
-    
+    _scheduleList = [[MOScheduleList alloc] init];
+    _occurrenceList = [[MOScheduleOccurrenceList alloc] init];
   }
   return self;
-}
-
-#pragma mark - Getters and Setters
-
-- (MOScheduleList*)scheduleList {
-  if ( _scheduleList == nil ) {
-    _scheduleList = [[MOScheduleList alloc] init];
-  }
-  return _scheduleList;
 }
 
 #pragma mark - Static Methods

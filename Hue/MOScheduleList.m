@@ -35,7 +35,10 @@
 #pragma mark - Mutation
 
 - (void)addSchedule:(MOSchedule*)schedule {
-  [self.schedules addObject: schedule];
+  // Additional check to make sure not adding an existing schedule
+  if ( ! [self containsUUID: schedule.UUID] ) {
+    [self.schedules addObject: schedule];
+  }
   
   // TODO(MO): Sort by time
   

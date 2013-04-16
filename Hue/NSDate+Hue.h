@@ -16,4 +16,8 @@
 
 + (NSDateFormatter*)hueDateFormatter;
 
++ (NSDateFormatter*)occurrenceIdentifierDateFormatter;
+
++ (NSDate*)dateByCombiningTime:(NSDate*)time withDay:(NSDate*)day;
+
 @end

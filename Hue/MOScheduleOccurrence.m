@@ -9,6 +9,7 @@
 #import "MOScheduleOccurrence.h"
 #import "MOLightState.h"
 #import "MOSchedule.h"
+#import "NSDate+Hue.h"
 
 @interface MOScheduleOccurrence () {
   NSString* _occurrenceIdentifier;
@@ -20,85 +21,45 @@
 
 - (id)initWithSchedule:(MOSchedule*)schedule day:(NSDate*)day {
   if ( self = [super init] ) {
+    
+    // Populate fields
     _scheduleUUID = schedule.UUID;
-    _lightState = schedule.lightState;
-    _label = schedule.label;
-    _additionalFields = schedule.additionalFields;
-    _date = [MOScheduleOccurrence dateByCombiningTime: schedule.timeOfDay withDay: day];
-  }
-  return self;
-}
-
-- (id)initWithHueOccurrenceDict:(NSDictionary*)hueOccurrenceDictionary {
-  if ( self = [super init] ) {
-    //Structure: { "name": occurrenceIdentifier, "description": additionalFields, "command":{"body": commandBodyDict}, "time": "2013-04-14T23:00:50"}
-    _occurrenceIdentifier = [hueOccurrenceDictionary valueForKey: @"name"];
-    [MOScheduleOccurrence scheduleUUIDFromOccurrenceIdentifier: _occurrenceIdentifier];
+    _date = [NSDate dateByCombiningTime: schedule.timeOfDay withDay: day];
+    _schedule = schedule;
     
-    // TODO(MO): Convert to using a schedule object property and populate that here
-    
-  }
-  return self;
-}
-
-#pragma mark - Getters and Setters
-
-- (NSString*)occurrenceIdentifier {
-  if ( _occurrenceIdentifier == nil ) {
-    // Format date
-    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-    NSTimeZone *gmt = [NSTimeZone timeZoneWithAbbreviation: @"GMT"];
-    [dateFormatter setTimeZone: gmt];
-    [dateFormatter  setDateFormat: @"MMddyyyy"];
-    NSString* dateString = [dateFormatter stringFromDate: _date];
-    
+    // Generate occurrence identifier
+    NSString* dateString = [[NSDate occurrenceIdentifierDateFormatter] stringFromDate: _date];
     _occurrenceIdentifier = [NSString stringWithFormat: @"%@ %@", _scheduleUUID, dateString];
   }
-      DBG(@"Occ identifier name is %@", _occurrenceIdentifier);
-  return _occurrenceIdentifier;
+  return self;
 }
 
-- (void)setDate:(NSDate *)date {
-  _date = date;
-  
-  // Reset occurrence identifier
-  _occurrenceIdentifier = nil;
+- (id)initWithHueOccurrenceDict:(NSDictionary*)dict {
+  if ( self = [super init] ) {
+    // Input Structure: { "name": occurrenceIdentifier, "description": additionalFields, "command":{"body": commandBodyDict}, "time": "2013-04-14T23:00:50"}
+    
+    // Populate occurrence fields
+    _occurrenceIdentifier = [dict valueForKey: @"name"];
+    _scheduleUUID = [MOScheduleOccurrence scheduleUUIDFromOccurrenceIdentifier: _occurrenceIdentifier];
+    _date = [NSDate dateFromHueString: [dict valueForKey: @"time"]];
+    
+    // Populate schedule
+    _schedule = [[MOSchedule alloc] initWithHueOccurrenceDict: dict];
+  }
+  return self;
 }
 
-- (void)setScheduleUUID:(NSString *)scheduleUUID {
-  _scheduleUUID = scheduleUUID;
-  
-  // Reset occurrence identifier
-  _occurrenceIdentifier = nil;
-}
-
-#pragma mark - Parsing hue data
-
-- (void)parseAdditionalFields {
-  
+- (id)initWithHueIdString:(NSString*)hueIdString occurrenceIdentifier:(NSString*)occurrenceIdentifier {
+  if ( self = [super init] ) {
+    _occurrenceIdentifier = occurrenceIdentifier;
+    _scheduleUUID = [MOScheduleOccurrence scheduleUUIDFromOccurrenceIdentifier: _occurrenceIdentifier];
+    _hueIdString = hueIdString;
+    _levelOfDetail = MOModelDetailSummary;
+  }
+  return self;
 }
 
 #pragma mark - Static Methods
-
-// TODO(MO): Make this faster by using NSDateComponents
-+ (NSDate*)dateByCombiningTime:(NSDate*)time withDay:(NSDate*)day {
-  NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-  NSTimeZone *gmt = [NSTimeZone timeZoneWithAbbreviation: @"GMT"];
-  [dateFormatter setTimeZone: gmt];
-  
-  // Format time
-  [dateFormatter  setDateFormat: @"HHmmss"];
-  NSString* timeString = [dateFormatter stringFromDate: time];
-  
-  // Format day
-  [dateFormatter  setDateFormat: @"MMddyyyy"];
-  NSString* dayString = [dateFormatter stringFromDate: day];
-  
-  // Concat and Parse
-  NSString* dateString = [NSString stringWithFormat: @"%@%@", dayString, timeString];
-  [dateFormatter  setDateFormat: @"MMddyyyyHHmmss"];
-  return [dateFormatter dateFromString: dateString];
-}
 
 + (NSString*)scheduleUUIDFromOccurrenceIdentifier:(NSString*)occurrenceIdentifier {
   NSArray* components = [occurrenceIdentifier componentsSeparatedByString: @" "];

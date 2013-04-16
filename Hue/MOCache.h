@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @class MOScheduleList;
+@class MOScheduleOccurrenceList;
 
 @interface MOCache : NSObject
 
-@property (nonatomic, strong) MOScheduleList* scheduleList;
+@property (atomic, strong) MOScheduleList* scheduleList;
+@property (atomic, strong) MOScheduleOccurrenceList* occurrenceList;
 
 + (MOCache*)sharedInstance;
 

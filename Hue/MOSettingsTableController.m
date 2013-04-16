@@ -124,7 +124,7 @@
     case MOSettingsTableRowLightRed:
     {
       NSDictionary* requestBody = @{@"on":@YES, @"hue":@30};
-      [[MOHueServiceManager sharedInstance] startAsyncRequestWithPath: @"api/1234567890/lights/2/state" body: requestBody method: @"PUT" completionHandler: nil];
+      [[MOHueServiceManager sharedInstance] startAsyncRequestWithPath: @"api/1234567890/groups/0/action" body: requestBody method: @"PUT" completionHandler: nil];
       break;
     }
     case MOSettingsTableRowPartay:
