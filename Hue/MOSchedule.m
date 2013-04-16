@@ -7,7 +7,139 @@
 //
 
 #import "MOSchedule.h"
+#import "MOLightState.h"
+#import "MOScheduleOccurrence.h"
+#import "NSDate+Hue.h"
 
 @implementation MOSchedule
+
+- (id)init {
+  if ( self = [super init] ) {
+    _UUID = [MOModel generateUUID];
+    _dayOfWeekMask = MODayOfWeekAll;
+    _label = @"";
+  }
+  return self;
+}
+
+- (id)initWithHueOccurrenceDict:(NSDictionary*)hueOccurrenceDictionary {
+  if ( self = [super init] ) {
+    // Structure: { "name": occurrenceIdentifier, "description": additionalFields, "command":{"body": commandBodyDict}, "time": "2013-04-14T23:00:50"}
+    
+    // Parse UUID
+    NSString* occurrenceIdentifier = [hueOccurrenceDictionary valueForKey: @"name"];
+    _UUID = [MOScheduleOccurrence scheduleUUIDFromOccurrenceIdentifier: occurrenceIdentifier];
+    
+    // Parse Additional Fields
+    NSString* additionalFieldsString = [hueOccurrenceDictionary valueForKey: @"description"];
+    NSArray* additionalFields = [additionalFieldsString componentsSeparatedByString: @"-"];
+    NSString* dayOfWeekMaskString = [additionalFields objectAtIndex: 0];
+    _dayOfWeekMask = dayOfWeekMaskString.integerValue;
+    _label = [additionalFields objectAtIndex: 1];
+    
+    // Parse Command Body Dict
+    NSDictionary* commandBodyDict = [[hueOccurrenceDictionary valueForKey: @"command"] valueForKey: @"body"];
+    _lightState = [[MOLightState alloc] initWithHueCommandDict: commandBodyDict];
+    
+    // Parse Time
+    NSString* dateString = [hueOccurrenceDictionary valueForKey: @"time"];
+    _timeOfDay = [NSDate dateFromHueString: dateString];
+  }
+  return self;
+}
+
+#pragma mark - Getters and Setters
+
+- (MOLightState*)lightState {
+  if ( _lightState == nil ) {
+    _lightState = [[MOLightState alloc] init];
+  }
+  return _lightState;
+}
+
+- (NSString*)timeString {
+  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+  [dateFormatter setDateStyle: NSDateFormatterNoStyle];
+  [dateFormatter setTimeStyle: NSDateFormatterShortStyle];
+  
+  return [dateFormatter stringFromDate: self.timeOfDay];
+}
+
+- (NSString*)dayOfWeekString {
+  return [MOSchedule stringForDayOfWeekMask: self.dayOfWeekMask];
+}
+
+- (NSString*)additionalFields {
+  DBG(@"Additional fields %@", [NSString stringWithFormat: @"%d-%@", self.dayOfWeekMask, self.label]);
+  return [NSString stringWithFormat: @"%d-%@", self.dayOfWeekMask, self.label];
+}
+
+#pragma mark - Static Methods
+
++ (NSString*)stringForDayOfWeek:(MODayOfWeek)dayOfWeek {
+  switch ( dayOfWeek ) {
+    case MODayOfWeekSunday:
+      return @"Sunday";
+    case MODayOfWeekMonday:
+      return @"Monday";
+    case MODayOfWeekTuesday:
+      return @"Tuesday";
+    case MODayOfWeekWednesday:
+      return @"Wednesday";
+    case MODayOfWeekThursday:
+      return @"Thursday";
+    case MODayOfWeekFriday:
+      return @"Friday";
+    case MODayOfWeekSaturday:
+      return @"Saturday";
+    default:
+      return nil;
+  }
+}
+
++ (NSString*)stringForDayOfWeekMask:(MODayOfWeek)dayOfWeekMask {
+
+  // Return day of week if it is one 
+  NSString* ret = [self stringForDayOfWeek: dayOfWeekMask];
+  if ( ret ) {
+    return ret;
+  }
+  
+  // Otherwise return mask if there is one predefined
+  switch ( dayOfWeekMask ) {
+    case MODayOfWeekWeekend:
+      return @"Weekends";
+    case MODayOfWeekWeekday:
+      return @"Weekdays";
+    case MODayOfWeekAll:
+      return @"Everyday";
+    case MODayOfWeekNone:
+      return @"";
+    default:
+      break;
+  }
+  
+  // Otherwise, create a comma seperated list of the 7 days
+  NSMutableArray* array = [[NSMutableArray alloc] init];
+  for ( NSNumber* dayNumber in [self daysOfTheWeek] ) {
+    MODayOfWeek dayOfWeek = dayNumber.integerValue;
+    if ( dayOfWeek & dayOfWeekMask ) {
+      [array addObject: [self stringForDayOfWeek: dayOfWeek]];
+    }
+  }
+  return [array componentsJoinedByString: @", "];
+}
+
++ (NSArray*)daysOfTheWeek {
+  return @[[NSNumber numberWithInteger: MODayOfWeekSunday],
+           [NSNumber numberWithInteger: MODayOfWeekMonday],
+           [NSNumber numberWithInteger: MODayOfWeekTuesday],
+           [NSNumber numberWithInteger: MODayOfWeekWednesday],
+           [NSNumber numberWithInteger: MODayOfWeekThursday],
+           [NSNumber numberWithInteger: MODayOfWeekFriday],
+           [NSNumber numberWithInteger: MODayOfWeekSaturday],
+           ];
+}
+
 
 @end

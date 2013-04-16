@@ -8,11 +8,9 @@
 
 #import "MOModel.h"
 
-typedef enum MOLightColorMode {
-  MOLightColorModeHS,
-  MOLightColorModeXY,
-  MOLightColorModeCT
-} MOLightColorMode;
+extern NSString* kMOLightColorModeHS;
+extern NSString* kMOLightColorModeXY;
+extern NSString* kMOLightColorModeCT;
 
 @interface MOLightState : MOModel
 
@@ -22,6 +20,12 @@ typedef enum MOLightColorMode {
 @property (nonatomic, assign) NSUInteger sat;
 @property (nonatomic, assign) CGPoint xy;
 @property (nonatomic, assign) NSUInteger ct;
-@property (nonatomic, assign) MOLightColorMode colorMode;
+@property (nonatomic, assign) NSString* colorMode;
+
+@property (nonatomic, readonly) NSDictionary* dictionary;
+
+- (id)init;
+
+- (id)initWithHueCommandDict:(NSDictionary*)hueCommandDict;
 
 @end

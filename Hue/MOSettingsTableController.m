@@ -136,7 +136,7 @@
     case MOSettingsTableRowAddTestSchedule:
     {
       
-      NSDate* time = [NSDate dateWithTimeIntervalSinceNow: 30];
+      NSDate* time = [NSDate dateWithTimeIntervalSinceNow: 10];
       
       // Format time
       NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
@@ -146,7 +146,7 @@
       NSString* timeString = [dateFormatter stringFromDate: time];
       
       NSDictionary* commandBody = @{@"hue":@30};
-      NSDictionary* command = @{@"address":@"/api/1234567890/lights/2/state", @"method":@"PUT", @"body":commandBody};
+      NSDictionary* command = @{@"address":@"/api/1234567890/lights/1/state", @"method":@"PUT", @"body":commandBody};
       NSDictionary* requestBody = @{@"name":@"schedule-2-1", @"description":@"schedule-2-1", @"command": command, @"time": timeString};
       
       [[MOHueServiceManager sharedInstance] startAsyncRequestWithPath: @"api/1234567890/schedules" body: requestBody method: @"POST" completionHandler: nil];

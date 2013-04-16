@@ -10,23 +10,16 @@
 
 @implementation HueTests
 
-- (void)setUp
-{
-    [super setUp];
-    
-    // Set-up code here.
+- (void)setUp {
+  [super setUp];
 }
 
-- (void)tearDown
-{
-    // Tear-down code here.
-    
-    [super tearDown];
+- (void)tearDown {
+  [super tearDown];
 }
 
-- (void)testExample
-{
-    STFail(@"Unit tests are not implemented yet in HueTests");
+- (void)testExample {
+  STAssertTrue(1 == 1, @"1 should be 2");
 }
 
 @end

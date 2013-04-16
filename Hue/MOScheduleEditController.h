@@ -10,7 +10,7 @@
 
 @class MOSchedule;
 
-@interface MOScheduleEditController : UIViewController
+@interface MOScheduleEditController : UITableViewController
 
 - (id)initWithSchedule:(MOSchedule*)schedule;
 
