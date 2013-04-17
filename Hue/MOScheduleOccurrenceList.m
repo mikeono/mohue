@@ -24,10 +24,13 @@
     
     // Structure: {hueIdString:{"name": occurrenceIdentifier},
     for ( NSString* hueIdString in hueListDict.allKeys ) {
-      // Create occurrence and add to occurrences dicts
       NSString* occurrenceIdentifier = [[hueListDict objectForKey: hueIdString] objectForKey: @"name"];
-      MOScheduleOccurrence* occurrence = [[MOScheduleOccurrence alloc] initWithHueIdString: hueIdString occurrenceIdentifier: occurrenceIdentifier];
-      [_occurrencesByHueId setObject: occurrence forKey: hueIdString];
+      
+      // If valid occurrence identifier, create occurrence and add to occurrences dicts
+      if ( [MOScheduleOccurrence isValidOccurrenceIdentifier: occurrenceIdentifier] ) {
+        MOScheduleOccurrence* occurrence = [[MOScheduleOccurrence alloc] initWithHueIdString: hueIdString occurrenceIdentifier: occurrenceIdentifier];
+        [_occurrencesByHueId setObject: occurrence forKey: hueIdString];
+      }
     }
   }
   return self;

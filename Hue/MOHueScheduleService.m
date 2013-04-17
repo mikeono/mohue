@@ -35,14 +35,20 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
       // Result Structure: {hueScheduleIdString:{"name": scheduleOccurenceIdentifier}}
       NSDictionary* hueScheduleListDict = resultObject;
       
-      // For each schedule, if it doesn't exist in cache, sync it down
+      // For each schedule:
       for ( NSString* hueScheduleIdString in hueScheduleListDict.allKeys ) {
         NSDictionary* hueScheduleDict = [hueScheduleListDict valueForKey: hueScheduleIdString];
         NSString* scheduleOccurenceIdentifier = [hueScheduleDict valueForKey: @"name"];
-        NSString* scheduleUUID = [MOScheduleOccurrence scheduleUUIDFromOccurrenceIdentifier: scheduleOccurenceIdentifier];
-        if ( ! [[[MOCache sharedInstance] scheduleList] containsUUID: scheduleUUID] ) {
-          // TODO(MO): Implement MOHueServiceOperationQueue so schedule sync requests can be sent synchronously 
-          [MOHueScheduleService syncDownScheduleWithHueId: hueScheduleIdString];
+        
+        // Ensure the occurrence identifier is valid
+        if ( [MOScheduleOccurrence isValidOccurrenceIdentifier: scheduleOccurenceIdentifier] ) {
+          NSString* scheduleUUID = [MOScheduleOccurrence scheduleUUIDFromOccurrenceIdentifier: scheduleOccurenceIdentifier];
+          
+          // If schedule doesn't exist in cache, sync it down
+          if ( ! [[[MOCache sharedInstance] scheduleList] containsUUID: scheduleUUID] ) {
+            // TODO(MO): Implement MOHueServiceOperationQueue so schedule sync requests can be sent synchronously 
+            [MOHueScheduleService syncDownScheduleWithHueId: hueScheduleIdString];
+          }
         }
       }
     }
