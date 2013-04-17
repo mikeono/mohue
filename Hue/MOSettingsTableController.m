@@ -23,6 +23,10 @@
     self.navigationItem.title = @"Settings";
     self.title = @"Settings";
     
+    // Init nav bar buttons
+    UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle: @"Done" style: UIBarButtonItemStylePlain target: self action: @selector(doneButtonPressed)];
+    self.navigationItem.leftBarButtonItem = doneButton;
+    
     // Init table row map
     _rowMap[_rowCount++] = MOSettingsTableRowConnect;
     _rowMap[_rowCount++] = MOSettingsTableRowAllOn;
@@ -168,6 +172,10 @@
       break;
     }
   }
+}
+
+- (void)doneButtonPressed {
+  [self.presentingViewController dismissViewControllerAnimated: YES completion: nil];
 }
 
 @end

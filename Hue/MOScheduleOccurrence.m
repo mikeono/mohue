@@ -69,4 +69,18 @@
   return nil;
 }
 
++ (BOOL)isValidOccurrenceIdentifier:(NSString*)occurrenceIdentifier {
+  NSArray* components = [occurrenceIdentifier componentsSeparatedByString: @" "];
+  if ( [components count] < 1 ) {
+    return NO;
+  }
+  if ( [[components objectAtIndex: 0] length] != 18 ) {
+    return NO;
+  }
+  if ( [[components objectAtIndex: 1] length] != 8 ) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
