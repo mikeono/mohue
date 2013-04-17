@@ -13,8 +13,11 @@
 #import "MOScheduleListCell.h"
 #import "MOCache.h"
 #import "MOHueScheduleService.h"
+#import "MOSettingsTableController.h"
 
 @interface MOScheduleListController ()
+
+@property (nonatomic, readonly) UIToolbar* bottomToolbar;
 
 @end
 
@@ -42,6 +45,17 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  
+  // Configure bottom toolbar
+  self.navigationController.toolbarHidden = NO;
+  UIBarButtonItem* flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target: nil action: nil];
+  UIBarButtonItem* settingsButton = [[UIBarButtonItem alloc] initWithTitle: @"\u2699" style: UIBarButtonItemStylePlain target: self action: @selector(settingsButtonPressed)];
+  
+  UIFont *f1 = [UIFont fontWithName:@"Helvetica" size:24.0];
+  NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:f1, UITextAttributeFont, nil];
+  [settingsButton setTitleTextAttributes: dict forState: UIControlStateNormal];
+  
+  self.toolbarItems = @[flexibleSpace, settingsButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -67,6 +81,10 @@
     _scheduleList = [[MOScheduleList alloc] init];
   }
   return _scheduleList;
+}
+
+- (UIToolbar*)bottomToolbar {
+  return self.navigationController.toolbar;
 }
 
 #pragma mark - Table view data source
@@ -116,6 +134,12 @@
 - (void)pushScheduleEditControllerForSchedule:(MOSchedule*)schedule {
   MOScheduleEditController* scheduleController = [[MOScheduleEditController alloc] initWithSchedule: schedule];
   UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController: scheduleController];
+  [self presentViewController: navController animated: YES completion: nil];
+}
+
+- (void)settingsButtonPressed {
+  MOSettingsTableController* settingsController = [[MOSettingsTableController alloc] init];
+  UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController: settingsController];
   [self presentViewController: navController animated: YES completion: nil];
 }
 

@@ -17,11 +17,8 @@
 
   // Override point for customization after application launch.
   MOScheduleListController* scheduleListController = [[MOScheduleListController alloc] init];
-  UINavigationController* scheduleNavigationController = [[UINavigationController alloc] initWithRootViewController: scheduleListController];
-  MOSettingsTableController* settingsController = [[MOSettingsTableController alloc] init];
-  self.tabBarController = [[UITabBarController alloc] init];
-  self.tabBarController.viewControllers = @[scheduleNavigationController, settingsController];
-  self.window.rootViewController = self.tabBarController;
+  _navController = [[UINavigationController alloc] initWithRootViewController: scheduleListController];
+  self.window.rootViewController = _navController;
   [self.window makeKeyAndVisible];
   return YES;
 }
