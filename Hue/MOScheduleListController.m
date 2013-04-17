@@ -33,6 +33,15 @@
     UIBarButtonItem* editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemEdit target: self action: @selector(editButtonPressed)];
     self.navigationItem.leftBarButtonItem = editButton;
     
+    // Init refresh control
+    if ( NO && [self respondsToSelector: @selector(setRefreshControl:)] ) {
+      UIRefreshControl* refreshControl = [[UIRefreshControl alloc] init];
+      refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString: @"Pull to Sync With Hue"];
+      [refreshControl addTarget: self action: @selector(refreshControlValueChanged) forControlEvents: UIControlEventValueChanged];
+      [self setRefreshControl: refreshControl];
+    }
+    
+    // Init event handling
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(receivedScheduleFromHue) name: kMOReceivedScheduleFromHue object: nil];
   }
   return self;
