@@ -223,9 +223,13 @@ typedef enum MOScheduleEditSection {
     }
     case MOScheduleEditSectionTime:
     {
-      UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: nil];
-      cell.selectionStyle = UITableViewCellSelectionStyleNone;
-      [cell.contentView addSubview: self.timePicker];
+      static NSString* cellIdentifier = @"TimeCell";
+      UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier: cellIdentifier];
+      if ( cell == nil ) {
+        cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: cellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell.contentView addSubview: self.timePicker];
+      }
       return cell;
     }
     case MOScheduleEditSectionModeDetails:

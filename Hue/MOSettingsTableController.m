@@ -23,6 +23,8 @@
     self.navigationItem.title = @"Settings";
     self.title = @"Settings";
     
+    self.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    
     // Init nav bar buttons
     UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle: @"Done" style: UIBarButtonItemStylePlain target: self action: @selector(doneButtonPressed)];
     self.navigationItem.leftBarButtonItem = doneButton;
