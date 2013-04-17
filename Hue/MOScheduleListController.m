@@ -14,10 +14,9 @@
 #import "MOCache.h"
 #import "MOHueScheduleService.h"
 #import "MOSettingsTableController.h"
+#import "MOStyles.h"
 
 @interface MOScheduleListController ()
-
-@property (nonatomic, readonly) UIToolbar* bottomToolbar;
 
 @end
 
@@ -45,6 +44,8 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  
+  self.navigationController.navigationBar.tintColor = [MOStyles colorDarkBrown];
   
   // Configure bottom toolbar
   self.navigationController.toolbarHidden = NO;
@@ -81,10 +82,6 @@
     _scheduleList = [[MOScheduleList alloc] init];
   }
   return _scheduleList;
-}
-
-- (UIToolbar*)bottomToolbar {
-  return self.navigationController.toolbar;
 }
 
 #pragma mark - Table view data source

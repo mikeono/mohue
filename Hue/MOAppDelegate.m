@@ -9,12 +9,15 @@
 #import "MOAppDelegate.h"
 #import "MOSettingsTableController.h"
 #import "MOScheduleListController.h"
+#import "MOStyles.h"
 
 @implementation MOAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
+  [MOStyles applyStylesToAppearance];
+  
   // Override point for customization after application launch.
   MOScheduleListController* scheduleListController = [[MOScheduleListController alloc] init];
   _navController = [[UINavigationController alloc] initWithRootViewController: scheduleListController];
