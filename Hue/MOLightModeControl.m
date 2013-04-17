@@ -7,6 +7,7 @@
 //
 
 #import "MOLightModeControl.h"
+#import "MOStyles.h"
 
 #define kMOLightModeControlHeight 60.0f
 
@@ -26,6 +27,8 @@
     
     // Add subviews
     _segmentedControl = [[UISegmentedControl alloc] initWithItems: @[@"ON", @"OFF"]];
+    _segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+    _segmentedControl.tintColor = [MOStyles colorLightYellow];
     self.lightMode = MOLightModeOn;
     [self addSubview: _segmentedControl];
   }

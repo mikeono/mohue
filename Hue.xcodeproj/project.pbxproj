@@ -11,6 +11,9 @@
 		27077B0F16F4B367007159DE /* MOScheduleList.m in Sources */ = {isa = PBXBuildFile; fileRef = 27077B0E16F4B367007159DE /* MOScheduleList.m */; };
 		27077B1316F4B563007159DE /* MOModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 27077B1216F4B563007159DE /* MOModel.m */; };
 		27077B1616F4B7E9007159DE /* MOHueScheduleService.m in Sources */ = {isa = PBXBuildFile; fileRef = 27077B1516F4B7E9007159DE /* MOHueScheduleService.m */; };
+		2744359C171E418700552AA7 /* MOStyles.m in Sources */ = {isa = PBXBuildFile; fileRef = 2744359B171E418700552AA7 /* MOStyles.m */; };
+		2744359F171E6A8800552AA7 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2744359E171E6A8800552AA7 /* Icon@2x.png */; };
+		274435A1171E6B3F00552AA7 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 274435A0171E6B3F00552AA7 /* Icon.png */; };
 		27451CEB16F01A7D0015A07B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27451CEA16F01A7D0015A07B /* UIKit.framework */; };
 		27451CED16F01A7D0015A07B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27451CEC16F01A7D0015A07B /* Foundation.framework */; };
 		27451CEF16F01A7D0015A07B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27451CEE16F01A7D0015A07B /* CoreGraphics.framework */; };
@@ -78,7 +81,11 @@
 		27077B1216F4B563007159DE /* MOModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOModel.m; sourceTree = "<group>"; };
 		27077B1416F4B7E9007159DE /* MOHueScheduleService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOHueScheduleService.h; sourceTree = "<group>"; };
 		27077B1516F4B7E9007159DE /* MOHueScheduleService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOHueScheduleService.m; sourceTree = "<group>"; };
-		27451CE716F01A7D0015A07B /* Hue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hue.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2744359A171E418700552AA7 /* MOStyles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOStyles.h; sourceTree = "<group>"; };
+		2744359B171E418700552AA7 /* MOStyles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOStyles.m; sourceTree = "<group>"; };
+		2744359E171E6A8800552AA7 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		274435A0171E6B3F00552AA7 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		27451CE716F01A7D0015A07B /* SchedHue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SchedHue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27451CEA16F01A7D0015A07B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		27451CEC16F01A7D0015A07B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		27451CEE16F01A7D0015A07B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -188,6 +195,15 @@
 			name = Service;
 			sourceTree = "<group>";
 		};
+		2744359D171E6A6E00552AA7 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				274435A0171E6B3F00552AA7 /* Icon.png */,
+				2744359E171E6A8800552AA7 /* Icon@2x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		27451CDE16F01A7D0015A07B = {
 			isa = PBXGroup;
 			children = (
@@ -201,7 +217,7 @@
 		27451CE816F01A7D0015A07B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				27451CE716F01A7D0015A07B /* Hue.app */,
+				27451CE716F01A7D0015A07B /* SchedHue.app */,
 				27451D2116F01A7E0015A07B /* HueTests.octest */,
 			);
 			name = Products;
@@ -231,6 +247,7 @@
 				27451D1316F01A7D0015A07B /* MOFirstViewController_iPad.xib */,
 				27451D1616F01A7D0015A07B /* MOSecondViewController_iPhone.xib */,
 				27451D1916F01A7D0015A07B /* MOSecondViewController_iPad.xib */,
+				2744359D171E6A6E00552AA7 /* Images */,
 				27451CF116F01A7D0015A07B /* Supporting Files */,
 			);
 			path = Hue;
@@ -370,6 +387,8 @@
 			children = (
 				27ED39521718E2880002836C /* MOGroupedTableViewCell.h */,
 				27ED39531718E2880002836C /* MOGroupedTableViewCell.m */,
+				2744359A171E418700552AA7 /* MOStyles.h */,
+				2744359B171E418700552AA7 /* MOStyles.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -449,7 +468,7 @@
 			);
 			name = Hue;
 			productName = Hue;
-			productReference = 27451CE716F01A7D0015A07B /* Hue.app */;
+			productReference = 27451CE716F01A7D0015A07B /* SchedHue.app */;
 			productType = "com.apple.product-type.application";
 		};
 		27451D2016F01A7E0015A07B /* HueTests */ = {
@@ -516,6 +535,8 @@
 				27451D1516F01A7D0015A07B /* MOFirstViewController_iPad.xib in Resources */,
 				27451D1816F01A7D0015A07B /* MOSecondViewController_iPhone.xib in Resources */,
 				27451D1B16F01A7D0015A07B /* MOSecondViewController_iPad.xib in Resources */,
+				2744359F171E6A8800552AA7 /* Icon@2x.png in Resources */,
+				274435A1171E6B3F00552AA7 /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,6 +597,7 @@
 				27ED397F171CE0880002836C /* MOHueScheduleOccurrenceService.m in Sources */,
 				27ED3982171CE73C0002836C /* MOScheduleOccurrenceList.m in Sources */,
 				27ED3985171CF1220002836C /* MOModelService.m in Sources */,
+				2744359C171E418700552AA7 /* MOStyles.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -720,7 +742,7 @@
 				INFOPLIST_FILE = "Hue/Hue-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				MO_DEBUG = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SchedHue;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -733,7 +755,7 @@
 				INFOPLIST_FILE = "Hue/Hue-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				MO_DEBUG = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SchedHue;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

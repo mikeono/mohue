@@ -28,4 +28,6 @@
 
 + (NSString*)scheduleUUIDFromOccurrenceIdentifier:(NSString*)occurrenceIdentifier;
 
++ (BOOL)isValidOccurrenceIdentifier:(NSString*)occurrenceIdentifier;
+
 @end
