@@ -45,6 +45,7 @@
 		27634CAE17110F8A00F95988 /* MOScheduleListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27634CAD17110F8A00F95988 /* MOScheduleListController.m */; };
 		27634CB117111FA300F95988 /* MOLightState.m in Sources */ = {isa = PBXBuildFile; fileRef = 27634CB017111FA300F95988 /* MOLightState.m */; };
 		27634CB41711279400F95988 /* MOScheduleEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27634CB31711279400F95988 /* MOScheduleEditController.m */; };
+		27ADC2DD172081F100237262 /* MOScheduleRecurrenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ADC2DC172081F100237262 /* MOScheduleRecurrenceController.m */; };
 		27ED39471718C7140002836C /* MOScheduleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ED39461718C7140002836C /* MOScheduleListCell.m */; };
 		27ED394A1718D3D10002836C /* MOScheduleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ED39491718D3D10002836C /* MOScheduleTests.m */; };
 		27ED39541718E2880002836C /* MOGroupedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ED39531718E2880002836C /* MOGroupedTableViewCell.m */; };
@@ -124,6 +125,8 @@
 		27634CB017111FA300F95988 /* MOLightState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOLightState.m; sourceTree = "<group>"; };
 		27634CB21711279400F95988 /* MOScheduleEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOScheduleEditController.h; sourceTree = "<group>"; };
 		27634CB31711279400F95988 /* MOScheduleEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOScheduleEditController.m; sourceTree = "<group>"; };
+		27ADC2DB172081F100237262 /* MOScheduleRecurrenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOScheduleRecurrenceController.h; sourceTree = "<group>"; };
+		27ADC2DC172081F100237262 /* MOScheduleRecurrenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOScheduleRecurrenceController.m; sourceTree = "<group>"; };
 		27ED39451718C7140002836C /* MOScheduleListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOScheduleListCell.h; sourceTree = "<group>"; };
 		27ED39461718C7140002836C /* MOScheduleListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOScheduleListCell.m; sourceTree = "<group>"; };
 		27ED39481718D3D10002836C /* MOScheduleTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOScheduleTests.h; sourceTree = "<group>"; };
@@ -317,6 +320,8 @@
 				27634CAD17110F8A00F95988 /* MOScheduleListController.m */,
 				27634CB21711279400F95988 /* MOScheduleEditController.h */,
 				27634CB31711279400F95988 /* MOScheduleEditController.m */,
+				27ADC2DB172081F100237262 /* MOScheduleRecurrenceController.h */,
+				27ADC2DC172081F100237262 /* MOScheduleRecurrenceController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -598,6 +603,7 @@
 				27ED3982171CE73C0002836C /* MOScheduleOccurrenceList.m in Sources */,
 				27ED3985171CF1220002836C /* MOModelService.m in Sources */,
 				2744359C171E418700552AA7 /* MOStyles.m in Sources */,
+				27ADC2DD172081F100237262 /* MOScheduleRecurrenceController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

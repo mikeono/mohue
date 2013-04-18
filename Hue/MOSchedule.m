@@ -97,12 +97,34 @@
   }
 }
 
++ (NSString*)shortStringForDayOfWeek:(MODayOfWeek)dayOfWeek {
+  switch ( dayOfWeek ) {
+    case MODayOfWeekSunday:
+      return @"Sun";
+    case MODayOfWeekMonday:
+      return @"Mon";
+    case MODayOfWeekTuesday:
+      return @"Tue";
+    case MODayOfWeekWednesday:
+      return @"Wed";
+    case MODayOfWeekThursday:
+      return @"Thu";
+    case MODayOfWeekFriday:
+      return @"Fri";
+    case MODayOfWeekSaturday:
+      return @"Sat";
+    default:
+      return nil;
+  }
+}
+
+
 + (NSString*)stringForDayOfWeekMask:(MODayOfWeek)dayOfWeekMask {
 
   // Return day of week if it is one 
-  NSString* ret = [self stringForDayOfWeek: dayOfWeekMask];
-  if ( ret ) {
-    return ret;
+  NSString* stringForDay = [self stringForDayOfWeek: dayOfWeekMask];
+  if ( stringForDay ) {
+    return [NSString stringWithFormat: @"Every %@", stringForDay];
   }
   
   // Otherwise return mask if there is one predefined
@@ -124,14 +146,17 @@
   for ( NSNumber* dayNumber in [self daysOfTheWeek] ) {
     MODayOfWeek dayOfWeek = dayNumber.integerValue;
     if ( dayOfWeek & dayOfWeekMask ) {
-      [array addObject: [self stringForDayOfWeek: dayOfWeek]];
+      [array addObject: [self shortStringForDayOfWeek: dayOfWeek]];
     }
   }
-  return [array componentsJoinedByString: @", "];
+  return [array componentsJoinedByString: @" "];
 }
 
+static NSArray *daysOfTheWeek;
+
 + (NSArray*)daysOfTheWeek {
-  return @[[NSNumber numberWithInteger: MODayOfWeekSunday],
+  if (!daysOfTheWeek) {
+    daysOfTheWeek = @[[NSNumber numberWithInteger: MODayOfWeekSunday],
            [NSNumber numberWithInteger: MODayOfWeekMonday],
            [NSNumber numberWithInteger: MODayOfWeekTuesday],
            [NSNumber numberWithInteger: MODayOfWeekWednesday],
@@ -139,6 +164,8 @@
            [NSNumber numberWithInteger: MODayOfWeekFriday],
            [NSNumber numberWithInteger: MODayOfWeekSaturday],
            ];
+  }
+  return daysOfTheWeek;
 }
 
 

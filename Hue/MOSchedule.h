@@ -8,6 +8,8 @@
 
 #import "MOModel.h"
 
+#define kMODaysPerWeek 7
+
 @class MOLightState;
 
 typedef enum MODayOfWeek {
@@ -45,6 +47,8 @@ typedef enum MODayOfWeek {
 + (NSString*)stringForDayOfWeek:(MODayOfWeek)dayOfWeek;
 
 + (NSString*)stringForDayOfWeekMask:(MODayOfWeek)dayOfWeekMask;
+
++ (NSString*)shortStringForDayOfWeek:(MODayOfWeek)dayOfWeek;
 
 + (NSArray*)daysOfTheWeek;
 

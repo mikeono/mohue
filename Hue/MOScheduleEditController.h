@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MOScheduleRecurrenceController.h"
 
 @class MOSchedule;
 
-@interface MOScheduleEditController : UITableViewController
+@interface MOScheduleEditController : UITableViewController <MOScheduleRecurrenceControllerDelegate>
 
 - (id)initWithSchedule:(MOSchedule*)schedule;
 

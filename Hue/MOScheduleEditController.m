@@ -41,6 +41,7 @@ typedef enum MOScheduleEditSection {
 @property (nonatomic, strong) MOLightOnSettingControl* lightOnSettingControl;
 @property (nonatomic, strong) MOLightModeControl* lightModeControl;
 @property (nonatomic, strong) UITextField* nameField;
+@property (nonatomic, strong) MOScheduleRecurrenceController* recurrenceController;
 
 @end
 
@@ -136,6 +137,15 @@ typedef enum MOScheduleEditSection {
   return _nameField;
 }
 
+- (MOScheduleRecurrenceController*)recurrenceController {
+  if ( _recurrenceController == nil ) {
+    _recurrenceController = [[MOScheduleRecurrenceController alloc] init];
+    _recurrenceController.delegate = self;
+    _recurrenceController.dayOfWeekMask = _schedule.dayOfWeekMask;
+  }
+  return _recurrenceController;
+}
+
 #pragma mark - Event Handling
 
 - (void)saveButtonPressed {
@@ -146,6 +156,7 @@ typedef enum MOScheduleEditSection {
   self.schedule.lightState.bri = self.lightOnSettingControl.brightness;
   self.schedule.lightState.ct = self.lightOnSettingControl.ct;
   self.schedule.label = self.nameField.text;
+  self.schedule.dayOfWeekMask = self.recurrenceController.dayOfWeekMask;
   
   // Save the schedule to the server
   [MOHueScheduleService saveSchedule: self.schedule];
@@ -197,7 +208,13 @@ typedef enum MOScheduleEditSection {
         case kMOScheduleEditTimerDetailsRowDays:
         {
           cell.textLabel.text = @"Recurrence";
-          cell.detailTextLabel.text = _schedule.dayOfWeekString;
+          MODayOfWeek dayOfWeekMask;
+          if ( _recurrenceController ) {
+            dayOfWeekMask = _recurrenceController.dayOfWeekMask;
+          } else {
+            dayOfWeekMask = _schedule.dayOfWeekMask;
+          }
+          cell.detailTextLabel.text = [MOSchedule stringForDayOfWeekMask: dayOfWeekMask];
           cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
           break;
         }
@@ -285,7 +302,15 @@ typedef enum MOScheduleEditSection {
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  
+  if ( _sections[indexPath.section] == MOScheduleEditSectionTimerDetails && indexPath.row == kMOScheduleEditTimerDetailsRowDays ) {
+    [self.navigationController pushViewController: self.recurrenceController animated: YES];
+  }
+}
+
+#pragma mark - MOScheduleRecurrenceControllerDelegate
+
+- (void)recurrenceController:(MOScheduleRecurrenceController*)recurrenceController didChangeDayOfWeekMask:(MODayOfWeek)dayOfWeekMask {
+  [self reloadData];
 }
 
 @end
