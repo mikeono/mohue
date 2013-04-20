@@ -15,6 +15,7 @@
 #import "MOHueScheduleService.h"
 #import "MOSettingsTableController.h"
 #import "MOStyles.h"
+#import "MOHueScheduleOccurrenceService.h"
 
 @interface MOScheduleListController ()
 
@@ -32,7 +33,8 @@
     UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemAdd target: self action: @selector(addButtonPressed)];
     self.navigationItem.rightBarButtonItem = addButton;
     
-    UIBarButtonItem* editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemEdit target: self action: @selector(editButtonPressed)];
+    UIBarButtonItem* editButton = [[UIBarButtonItem alloc] initWithTitle: @"Edit" style:UIBarButtonItemStyleBordered target: self action: @selector(editButtonPressed)];
+    editButton.possibleTitles = [NSSet setWithObjects: @"Edit", @"Done", nil];
     self.navigationItem.leftBarButtonItem = editButton;
     
     // Init refresh control
@@ -116,6 +118,34 @@
   return cell;
 }
 
+#pragma mark - Table view editing
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  // Return NO if you do not want the specified item to be editable.
+  return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  if (editingStyle == UITableViewCellEditingStyleDelete) {
+    MOSchedule* schedule = [self.scheduleList.schedules objectAtIndex: indexPath.row];
+  
+    // Send delete request to server
+    [MOHueScheduleOccurrenceService deleteAllOccurrencesOfUUID: schedule.UUID withCompletion: ^(BOOL success) {
+      if ( success ) {
+        [[[MOCache sharedInstance] scheduleList] removeScheduleWithUUID: schedule.UUID];
+        [tableView deleteRowsAtIndexPaths: @[indexPath] withRowAnimation: UITableViewRowAnimationAutomatic];
+      } else {
+        NSString* message = @"The schedule couldn't be deleted at this time.";
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle: @"" message: message delegate: nil cancelButtonTitle: nil otherButtonTitles: @"Ok", nil];
+        [alertView show];
+      }
+      [MOHueScheduleService syncDownSchedules];
+    }];
+  }
+}
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -134,7 +164,8 @@
 }
 
 - (void)editButtonPressed {
-
+  [self.tableView setEditing: ! self.tableView.editing animated: YES];
+  self.navigationItem.leftBarButtonItem.title = self.tableView.editing ? @"Done" : @"Edit";
 }
 
 - (void)pushScheduleEditControllerForSchedule:(MOSchedule*)schedule {
@@ -149,45 +180,6 @@
   [self presentViewController: navController animated: YES completion: nil];
 }
 
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
 
 
 @end

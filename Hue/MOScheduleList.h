@@ -20,6 +20,8 @@
 
 - (void)addSchedule:(MOSchedule*)schedule;
 
+- (void)removeScheduleWithUUID:(NSString*)scheduleUUID;
+
 - (BOOL)containsUUID:(NSString*)scheduleUUID;
 
 @end

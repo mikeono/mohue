@@ -25,7 +25,8 @@
   _schedule = schedule;
   
   self.textLabel.text = _schedule.timeString;
-  self.detailTextLabel.text = _schedule.label ? _schedule.label : @""; // _schedule.dayOfWeekString;
+  NSString* label = _schedule.label ? _schedule.label : @"";
+  self.detailTextLabel.text = [NSString stringWithFormat: @"%@  %@", _schedule.dayOfWeekString, label];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

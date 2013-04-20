@@ -44,6 +44,16 @@
   
 }
 
+- (void)removeScheduleWithUUID:(NSString*)scheduleUUID {
+  MOSchedule* scheduleToRemove = nil;
+  for ( MOSchedule* schedule in _schedules ) {
+    if ( [schedule.UUID isEqualToString: scheduleUUID] ) {
+      scheduleToRemove = schedule;
+    }
+  }
+  [_schedules removeObject: scheduleToRemove];
+}
+
 #pragma mark - Reading
 
 - (BOOL)containsUUID:(NSString*)scheduleUUID {

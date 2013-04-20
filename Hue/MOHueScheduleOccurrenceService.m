@@ -27,6 +27,8 @@
   MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"api/1234567890/schedules" bodyDict: nil httpMethod: kMOHTTPRequestMethodGet completionBlock:^(id resultObject, NSError* error) {
     
     // TODO(MO): Handle errors here or in MOHueService
+    if ( error ) {
+    }
     
     // Make sure got back a dict
     if ( [resultObject isKindOfClass: [NSDictionary class]] ) {
@@ -34,6 +36,13 @@
       MOScheduleOccurrenceList* occurrenceList = [[MOScheduleOccurrenceList alloc] initWithHueListDictionary: resultObject];
       if ( completion ) {
         completion(occurrenceList, error);
+      }
+    }
+    
+    // Otherwise return nil
+    else {
+      if ( completion ) {
+        completion(nil, error);
       }
     }
     
@@ -57,8 +66,10 @@
         }];
       }
     }
-    if ( completion ) {
-      completion(errors == 0);
+    if ( completion != nil ) {
+      dispatch_async( dispatch_get_main_queue(), ^{
+        completion(errors == 0 && occurrenceList.occurrences.count > 0);
+      });
     }
   }];
 
