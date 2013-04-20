@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Mike Onorato. All rights reserved.
 //
 
-#import "MOHueScheduleService.h"
+#import "MOScheduleService.h"
 #import "MOHueService.h"
 #import "MOHueServiceRequest.h"
 #import "MOScheduleList.h"
@@ -15,11 +15,11 @@
 #import "NSDate+Hue.h"
 #import "MOLightState.h"
 #import "MOCache.h"
-#import "MOHueScheduleOccurrenceService.h"
+#import "MOScheduleOccurrenceService.h"
 
 NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
 
-@implementation MOHueScheduleService
+@implementation MOScheduleService
 
 #pragma mark - Getting Schedules
 
@@ -47,7 +47,7 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
           // If schedule doesn't exist in cache, sync it down
           if ( ! [[[MOCache sharedInstance] scheduleList] containsUUID: scheduleUUID] ) {
             // TODO(MO): Implement MOHueServiceOperationQueue so schedule sync requests can be sent synchronously 
-            [MOHueScheduleService syncDownScheduleWithHueId: hueScheduleIdString];
+            [MOScheduleService syncDownScheduleWithHueId: hueScheduleIdString];
           }
         }
       }
@@ -112,14 +112,14 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
   for (int daysAfterToday = -1; daysAfterToday < 6; daysAfterToday++) {
     NSDate* day = [NSDate dateWithTimeIntervalSinceNow: daysAfterToday * 60 * 60 * 24];
     MOScheduleOccurrence* scheduleOccurrence = [[MOScheduleOccurrence alloc] initWithSchedule: schedule day: day];
-    [MOHueScheduleService postScheduleOccurrence: scheduleOccurrence];
+    [MOScheduleService postScheduleOccurrence: scheduleOccurrence];
   }
 }
 
 + (void)saveSchedule:(MOSchedule*)schedule {
   
   // If schedule exists, remove it
-  [MOHueScheduleOccurrenceService deleteAllOccurrencesOfUUID: schedule.UUID withCompletion: ^(BOOL success) {
+  [MOScheduleOccurrenceService deleteAllOccurrencesOfUUID: schedule.UUID withCompletion: ^(BOOL success) {
     if ( success ) {
       DBG(@"Deleted all occurrences successfully");
     } else {
@@ -127,7 +127,7 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
     }
     
     // Post schedule
-    [MOHueScheduleService postSchedule: schedule];
+    [MOScheduleService postSchedule: schedule];
   }];
 }
 

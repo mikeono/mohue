@@ -8,7 +8,7 @@
 
 #import "MOSettingsTableController.h"
 #import "MOHueServiceManager.h"
-#import "MOHueScheduleService.h"
+#import "MOScheduleService.h"
 
 @interface MOSettingsTableController ()
 
@@ -166,7 +166,7 @@
     }
     case MOSettingsTableRowGetSchedules:
     {
-      [MOHueScheduleService getAllSchedules];
+      [MOScheduleService getAllSchedules];
       break;
     }
     default:

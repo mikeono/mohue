@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Mike Onorato. All rights reserved.
 //
 
-#import "MOHueScheduleOccurrenceService.h"
+#import "MOScheduleOccurrenceService.h"
 #import "MOHueService.h"
 #import "MOHueServiceRequest.h"
 #import "MOScheduleList.h"
@@ -17,7 +17,7 @@
 #import "MOCache.h"
 #import "MOScheduleOccurrenceList.h"
 
-@implementation MOHueScheduleOccurrenceService
+@implementation MOScheduleOccurrenceService
 
 #pragma mark - Getting Schedule Occurrences
 
@@ -55,11 +55,11 @@
 + (void)deleteAllOccurrencesOfUUID:(NSString*)scheduleUUID withCompletion:(void(^)(BOOL success))completion {
 
   __block NSInteger errors = 0;
-  [MOHueScheduleOccurrenceService getOccurrenceListWithCompletion: ^(MOScheduleOccurrenceList* occurrenceList, NSError* error) {
+  [MOScheduleOccurrenceService getOccurrenceListWithCompletion: ^(MOScheduleOccurrenceList* occurrenceList, NSError* error) {
     // For each occurrence, if it has the specified UUID, delete it
     for ( MOScheduleOccurrence* occurrence in occurrenceList.occurrences ) {
       if ( [occurrence.scheduleUUID isEqualToString: scheduleUUID] ) {
-        [MOHueScheduleOccurrenceService deleteOccurrenceWithHueIdString: occurrence.hueIdString withCompletion: ^(BOOL success) {
+        [MOScheduleOccurrenceService deleteOccurrenceWithHueIdString: occurrence.hueIdString withCompletion: ^(BOOL success) {
           if ( ! success ) {
             errors++;
           }
@@ -80,7 +80,7 @@
   NSString* resourceRelativePath = [NSString stringWithFormat: @"api/1234567890/schedules/%@", hueIdString];
   MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: resourceRelativePath bodyDict: nil httpMethod: kMOHTTPRequestMethodDelete completionBlock: ^(id resultObject, NSError* error) {
     
-    MOHueServiceResponseCode responseCode = [MOHueScheduleOccurrenceService parseHueServiceResponseFromResponseObject: resultObject];
+    MOHueServiceResponseCode responseCode = [MOScheduleOccurrenceService parseHueServiceResponseFromResponseObject: resultObject];
     BOOL success = (responseCode == MOHueServiceResponseSuccess);
     
     if ( completion ) {

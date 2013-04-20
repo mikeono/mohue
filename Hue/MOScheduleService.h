@@ -13,7 +13,7 @@ extern NSString* kMOReceivedScheduleFromHue;
 @class MOSchedule;
 @class MOScheduleOccurrence;
 
-@interface MOHueScheduleService : NSObject
+@interface MOScheduleService : NSObject
 
 + (void)syncDownSchedules;
 

@@ -13,7 +13,7 @@
 #import "MOLightOnSettingControl.h"
 #import "MOLightModeControl.h"
 #import "MOLightState.h"
-#import "MOHueScheduleService.h"
+#import "MOScheduleService.h"
 
 #define kMOScheduleEditTimePickerHeight 200
 
@@ -159,7 +159,7 @@ typedef enum MOScheduleEditSection {
   self.schedule.dayOfWeekMask = self.recurrenceController.dayOfWeekMask;
   
   // Save the schedule to the server
-  [MOHueScheduleService saveSchedule: self.schedule];
+  [MOScheduleService saveSchedule: self.schedule];
   
   // If in add mode, add the schedule to the list
   if ( _isScheduleNew ) {

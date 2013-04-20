@@ -12,10 +12,10 @@
 #import "MOScheduleEditController.h"
 #import "MOScheduleListCell.h"
 #import "MOCache.h"
-#import "MOHueScheduleService.h"
+#import "MOScheduleService.h"
 #import "MOSettingsTableController.h"
 #import "MOStyles.h"
-#import "MOHueScheduleOccurrenceService.h"
+#import "MOScheduleOccurrenceService.h"
 
 @interface MOScheduleListController ()
 
@@ -77,7 +77,7 @@
   self.scheduleList = [MOCache sharedInstance].scheduleList;
   
   // Sync schedules down from server
-  [MOHueScheduleService syncDownSchedules];
+  [MOScheduleService syncDownSchedules];
 }
 
 #pragma mark - Getters and Setters
@@ -132,7 +132,7 @@
     MOSchedule* schedule = [self.scheduleList.schedules objectAtIndex: indexPath.row];
   
     // Send delete request to server
-    [MOHueScheduleOccurrenceService deleteAllOccurrencesOfUUID: schedule.UUID withCompletion: ^(BOOL success) {
+    [MOScheduleOccurrenceService deleteAllOccurrencesOfUUID: schedule.UUID withCompletion: ^(BOOL success) {
       if ( success ) {
         [[[MOCache sharedInstance] scheduleList] removeScheduleWithUUID: schedule.UUID];
         [tableView deleteRowsAtIndexPaths: @[indexPath] withRowAnimation: UITableViewRowAnimationAutomatic];
@@ -141,7 +141,7 @@
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle: @"" message: message delegate: nil cancelButtonTitle: nil otherButtonTitles: @"Ok", nil];
         [alertView show];
       }
-      [MOHueScheduleService syncDownSchedules];
+      [MOScheduleService syncDownSchedules];
     }];
   }
 }

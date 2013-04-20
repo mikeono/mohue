@@ -10,7 +10,7 @@
 
 @class MOScheduleOccurrenceList;
 
-@interface MOHueScheduleOccurrenceService : MOModelService
+@interface MOScheduleOccurrenceService : MOModelService
 
 + (void)getOccurrenceListWithCompletion:(void(^)(MOScheduleOccurrenceList*, NSError*))completion;
 
