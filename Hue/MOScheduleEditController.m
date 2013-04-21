@@ -385,7 +385,7 @@ typedef enum MOScheduleEditSection {
 #pragma mark - MOScheduleRecurrenceControllerDelegate
 
 - (void)recurrenceController:(MOScheduleRecurrenceController*)recurrenceController didChangeDayOfWeekMask:(MODayOfWeek)dayOfWeekMask {
-  [self reloadData];
+  [self.tableView reloadData];
 }
 
 @end
