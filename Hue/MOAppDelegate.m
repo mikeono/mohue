@@ -10,6 +10,7 @@
 #import "MOSettingsTableController.h"
 #import "MOScheduleListController.h"
 #import "MOStyles.h"
+#import "MOHueBridgeFinder.h"
 
 @implementation MOAppDelegate
 
@@ -23,6 +24,9 @@
   _navController = [[UINavigationController alloc] initWithRootViewController: scheduleListController];
   self.window.rootViewController = _navController;
   [self.window makeKeyAndVisible];
+  
+  [[MOHueBridgeFinder sharedInstance] updateBridgeStatus];
+  
   return YES;
 }
 

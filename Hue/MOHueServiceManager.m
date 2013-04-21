@@ -8,6 +8,7 @@
 
 #import "MOHueServiceManager.h"
 #import "JSONKit.h"
+#import "MOHueService.h"
 
 @interface MOHueServiceManager ()
 
@@ -38,7 +39,7 @@ static MOHueServiceManager *instance = nil;
 
 
 - (NSMutableURLRequest*)requestWithPath:(NSString*)path body:(NSDictionary*)body method:(NSString*)method {
-  NSString* fullURLString = [NSString stringWithFormat: @"http://%@/%@", self.serverName, path];
+  NSString* fullURLString = [NSString stringWithFormat: @"http://%@/api/%@/%@", self.serverName, [MOHueService sharedInstance].username, path];
   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString: fullURLString]];
   
   NSData* data = [body JSONData];

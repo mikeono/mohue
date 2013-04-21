@@ -8,14 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum MOHueServiceResponseCode {
-  MOHueServiceResponseUnspecified = 0,
-  MOHueServiceResponseSuccess,
-  MOHueServiceResponseFailure
-} MOHueServiceResponseCode;
-
 @interface MOModelService : NSObject
-
-+ (MOHueServiceResponseCode)parseHueServiceResponseFromResponseObject:(id)responseObject;
 
 @end

@@ -11,6 +11,9 @@
 		27077B0F16F4B367007159DE /* MOScheduleList.m in Sources */ = {isa = PBXBuildFile; fileRef = 27077B0E16F4B367007159DE /* MOScheduleList.m */; };
 		27077B1316F4B563007159DE /* MOModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 27077B1216F4B563007159DE /* MOModel.m */; };
 		27077B1616F4B7E9007159DE /* MOScheduleService.m in Sources */ = {isa = PBXBuildFile; fileRef = 27077B1516F4B7E9007159DE /* MOScheduleService.m */; };
+		2711C6CB17244276003E6DE4 /* MOHueBridgeFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2711C6CA17244276003E6DE4 /* MOHueBridgeFinder.m */; };
+		2711C6D117244F90003E6DE4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2711C6CD17244789003E6DE4 /* Reachability.m */; };
+		2711C6D5172450E8003E6DE4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2711C6D4172450E8003E6DE4 /* SystemConfiguration.framework */; };
 		2744359C171E418700552AA7 /* MOStyles.m in Sources */ = {isa = PBXBuildFile; fileRef = 2744359B171E418700552AA7 /* MOStyles.m */; };
 		2744359F171E6A8800552AA7 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2744359E171E6A8800552AA7 /* Icon@2x.png */; };
 		274435A1171E6B3F00552AA7 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 274435A0171E6B3F00552AA7 /* Icon.png */; };
@@ -23,14 +26,6 @@
 		27451CFD16F01A7D0015A07B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 27451CFC16F01A7D0015A07B /* Default.png */; };
 		27451CFF16F01A7D0015A07B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27451CFE16F01A7D0015A07B /* Default@2x.png */; };
 		27451D0116F01A7D0015A07B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27451D0016F01A7D0015A07B /* Default-568h@2x.png */; };
-		27451D0616F01A7D0015A07B /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 27451D0516F01A7D0015A07B /* first.png */; };
-		27451D0816F01A7D0015A07B /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27451D0716F01A7D0015A07B /* first@2x.png */; };
-		27451D0D16F01A7D0015A07B /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 27451D0C16F01A7D0015A07B /* second.png */; };
-		27451D0F16F01A7D0015A07B /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27451D0E16F01A7D0015A07B /* second@2x.png */; };
-		27451D1216F01A7D0015A07B /* MOFirstViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27451D1016F01A7D0015A07B /* MOFirstViewController_iPhone.xib */; };
-		27451D1516F01A7D0015A07B /* MOFirstViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27451D1316F01A7D0015A07B /* MOFirstViewController_iPad.xib */; };
-		27451D1816F01A7D0015A07B /* MOSecondViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27451D1616F01A7D0015A07B /* MOSecondViewController_iPhone.xib */; };
-		27451D1B16F01A7D0015A07B /* MOSecondViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27451D1916F01A7D0015A07B /* MOSecondViewController_iPad.xib */; };
 		27451D2316F01A7E0015A07B /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27451D2216F01A7E0015A07B /* SenTestingKit.framework */; };
 		27451D2416F01A7E0015A07B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27451CEA16F01A7D0015A07B /* UIKit.framework */; };
 		27451D2516F01A7E0015A07B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27451CEC16F01A7D0015A07B /* Foundation.framework */; };
@@ -84,6 +79,11 @@
 		27077B1216F4B563007159DE /* MOModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOModel.m; sourceTree = "<group>"; };
 		27077B1416F4B7E9007159DE /* MOScheduleService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOScheduleService.h; sourceTree = "<group>"; };
 		27077B1516F4B7E9007159DE /* MOScheduleService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOScheduleService.m; sourceTree = "<group>"; };
+		2711C6C917244276003E6DE4 /* MOHueBridgeFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOHueBridgeFinder.h; sourceTree = "<group>"; };
+		2711C6CA17244276003E6DE4 /* MOHueBridgeFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOHueBridgeFinder.m; sourceTree = "<group>"; };
+		2711C6CD17244789003E6DE4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		2711C6CE17244789003E6DE4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		2711C6D4172450E8003E6DE4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2744359A171E418700552AA7 /* MOStyles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOStyles.h; sourceTree = "<group>"; };
 		2744359B171E418700552AA7 /* MOStyles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOStyles.m; sourceTree = "<group>"; };
 		2744359E171E6A8800552AA7 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
@@ -101,14 +101,6 @@
 		27451CFC16F01A7D0015A07B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		27451CFE16F01A7D0015A07B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		27451D0016F01A7D0015A07B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		27451D0516F01A7D0015A07B /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
-		27451D0716F01A7D0015A07B /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		27451D0C16F01A7D0015A07B /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
-		27451D0E16F01A7D0015A07B /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
-		27451D1116F01A7D0015A07B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MOFirstViewController_iPhone.xib; sourceTree = "<group>"; };
-		27451D1416F01A7D0015A07B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MOFirstViewController_iPad.xib; sourceTree = "<group>"; };
-		27451D1716F01A7D0015A07B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MOSecondViewController_iPhone.xib; sourceTree = "<group>"; };
-		27451D1A16F01A7D0015A07B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MOSecondViewController_iPad.xib; sourceTree = "<group>"; };
 		27451D2116F01A7E0015A07B /* HueTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HueTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27451D2216F01A7E0015A07B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		27451D2A16F01A7E0015A07B /* HueTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HueTests-Info.plist"; sourceTree = "<group>"; };
@@ -170,6 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2711C6D5172450E8003E6DE4 /* SystemConfiguration.framework in Frameworks */,
 				27451CEB16F01A7D0015A07B /* UIKit.framework in Frameworks */,
 				27451CED16F01A7D0015A07B /* Foundation.framework in Frameworks */,
 				27451CEF16F01A7D0015A07B /* CoreGraphics.framework in Frameworks */,
@@ -200,8 +193,28 @@
 				27451D4716F0237E0015A07B /* MOHueServiceManager.m */,
 				27ED3983171CF1220002836C /* MOModelService.h */,
 				27ED3984171CF1220002836C /* MOModelService.m */,
+				2711C6C917244276003E6DE4 /* MOHueBridgeFinder.h */,
+				2711C6CA17244276003E6DE4 /* MOHueBridgeFinder.m */,
 			);
 			name = Service;
+			sourceTree = "<group>";
+		};
+		2711C6CC1724477E003E6DE4 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				2711C6CE17244789003E6DE4 /* Reachability.h */,
+				2711C6CD17244789003E6DE4 /* Reachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
+		2711C6D01724478D003E6DE4 /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				27451D3B16F01DCF0015A07B /* JSONKit.h */,
+				27451D3C16F01DCF0015A07B /* JSONKit.m */,
+			);
+			name = JSONKit;
 			sourceTree = "<group>";
 		};
 		2744359D171E6A6E00552AA7 /* Images */ = {
@@ -216,6 +229,7 @@
 		27451CDE16F01A7D0015A07B = {
 			isa = PBXGroup;
 			children = (
+				2711C6D4172450E8003E6DE4 /* SystemConfiguration.framework */,
 				27451CF016F01A7D0015A07B /* Hue */,
 				27451D2816F01A7E0015A07B /* HueTests */,
 				27451CE916F01A7D0015A07B /* Frameworks */,
@@ -248,14 +262,6 @@
 			children = (
 				27451D3916F01D8F0015A07B /* Classes */,
 				27451D3A16F01DBD0015A07B /* Libraries */,
-				27451D0516F01A7D0015A07B /* first.png */,
-				27451D0716F01A7D0015A07B /* first@2x.png */,
-				27451D0C16F01A7D0015A07B /* second.png */,
-				27451D0E16F01A7D0015A07B /* second@2x.png */,
-				27451D1016F01A7D0015A07B /* MOFirstViewController_iPhone.xib */,
-				27451D1316F01A7D0015A07B /* MOFirstViewController_iPad.xib */,
-				27451D1616F01A7D0015A07B /* MOSecondViewController_iPhone.xib */,
-				27451D1916F01A7D0015A07B /* MOSecondViewController_iPad.xib */,
 				2744359D171E6A6E00552AA7 /* Images */,
 				27451CF116F01A7D0015A07B /* Supporting Files */,
 			);
@@ -313,8 +319,8 @@
 		27451D3A16F01DBD0015A07B /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				27451D3B16F01DCF0015A07B /* JSONKit.h */,
-				27451D3C16F01DCF0015A07B /* JSONKit.m */,
+				2711C6D01724478D003E6DE4 /* JSONKit */,
+				2711C6CC1724477E003E6DE4 /* Reachability */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -550,14 +556,6 @@
 				27451CFD16F01A7D0015A07B /* Default.png in Resources */,
 				27451CFF16F01A7D0015A07B /* Default@2x.png in Resources */,
 				27451D0116F01A7D0015A07B /* Default-568h@2x.png in Resources */,
-				27451D0616F01A7D0015A07B /* first.png in Resources */,
-				27451D0816F01A7D0015A07B /* first@2x.png in Resources */,
-				27451D0D16F01A7D0015A07B /* second.png in Resources */,
-				27451D0F16F01A7D0015A07B /* second@2x.png in Resources */,
-				27451D1216F01A7D0015A07B /* MOFirstViewController_iPhone.xib in Resources */,
-				27451D1516F01A7D0015A07B /* MOFirstViewController_iPad.xib in Resources */,
-				27451D1816F01A7D0015A07B /* MOSecondViewController_iPhone.xib in Resources */,
-				27451D1B16F01A7D0015A07B /* MOSecondViewController_iPad.xib in Resources */,
 				2744359F171E6A8800552AA7 /* Icon@2x.png in Resources */,
 				274435A1171E6B3F00552AA7 /* Icon.png in Resources */,
 			);
@@ -624,6 +622,8 @@
 				27ADC2DD172081F100237262 /* MOScheduleRecurrenceController.m in Sources */,
 				2789B08E17231DBA00C1D49E /* MOLightService.m in Sources */,
 				2789B0911723457300C1D49E /* MOLight.m in Sources */,
+				2711C6CB17244276003E6DE4 /* MOHueBridgeFinder.m in Sources */,
+				2711C6D117244F90003E6DE4 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -656,38 +656,6 @@
 				27451CF416F01A7D0015A07B /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		27451D1016F01A7D0015A07B /* MOFirstViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				27451D1116F01A7D0015A07B /* en */,
-			);
-			name = MOFirstViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		27451D1316F01A7D0015A07B /* MOFirstViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				27451D1416F01A7D0015A07B /* en */,
-			);
-			name = MOFirstViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		27451D1616F01A7D0015A07B /* MOSecondViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				27451D1716F01A7D0015A07B /* en */,
-			);
-			name = MOSecondViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		27451D1916F01A7D0015A07B /* MOSecondViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				27451D1A16F01A7D0015A07B /* en */,
-			);
-			name = MOSecondViewController_iPad.xib;
 			sourceTree = "<group>";
 		};
 		27451D2B16F01A7E0015A07B /* InfoPlist.strings */ = {

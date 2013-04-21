@@ -16,6 +16,7 @@
 #import "MOSettingsTableController.h"
 #import "MOStyles.h"
 #import "MOScheduleOccurrenceService.h"
+#import "MOHueBridgeFinder.h"
 
 @interface MOScheduleListController ()
 
@@ -47,6 +48,8 @@
     
     // Init event handling
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(receivedScheduleFromHue) name: kMOReceivedScheduleFromHue object: nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(bridgeStatusChanged) name:kMOHueBridgeFinderStatusChangeNotification object: nil];
   }
   return self;
 }
@@ -157,6 +160,12 @@
 
 - (void)receivedScheduleFromHue {
   self.scheduleList = [MOCache sharedInstance].scheduleList;
+}
+
+- (void)bridgeStatusChanged {
+  if ( [MOHueBridgeFinder sharedInstance].bridgeStatus == MOHueBridgeStatusAuthed ) {
+    [MOScheduleService syncDownSchedules];
+  }
 }
 
 - (void)addButtonPressed {

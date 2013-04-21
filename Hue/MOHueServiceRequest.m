@@ -36,7 +36,14 @@ NSString* kMOHTTPRequestMethodDelete = @"DELETE";
 
 - (NSURLRequest*)urlRequest {
   // Create Request
-  NSString* fullPath = [NSString stringWithFormat: @"http://%@/%@", [MOHueService sharedInstance].serverName, _relativePath];
+  NSString* fullPath;
+  
+  if ( _relativePath ) {
+    fullPath = [NSString stringWithFormat: @"http://%@/api/%@/%@", [MOHueService sharedInstance].serverName, [MOHueService sharedInstance].username, _relativePath];
+  } else {
+    fullPath = [NSString stringWithFormat: @"http://%@/api", [MOHueService sharedInstance].serverName];
+  }
+  
   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString: fullPath]];
   
   // Set HTTP Method and Body

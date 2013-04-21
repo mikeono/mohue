@@ -8,11 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum MOHueServiceResponseCode {
+  MOHueServiceResponseUnspecified = 0,
+  MOHueServiceResponseSuccess,
+  MOHueServiceResponseFailure
+} MOHueServiceResponseCode;
+
 @class MOHueServiceRequest;
 
 @interface MOHueService : NSObject
 
 @property (nonatomic, strong) NSString* serverName;
+@property (nonatomic, strong) NSString* username;
 @property (nonatomic, assign) float defaultTimeout;
 
 - (void)executeAsyncRequest:(MOHueServiceRequest*)hueRequest;
@@ -21,5 +28,6 @@
 
 + (MOHueService*)sharedInstance;
 
++ (MOHueServiceResponseCode)parseHueServiceResponseFromResponseObject:(id)responseObject;
 
 @end

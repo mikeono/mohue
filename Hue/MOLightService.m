@@ -21,7 +21,7 @@ NSString* kMOReceivedLightFromHue = @"ReceivedScheduleFromHue";
   
   DBG(@"putting state for all lights");
   
-  MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"api/1234567890/groups/0/action" bodyDict: lightState.dictionary httpMethod: kMOHTTPRequestMethodPut completionBlock: nil];
+  MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"groups/0/action" bodyDict: lightState.dictionary httpMethod: kMOHTTPRequestMethodPut completionBlock: nil];
   
   [[MOHueService sharedInstance] executeAsyncRequest: hueRequest];
 }
@@ -30,7 +30,7 @@ NSString* kMOReceivedLightFromHue = @"ReceivedScheduleFromHue";
   
   DBG(@"putting state for light %@", lightIdString);
   
-  NSString* relativePath = [NSString stringWithFormat: @"api/1234567890/lights/%@/state", lightIdString];
+  NSString* relativePath = [NSString stringWithFormat: @"lights/%@/state", lightIdString];
   MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: relativePath bodyDict: lightState.dictionary httpMethod: kMOHTTPRequestMethodPut completionBlock: nil];
   
   [[MOHueService sharedInstance] executeSyncRequest: hueRequest];
@@ -42,7 +42,7 @@ NSString* kMOReceivedLightFromHue = @"ReceivedScheduleFromHue";
   DBG(@"Syncing lights");
   
   // Create request
-  MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"api/1234567890/lights" bodyDict: nil httpMethod: kMOHTTPRequestMethodGet completionBlock:^(id resultObject, NSError* error) {
+  MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"lights" bodyDict: nil httpMethod: kMOHTTPRequestMethodGet completionBlock:^(id resultObject, NSError* error) {
     
     BOOL success = NO;
     // TODO(MO): Handle errors here or in MOHueService
@@ -70,7 +70,7 @@ NSString* kMOReceivedLightFromHue = @"ReceivedScheduleFromHue";
 }
 
 + (void)syncDownLightWithIdString:(NSString*)idString {
-  NSString* relativePath = [NSString stringWithFormat: @"api/1234567890/lights/%@", idString];
+  NSString* relativePath = [NSString stringWithFormat: @"lights/%@", idString];
   
   DBG(@"syncing light %@", idString);
   

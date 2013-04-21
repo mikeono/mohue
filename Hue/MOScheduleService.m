@@ -26,7 +26,7 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
 + (void)syncDownSchedules {
   
   // Create request
-  MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"api/1234567890/schedules" bodyDict: nil httpMethod: kMOHTTPRequestMethodGet completionBlock:^(id resultObject, NSError* error) {
+  MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"schedules" bodyDict: nil httpMethod: kMOHTTPRequestMethodGet completionBlock:^(id resultObject, NSError* error) {
     
     // TODO(MO): Handle errors here or in MOHueService
     
@@ -58,7 +58,7 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
 }
 
 + (void)syncDownScheduleWithHueId:(NSString*)hueScheduleId {
-  NSString* relativePath = [NSString stringWithFormat: @"api/1234567890/schedules/%@", hueScheduleId];
+  NSString* relativePath = [NSString stringWithFormat: @"schedules/%@", hueScheduleId];
   
   // Create request
   MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: relativePath bodyDict: nil httpMethod: kMOHTTPRequestMethodGet completionBlock: ^(id resultObject, NSError* error) {
@@ -81,7 +81,7 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
 }
 
 + (void)getAllSchedules {
-  MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"api/1234567890/schedules" bodyDict: nil httpMethod: kMOHTTPRequestMethodGet completionBlock:^(id resultObject, NSError* error) {
+  MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"schedules" bodyDict: nil httpMethod: kMOHTTPRequestMethodGet completionBlock:^(id resultObject, NSError* error) {
   }];
   
   [[MOHueService sharedInstance] executeAsyncRequest: hueRequest];
@@ -93,7 +93,7 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
   
   // Create body
   NSDictionary* commandBody = scheduleOccurrence.schedule.lightState.dictionary;
-  NSDictionary* command = @{@"address": @"/api/1234567890/groups/0/action",
+  NSDictionary* command = @{@"address": @"groups/0/action",
                             @"method": kMOHTTPRequestMethodPut,
                             @"body": commandBody};
   NSDictionary* requestBody = @{@"name": scheduleOccurrence.occurrenceIdentifier,
@@ -101,7 +101,7 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
                                 @"command": command,
                                 @"time": scheduleOccurrence.date.hueDateString};
   
-  MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"api/1234567890/schedules" bodyDict: requestBody httpMethod: kMOHTTPRequestMethodPost completionBlock: nil];
+  MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"schedules" bodyDict: requestBody httpMethod: kMOHTTPRequestMethodPost completionBlock: nil];
   
   [[MOHueService sharedInstance] executeAsyncRequest: hueRequest];
 }

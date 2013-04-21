@@ -24,7 +24,7 @@
 + (void)getOccurrenceListWithCompletion:(void(^)(MOScheduleOccurrenceList*, NSError*))completion {
   
   // Create request
-  MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"api/1234567890/schedules" bodyDict: nil httpMethod: kMOHTTPRequestMethodGet completionBlock:^(id resultObject, NSError* error) {
+  MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"schedules" bodyDict: nil httpMethod: kMOHTTPRequestMethodGet completionBlock:^(id resultObject, NSError* error) {
     
     // TODO(MO): Handle errors here or in MOHueService
     if ( error ) {
@@ -77,10 +77,10 @@
 
 + (void)deleteOccurrenceWithHueIdString:(NSString*)hueIdString withCompletion:(void(^)(BOOL success))completion {
   
-  NSString* resourceRelativePath = [NSString stringWithFormat: @"api/1234567890/schedules/%@", hueIdString];
+  NSString* resourceRelativePath = [NSString stringWithFormat: @"schedules/%@", hueIdString];
   MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: resourceRelativePath bodyDict: nil httpMethod: kMOHTTPRequestMethodDelete completionBlock: ^(id resultObject, NSError* error) {
     
-    MOHueServiceResponseCode responseCode = [MOScheduleOccurrenceService parseHueServiceResponseFromResponseObject: resultObject];
+    MOHueServiceResponseCode responseCode = [MOHueService parseHueServiceResponseFromResponseObject: resultObject];
     BOOL success = (responseCode == MOHueServiceResponseSuccess);
     
     if ( completion ) {
