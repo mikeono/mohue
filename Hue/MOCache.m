@@ -16,6 +16,7 @@
   if ( self = [super init] ) {
     _scheduleList = [[MOScheduleList alloc] init];
     _occurrenceList = [[MOScheduleOccurrenceList alloc] init];
+    _lightSyncDate = [NSDate dateWithTimeIntervalSince1970: 0];
   }
   return self;
 }

@@ -12,6 +12,8 @@
 
 - (NSNumber*)numberForKey:(id)key;
 
+- (NSDictionary*)dictForKey:(id)key;
+
 - (CGPoint)pointForKey:(id)key;
 
 @end

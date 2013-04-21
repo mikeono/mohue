@@ -26,16 +26,18 @@ NSString* kMOLightColorModeCT = @"ct";
   return self;
 }
 
-- (id)initWithHueCommandDict:(NSDictionary*)dict {
+- (id)initWithHueStateDict:(NSDictionary*)dict {
   if ( self = [super init] ) {
     // Structure {"bri":bri,"ct":ct,"colorMode":colorMode,"on":on}
+    DBG(@"dict %@", dict);
     _on = [dict numberForKey: @"on"].boolValue;
     _bri = [dict numberForKey: @"bri"].integerValue;
     _hue = [dict numberForKey: @"hue"].integerValue;
     _sat = [dict numberForKey: @"sat"].integerValue;
     _xy = [dict pointForKey: @"xy"];
     _ct = [dict numberForKey: @""].integerValue;
-    _colorMode = [dict valueForKey: @"colorMode"];
+    NSString* colorMode = [dict valueForKey: @"colormode"];
+    _colorMode = colorMode;
   }
   return self;
 }
@@ -46,7 +48,7 @@ NSString* kMOLightColorModeCT = @"ct";
   NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
   [dictionary setObject: [NSNumber numberWithBool: _on] forKey: @"on"];
   [dictionary setObject: [NSNumber numberWithInteger: _bri] forKey: @"bri"];
-  [dictionary setObject: _colorMode forKey: @"colorMode"];
+  [dictionary setObject: _colorMode forKey: @"colormode"];
   
   if ( [_colorMode isEqualToString: kMOLightColorModeHS] ) {
     [dictionary setObject: [NSNumber numberWithInteger: _hue] forKey: @"hue"];

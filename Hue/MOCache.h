@@ -15,6 +15,8 @@
 
 @property (atomic, strong) MOScheduleList* scheduleList;
 @property (atomic, strong) MOScheduleOccurrenceList* occurrenceList;
+@property (atomic, strong) NSMutableArray* lights;
+@property (atomic, strong) NSDate* lightSyncDate;
 
 + (MOCache*)sharedInstance;
 

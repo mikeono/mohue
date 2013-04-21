@@ -32,6 +32,7 @@
     // Add subviews
     _brightnessLabel = [[UILabel alloc] init];
     _brightnessLabel.text = @"Brightness";
+    _brightnessLabel.backgroundColor = [UIColor clearColor];
     [self addSubview: _brightnessLabel];
     
     _brightnessSlider = [[UISlider alloc] init];
@@ -41,6 +42,7 @@
     
     _ctLabel = [[UILabel alloc] init];
     _ctLabel.text = @"Color Temperature";
+    _ctLabel.backgroundColor = [UIColor clearColor];
     [self addSubview: _ctLabel];
     
     _ctSlider = [[UISlider alloc] init];

@@ -36,7 +36,7 @@
     
     // Do stuff with response
     NSString* responseString = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-    DBG(@"Got response: %@", responseString);
+    //DBG(@"Got response: %@", responseString);
     if ( error ) {
       DBG(@"Got error %@", error);
     }
@@ -47,6 +47,27 @@
       hueRequest.completionBlock(responseObject, error);
     }
   }];
+}
+
+- (void)executeSyncRequest:(MOHueServiceRequest*)hueRequest {
+  NSURLRequest* request = hueRequest.urlRequest;
+  NSError *error = nil;
+  NSHTTPURLResponse *response = nil;
+  
+  NSData* data = [NSURLConnection sendSynchronousRequest: request returningResponse: &response error: &error];
+  
+  // Do stuff with response
+  NSString* responseString = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
+  //DBG(@"Got response: %@", responseString);
+  if ( error ) {
+    DBG(@"Got error %@", error);
+  }
+  
+  id responseObject = [data objectFromJSONData];
+  
+  if ( hueRequest.completionBlock ) {
+    hueRequest.completionBlock(responseObject, error);
+  }
 }
 
 - (void)handleAsyncResponse:(NSURLResponse*)response data:(NSData*)data error:(NSError*)error hueRequest:(MOHueServiceRequest*)hueRequest {

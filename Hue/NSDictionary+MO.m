@@ -19,6 +19,14 @@
   return nil;
 }
 
+- (NSDictionary*)dictForKey:(id)key {
+  id object = [self objectForKey: key];
+  if ( [object isKindOfClass: [NSDictionary class]] ) {
+    return object;
+  }
+  return nil;
+}
+
 - (CGPoint)pointForKey:(id)key {
   id object = [self objectForKey: key];
   if ( [object isKindOfClass: [NSArray class]] ) {

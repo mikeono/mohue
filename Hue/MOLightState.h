@@ -26,6 +26,6 @@ extern NSString* kMOLightColorModeCT;
 
 - (id)init;
 
-- (id)initWithHueCommandDict:(NSDictionary*)hueCommandDict;
+- (id)initWithHueStateDict:(NSDictionary*)hueCommandDict;
 
 @end

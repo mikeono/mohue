@@ -39,7 +39,7 @@
     
     // Parse Command Body Dict
     NSDictionary* commandBodyDict = [[hueOccurrenceDictionary valueForKey: @"command"] valueForKey: @"body"];
-    _lightState = [[MOLightState alloc] initWithHueCommandDict: commandBodyDict];
+    _lightState = [[MOLightState alloc] initWithHueStateDict: commandBodyDict];
     
     // Parse Time
     NSString* dateString = [hueOccurrenceDictionary valueForKey: @"time"];

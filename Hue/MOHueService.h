@@ -17,6 +17,8 @@
 
 - (void)executeAsyncRequest:(MOHueServiceRequest*)hueRequest;
 
+- (void)executeSyncRequest:(MOHueServiceRequest*)hueRequest;
+
 + (MOHueService*)sharedInstance;
 
 

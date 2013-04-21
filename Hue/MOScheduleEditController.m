@@ -14,6 +14,8 @@
 #import "MOLightModeControl.h"
 #import "MOLightState.h"
 #import "MOScheduleService.h"
+#import "MOLightService.h"
+#import "MOLight.h"
 
 #define kMOScheduleEditTimePickerHeight 200
 
@@ -33,6 +35,10 @@ typedef enum MOScheduleEditSection {
   MOScheduleEditSection _sections[MOScheduleEditSectionCount];
   int _sectionCount;
   MOSchedule* _schedule;
+  NSTimer* _previewTimer;
+  BOOL _transitioningFromPreview;
+  BOOL _transitioningIntoPreview;
+  NSDate* _lastPreviewDate;
 }
 
 @property (nonatomic, strong) MOSchedule* schedule;
@@ -42,6 +48,7 @@ typedef enum MOScheduleEditSection {
 @property (nonatomic, strong) MOLightModeControl* lightModeControl;
 @property (nonatomic, strong) UITextField* nameField;
 @property (nonatomic, strong) MOScheduleRecurrenceController* recurrenceController;
+@property (nonatomic, assign) BOOL previewing;
 
 @end
 
@@ -52,6 +59,7 @@ typedef enum MOScheduleEditSection {
     // Init iVars
     _isScheduleNew = schedule ? NO : YES;
     _schedule = schedule;
+    _lastPreviewDate = [NSDate dateWithTimeIntervalSince1970: 0];
     
     [self configureSections];
     [self reloadData];
@@ -117,6 +125,10 @@ typedef enum MOScheduleEditSection {
 - (MOLightOnSettingControl*)lightOnSettingControl {
   if ( _lightOnSettingControl == nil ) {
     _lightOnSettingControl = [[MOLightOnSettingControl alloc] init];
+    [_lightOnSettingControl.brightnessSlider addTarget: self action: @selector(updatePreview) forControlEvents: UIControlEventValueChanged];
+    [_lightOnSettingControl.ctSlider addTarget: self action: @selector(updatePreview) forControlEvents: UIControlEventValueChanged];
+    [_lightOnSettingControl.brightnessSlider addTarget: self action: @selector(updatePreviewAndExitWithDelay) forControlEvents: UIControlEventTouchUpInside];
+    [_lightOnSettingControl.ctSlider addTarget: self action: @selector(updatePreviewAndExitWithDelay) forControlEvents: UIControlEventTouchUpInside];
   }
   return _lightOnSettingControl;
 }
@@ -173,7 +185,70 @@ typedef enum MOScheduleEditSection {
   [self.presentingViewController dismissViewControllerAnimated: YES completion: nil];
 }
 
-#pragma mark - Private methods 
+- (void)updatePreview {
+  if ( [[NSDate date] timeIntervalSinceDate: _lastPreviewDate] < 1 ) {
+    return;
+  }
+  _lastPreviewDate = [NSDate date];
+  
+  // Sync down the light state if not in preview mode
+  if ( ! self.previewing && ! _transitioningFromPreview  ) {
+    _transitioningIntoPreview = YES;
+    [MOLightService syncDownLightsWithCompletion: ^(BOOL success) {
+      dispatch_sync(dispatch_get_main_queue(), ^(){
+        _transitioningIntoPreview = NO;
+        self.previewing = YES;
+      });
+    }];
+  } else if ( ! _transitioningIntoPreview ) {
+    self.previewing = YES;
+  }
+}
+
+- (void)updatePreviewAndExitWithDelay {
+
+  [self updatePreview];
+  _previewTimer = [NSTimer scheduledTimerWithTimeInterval: 1.0f target: self selector: @selector(turnOffPreview) userInfo: nil repeats: NO];
+}
+
+
+- (void)setPreviewing:(BOOL)previewing {
+  _previewing = previewing;
+
+  // If turning on preview
+  if ( _previewing ) {
+    // Set light state
+    MOLightState* state = [[MOLightState alloc] init];
+    state.bri = self.lightOnSettingControl.brightness;
+    state.ct = self.lightOnSettingControl.ct;
+    state.colorMode = kMOLightColorModeCT;
+    state.on = YES;
+    [MOLightService putStateForAllLights: state];
+    
+    // Stop timer
+    [_previewTimer invalidate];
+  }
+  
+  // If exiting preview mode, put state for each light
+  if ( ! _previewing ) {
+    _transitioningFromPreview = YES;
+     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(){
+      for ( MOLight* light in [MOCache sharedInstance].lights ) {
+        DBG(@"lights %d", [MOCache sharedInstance].lights.count);
+        [MOLightService putState: light.state forLightIdString: light.idString];
+        dispatch_sync(dispatch_get_main_queue(), ^(){
+          _transitioningFromPreview = NO;
+        });
+      }
+    });
+  }
+}
+
+- (void)turnOffPreview {
+  self.previewing = NO;
+}
+
+#pragma mark - Private methods
 
 - (void)configureSections {
   _sectionCount = 0;
