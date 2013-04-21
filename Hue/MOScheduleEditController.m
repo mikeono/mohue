@@ -35,10 +35,10 @@ typedef enum MOScheduleEditSection {
   MOScheduleEditSection _sections[MOScheduleEditSectionCount];
   int _sectionCount;
   MOSchedule* _schedule;
-  NSTimer* _previewTimer;
+  NSTimer* _exitPreviewTimer;
   BOOL _transitioningFromPreview;
   BOOL _transitioningIntoPreview;
-  NSDate* _lastPreviewDate;
+  NSTimer* _previewTimer;
 }
 
 @property (nonatomic, strong) MOSchedule* schedule;
@@ -59,7 +59,6 @@ typedef enum MOScheduleEditSection {
     // Init iVars
     _isScheduleNew = schedule ? NO : YES;
     _schedule = schedule;
-    _lastPreviewDate = [NSDate dateWithTimeIntervalSince1970: 0];
     
     [self configureSections];
     [self reloadData];
@@ -125,8 +124,8 @@ typedef enum MOScheduleEditSection {
 - (MOLightOnSettingControl*)lightOnSettingControl {
   if ( _lightOnSettingControl == nil ) {
     _lightOnSettingControl = [[MOLightOnSettingControl alloc] init];
-    [_lightOnSettingControl.brightnessSlider addTarget: self action: @selector(updatePreview) forControlEvents: UIControlEventValueChanged];
-    [_lightOnSettingControl.ctSlider addTarget: self action: @selector(updatePreview) forControlEvents: UIControlEventValueChanged];
+    [_lightOnSettingControl.brightnessSlider addTarget: self action: @selector(startUpdatingPreview) forControlEvents: UIControlEventTouchDown];
+    [_lightOnSettingControl.ctSlider addTarget: self action: @selector(startUpdatingPreview) forControlEvents: UIControlEventTouchDown];
     [_lightOnSettingControl.brightnessSlider addTarget: self action: @selector(updatePreviewAndExitWithDelay) forControlEvents: UIControlEventTouchUpInside];
     [_lightOnSettingControl.ctSlider addTarget: self action: @selector(updatePreviewAndExitWithDelay) forControlEvents: UIControlEventTouchUpInside];
   }
@@ -185,12 +184,12 @@ typedef enum MOScheduleEditSection {
   [self.presentingViewController dismissViewControllerAnimated: YES completion: nil];
 }
 
+- (void)startUpdatingPreview {
+  [self updatePreview];
+  _previewTimer = [NSTimer scheduledTimerWithTimeInterval: 1.0f target: self selector: @selector(updatePreview) userInfo: nil repeats: YES];
+}
+
 - (void)updatePreview {
-  if ( [[NSDate date] timeIntervalSinceDate: _lastPreviewDate] < 1 ) {
-    return;
-  }
-  _lastPreviewDate = [NSDate date];
-  
   // Sync down the light state if not in preview mode
   if ( ! self.previewing && ! _transitioningFromPreview  ) {
     _transitioningIntoPreview = YES;
@@ -207,8 +206,9 @@ typedef enum MOScheduleEditSection {
 
 - (void)updatePreviewAndExitWithDelay {
 
+  [_previewTimer invalidate];
   [self updatePreview];
-  _previewTimer = [NSTimer scheduledTimerWithTimeInterval: 1.0f target: self selector: @selector(turnOffPreview) userInfo: nil repeats: NO];
+  _exitPreviewTimer = [NSTimer scheduledTimerWithTimeInterval: 1.0f target: self selector: @selector(turnOffPreview) userInfo: nil repeats: NO];
 }
 
 
@@ -226,7 +226,7 @@ typedef enum MOScheduleEditSection {
     [MOLightService putStateForAllLights: state];
     
     // Stop timer
-    [_previewTimer invalidate];
+    [_exitPreviewTimer invalidate];
   }
   
   // If exiting preview mode, put state for each light
