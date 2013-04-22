@@ -71,6 +71,11 @@ static MOHueBridgeFinder *instance = nil;
   [self updateBridgeStatusNoAlert];
 }
 
+- (void)reconnect {
+  self.bridgeStatus = MOHueBridgeStatusUpdating;
+  [NSTimer scheduledTimerWithTimeInterval: 0.2f target: self selector: @selector(updateBridgeStatus) userInfo: nil repeats: NO];
+}
+
 - (void)updateBridgeStatusNoAlert {
   
   // Check for wifi reachability
@@ -100,18 +105,30 @@ static MOHueBridgeFinder *instance = nil;
     return;
   }
   
-  // TODO(MO): Check if already authed so you don't have to keep authing.
-  
-  // Otherwise, attempt to auth if not cancelled 
-  else if ( _bridgeStatus != MOHueBridgeStatusAuthCancelled ) {
-    [self startAuthRequestWithCompletion:^(MOHueServiceResponseCode responseCode) {
-      if ( responseCode == MOHueServiceResponseSuccess ) {
-        self.bridgeStatus = MOHueBridgeStatusAuthed;
-      } else {
-        self.bridgeStatus = MOHueBridgeStatusNoAuth;
-      }
-    }];
+  // Otherwise, if auth cancelled do nothing
+  else if ( _bridgeStatus == MOHueBridgeStatusAuthCancelled ) {
+    return;
   }
+  
+  // Otherwise, check if authed
+  [self testAuthWithCompletion: ^(BOOL success) {
+    
+    // If authed, save status
+    if ( success ) {
+      self.bridgeStatus = MOHueBridgeStatusAuthed;
+    }
+    
+    // If not authed, start auth request
+    else {
+      [self startAuthRequestWithCompletion:^(MOHueServiceResponseCode responseCode) {
+        if ( responseCode == MOHueServiceResponseSuccess ) {
+          self.bridgeStatus = MOHueBridgeStatusAuthed;
+        } else {
+          self.bridgeStatus = MOHueBridgeStatusNoAuth;
+        }
+      }];
+    }
+  }];
   
 }
 
@@ -147,6 +164,47 @@ static MOHueBridgeFinder *instance = nil;
   }];
 }
 
+- (void)executeAsyncRequest:(NSURLRequest*)urlRequest completion:(void(^)(NSURLResponse* response, NSData* data, NSError* error))completion {
+  NSURLRequest* request = urlRequest;
+  
+  [NSURLConnection sendAsynchronousRequest: request queue: _urlResultProcessingQueue completionHandler: ^(NSURLResponse* response, NSData* data, NSError* error) {
+    
+    if ( error ) {
+      DBG(@"Got error %@", error);
+    }
+    
+    if ( completion ) {
+      completion(response, data, error);
+    }
+  }];
+}
+
+- (void)testAuthWithCompletion:(void(^)(BOOL success))completion {
+  
+  // Create request
+  MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"config" bodyDict: nil httpMethod: kMOHTTPRequestMethodGet completionBlock:^(id resultObject, NSError* error) {
+    
+    BOOL success = NO;
+    if ( [resultObject isKindOfClass: [NSDictionary class]] ) {
+      NSDictionary* resultDict = resultObject;
+      NSString* hueUTC = [resultDict objectForKey: @"UTC"];
+      if ( hueUTC ) {
+        success = YES;
+      }
+    }
+    
+    DBG(@"response %@", resultObject);
+    
+    if ( completion ) {
+      dispatch_async(dispatch_get_main_queue(), ^(){
+        completion ( success );
+      });
+    }
+    
+  }];
+  [[MOHueService sharedInstance] executeAsyncRequest: hueRequest];
+}
+
 - (void)startAuthRequestWithCompletion:(void(^)(MOHueServiceResponseCode responseCode))completion {
   
   // Create request
@@ -156,7 +214,7 @@ static MOHueBridgeFinder *instance = nil;
     MOHueServiceResponseCode responseCode = [MOHueService parseHueServiceResponseFromResponseObject: resultObject];
     
     DBG(@"response %@", resultObject);
-  
+    
     if ( completion ) {
       dispatch_async(dispatch_get_main_queue(), ^(){
         completion ( responseCode );
@@ -165,24 +223,6 @@ static MOHueBridgeFinder *instance = nil;
     
   }];
   [[MOHueService sharedInstance] executeAsyncRequest: hueRequest];
-}
-
-- (void)executeAsyncRequest:(NSURLRequest*)urlRequest completion:(void(^)(NSURLResponse* response, NSData* data, NSError* error))completion {
-  NSURLRequest* request = urlRequest;
-  
-  [NSURLConnection sendAsynchronousRequest: request queue: _urlResultProcessingQueue completionHandler: ^(NSURLResponse* response, NSData* data, NSError* error) {
-    
-    // Do stuff with response
-    //NSString* responseString = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-    //DBG(@"Got response: %@", responseString);
-    if ( error ) {
-      DBG(@"Got error %@", error);
-    }
-    
-    if ( completion ) {
-      completion(response, data, error);
-    }
-  }];
 }
 
 - (void)presentAlert {

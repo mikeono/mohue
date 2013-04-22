@@ -80,13 +80,6 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
   [[MOHueService sharedInstance] executeAsyncRequest: hueRequest];
 }
 
-+ (void)getAllSchedules {
-  MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"schedules" bodyDict: nil httpMethod: kMOHTTPRequestMethodGet completionBlock:^(id resultObject, NSError* error) {
-  }];
-  
-  [[MOHueService sharedInstance] executeAsyncRequest: hueRequest];
-}
-
 #pragma mark - Posting Schedules
 
 + (void)postScheduleOccurrence:(MOScheduleOccurrence*)scheduleOccurrence {

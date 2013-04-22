@@ -19,8 +19,6 @@ extern NSString* kMOReceivedScheduleFromHue;
 
 + (void)syncDownScheduleWithHueId:(NSString*)hueScheduleId;
 
-+ (void)getAllSchedules;
-
 + (void)postScheduleOccurrence:(MOScheduleOccurrence*)scheduleOccurrence;
 
 + (void)postSchedule:(MOSchedule*)schedule;

@@ -28,6 +28,8 @@ typedef enum MOHueBridgeStatus {
 
 - (MOHueBridgeStatus)bridgeStatus;
 
+- (void)reconnect;
+
 + (MOHueBridgeFinder*)sharedInstance;
 
 @end

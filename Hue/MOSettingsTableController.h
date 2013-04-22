@@ -10,13 +10,6 @@
 
 typedef enum MOSettingsTableRow {
   MOSettingsTableRowConnect,
-  MOSettingsTableRowAllOn,
-  MOSettingsTableRowAllOff,
-  MOSettingsTableRowLightRed,
-  MOSettingsTableRowPartay,
-  MOSettingsTableRowAddTestSchedule,
-  MOSettingsTableRowRemoveTestSchedule,
-  MOSettingsTableRowGetSchedules,
   MOSettingsTableRowCount
 } MOSettingsTableRow;
 

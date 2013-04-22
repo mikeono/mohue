@@ -21,7 +21,7 @@
 - (id)init {
   if ( self = [super init] ) {
     //_serverName = @"192.168.1.5";
-    _username = @"1234567890";
+    _username = @"ab72e636502d70a68c88ed42b46825a6";
     _defaultTimeout = 5.0f;
     _resultProcessingQueue = [[NSOperationQueue alloc] init];
   }

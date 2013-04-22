@@ -9,6 +9,8 @@
 #import "MOSettingsTableController.h"
 #import "MOHueServiceManager.h"
 #import "MOScheduleService.h"
+#import "MOHueBridgeFinder.h"
+#import "MOHueService.h"
 
 @interface MOSettingsTableController ()
 
@@ -31,13 +33,9 @@
     
     // Init table row map
     _rowMap[_rowCount++] = MOSettingsTableRowConnect;
-    _rowMap[_rowCount++] = MOSettingsTableRowAllOn;
-    _rowMap[_rowCount++] = MOSettingsTableRowAllOff;
-    _rowMap[_rowCount++] = MOSettingsTableRowLightRed;
-    _rowMap[_rowCount++] = MOSettingsTableRowPartay;
-    _rowMap[_rowCount++] = MOSettingsTableRowAddTestSchedule;
-    _rowMap[_rowCount++] = MOSettingsTableRowRemoveTestSchedule;
-    _rowMap[_rowCount++] = MOSettingsTableRowGetSchedules;
+    
+    // Event handling
+    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(bridgeStatusChanged) name:kMOHueBridgeFinderStatusChangeNotification object: nil];
   }
   return self;
 }
@@ -60,6 +58,22 @@
   return 1;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+  switch ( _rowMap[section] ) {
+    case MOSettingsTableRowConnect:
+      if ( [MOHueBridgeFinder sharedInstance].bridgeStatus == MOHueBridgeStatusAuthed ) {
+        return [NSString stringWithFormat: @"Connected to bridge at %@", [MOHueService sharedInstance].serverName];
+      } else {
+        return @"Not Connected";
+      }
+      break;
+    default:
+    {
+      return @"";
+    }
+  }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   static NSString *CellIdentifier = @"SettingsCell";
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -71,28 +85,13 @@
   // Configure the cell
   switch ( _rowMap[indexPath.section] ) {
     case MOSettingsTableRowConnect:
-      cell.textLabel.text = @"Connect";
-      break;
-    case MOSettingsTableRowAllOn:
-      cell.textLabel.text = @"Lights On";
-      break;
-    case MOSettingsTableRowAllOff:
-      cell.textLabel.text = @"Lights Off";
-      break;
-    case MOSettingsTableRowLightRed:
-      cell.textLabel.text = @"Light Red";
-      break;
-    case MOSettingsTableRowPartay:
-      cell.textLabel.text = @"Partay";
-      break;
-    case MOSettingsTableRowAddTestSchedule:
-      cell.textLabel.text = @"Add Test Schedule";
-      break;
-    case MOSettingsTableRowRemoveTestSchedule:
-      cell.textLabel.text = @"Remove Test Schedule";
-      break;
-    case MOSettingsTableRowGetSchedules:
-      cell.textLabel.text = @"Get Schedules";
+      if ( [MOHueBridgeFinder sharedInstance].bridgeStatus == MOHueBridgeStatusAuthed ) {
+        cell.textLabel.text = @"Find a New Bridge";
+      } else if ( [MOHueBridgeFinder sharedInstance].bridgeStatus == MOHueBridgeStatusUpdating ) {
+        cell.textLabel.text = @"Searching...";
+      } else {
+        cell.textLabel.text = @"Connect to Bridge";
+      }
       break;
     default:
       break;
@@ -109,64 +108,7 @@
   switch ( _rowMap[indexPath.section] ) {
     case MOSettingsTableRowConnect:
     {
-      NSDictionary* requestBody = @{@"devicetype":@"iPhone", @"username":@"1234567890"};
-      [[MOHueServiceManager sharedInstance] startAsyncRequestWithPath: @"api" body: requestBody method: @"POST" completionHandler: nil];
-      break;
-    }
-    case MOSettingsTableRowAllOn:
-    {
-      NSDictionary* requestBody = @{@"on":@YES, @"effect":@"none", @"ct":@300, @"bri":@255};
-      [[MOHueServiceManager sharedInstance] startAsyncRequestWithPath: @"groups/0/action" body: requestBody method: @"PUT" completionHandler: nil];
-      break;
-    }
-    case MOSettingsTableRowAllOff:
-    {
-      NSDictionary* requestBody = @{@"on":@NO};
-      [[MOHueServiceManager sharedInstance] startAsyncRequestWithPath: @"groups/0/action" body: requestBody method: @"PUT" completionHandler: nil];
-      
-      DBG(@"requestbody %@", requestBody);
-      break;
-    }
-    case MOSettingsTableRowLightRed:
-    {
-      NSDictionary* requestBody = @{@"on":@YES, @"hue":@30};
-      [[MOHueServiceManager sharedInstance] startAsyncRequestWithPath: @"groups/0/action" body: requestBody method: @"PUT" completionHandler: nil];
-      break;
-    }
-    case MOSettingsTableRowPartay:
-    {
-      NSDictionary* requestBody = @{@"on":@YES, @"effect":@"colorloop"};
-      [[MOHueServiceManager sharedInstance] startAsyncRequestWithPath: @"groups/0/action" body: requestBody method: @"PUT" completionHandler: nil];
-      break;
-    }
-    case MOSettingsTableRowAddTestSchedule:
-    {
-      
-      NSDate* time = [NSDate dateWithTimeIntervalSinceNow: 10];
-      
-      // Format time
-      NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-      NSTimeZone *gmt = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
-      [dateFormatter setTimeZone:gmt];
-      [dateFormatter  setDateFormat: @"yyyy-MM-dd'T'HH:mm:ss"];
-      NSString* timeString = [dateFormatter stringFromDate: time];
-      
-      NSDictionary* commandBody = @{@"hue":@30};
-      NSDictionary* command = @{@"address":@"lights/1/state", @"method":@"PUT", @"body":commandBody};
-      NSDictionary* requestBody = @{@"name":@"schedule-2-1", @"description":@"schedule-2-1", @"command": command, @"time": timeString};
-      
-      [[MOHueServiceManager sharedInstance] startAsyncRequestWithPath: @"schedules" body: requestBody method: @"POST" completionHandler: nil];
-      break;
-    }
-    case MOSettingsTableRowRemoveTestSchedule:
-    {
-      NSDictionary* requestBody = @{@"on":@YES, @"effect":@"colorloop"};
-      [[MOHueServiceManager sharedInstance] startAsyncRequestWithPath: @"schedules" body: requestBody method: @"GET" completionHandler: nil];
-      break;
-    }
-    case MOSettingsTableRowGetSchedules:
-    {
-      [MOScheduleService getAllSchedules];
+      [[MOHueBridgeFinder sharedInstance] reconnect];
       break;
     }
     default:
@@ -176,8 +118,14 @@
   }
 }
 
+#pragma mark - Event handling
+
 - (void)doneButtonPressed {
   [self.presentingViewController dismissViewControllerAnimated: YES completion: nil];
+}
+
+- (void)bridgeStatusChanged{
+  [self.tableView reloadData];
 }
 
 @end
