@@ -59,7 +59,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
-  self.navigationController.navigationBar.tintColor = [MOStyles colorDarkBrown];
+  self.navigationController.navigationBar.tintColor = [MOStyles brownDark];
   
   // Configure bottom toolbar
   self.navigationController.toolbarHidden = NO;
