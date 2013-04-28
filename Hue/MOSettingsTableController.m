@@ -108,6 +108,7 @@
   switch ( _rowMap[indexPath.section] ) {
     case MOSettingsTableRowConnect:
     {
+      [[MOAlertManager sharedInstance] clearState];
       [[MOHueBridgeFinder sharedInstance] reconnect];
       break;
     }

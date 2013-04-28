@@ -40,6 +40,7 @@
 		27634CAE17110F8A00F95988 /* MOScheduleListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27634CAD17110F8A00F95988 /* MOScheduleListController.m */; };
 		27634CB117111FA300F95988 /* MOLightState.m in Sources */ = {isa = PBXBuildFile; fileRef = 27634CB017111FA300F95988 /* MOLightState.m */; };
 		27634CB41711279400F95988 /* MOScheduleEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27634CB31711279400F95988 /* MOScheduleEditController.m */; };
+		276A3F0B172DBF74000B71D8 /* MOAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 276A3F0A172DBF74000B71D8 /* MOAlertManager.m */; };
 		2789B08E17231DBA00C1D49E /* MOLightService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2789B08D17231DBA00C1D49E /* MOLightService.m */; };
 		2789B0911723457300C1D49E /* MOLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 2789B0901723457300C1D49E /* MOLight.m */; };
 		27ADC2DD172081F100237262 /* MOScheduleRecurrenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ADC2DC172081F100237262 /* MOScheduleRecurrenceController.m */; };
@@ -119,6 +120,8 @@
 		27634CB017111FA300F95988 /* MOLightState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOLightState.m; sourceTree = "<group>"; };
 		27634CB21711279400F95988 /* MOScheduleEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOScheduleEditController.h; sourceTree = "<group>"; };
 		27634CB31711279400F95988 /* MOScheduleEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOScheduleEditController.m; sourceTree = "<group>"; };
+		276A3F09172DBF74000B71D8 /* MOAlertManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAlertManager.h; sourceTree = "<group>"; };
+		276A3F0A172DBF74000B71D8 /* MOAlertManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOAlertManager.m; sourceTree = "<group>"; };
 		2789B08C17231DBA00C1D49E /* MOLightService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOLightService.h; sourceTree = "<group>"; };
 		2789B08D17231DBA00C1D49E /* MOLightService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOLightService.m; sourceTree = "<group>"; };
 		2789B08F1723457300C1D49E /* MOLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOLight.h; sourceTree = "<group>"; };
@@ -436,6 +439,8 @@
 				27ED3975171B794E0002836C /* NSDictionary+MO.m */,
 				27ED3977171B7B290002836C /* NSArray+MO.h */,
 				27ED3978171B7B290002836C /* NSArray+MO.m */,
+				276A3F09172DBF74000B71D8 /* MOAlertManager.h */,
+				276A3F0A172DBF74000B71D8 /* MOAlertManager.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -624,6 +629,7 @@
 				2789B0911723457300C1D49E /* MOLight.m in Sources */,
 				2711C6CB17244276003E6DE4 /* MOHueBridgeFinder.m in Sources */,
 				2711C6D117244F90003E6DE4 /* Reachability.m in Sources */,
+				276A3F0B172DBF74000B71D8 /* MOAlertManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

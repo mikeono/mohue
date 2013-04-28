@@ -36,6 +36,7 @@ static MOHueBridgeFinder *instance = nil;
   if ( self = [super init] ) {
     _wifiReachability = [Reachability reachabilityForLocalWiFi];
     _internetReachability = [Reachability reachabilityForInternetConnection];
+    [_wifiReachability startNotifier];
     [_internetReachability startNotifier];
     _websiteReachability = [Reachability reachabilityWithHostname: @"www.meethue.com"];
     _urlResultProcessingQueue = [[NSOperationQueue alloc] init];
@@ -67,19 +68,15 @@ static MOHueBridgeFinder *instance = nil;
 
 #pragma mark - Bridge
 
-- (void)updateBridgeStatus {
-  [self updateBridgeStatusNoAlert];
-}
-
 - (void)reconnect {
   self.bridgeStatus = MOHueBridgeStatusUpdating;
   [NSTimer scheduledTimerWithTimeInterval: 0.2f target: self selector: @selector(updateBridgeStatus) userInfo: nil repeats: NO];
 }
 
-- (void)updateBridgeStatusNoAlert {
+- (void)updateBridgeStatus {
   
   // Check for wifi reachability
-  if ( ! _wifiReachability.isReachable ) {
+  if ( ! _wifiReachability.isReachableViaWiFi ) {
     self.bridgeStatus = MOHueBridgeStatusNoWifi;
     return;
   }
@@ -130,6 +127,10 @@ static MOHueBridgeFinder *instance = nil;
     }
   }];
   
+}
+
+- (void)resetStatus {
+  self.bridgeStatus = MOHueBridgeStatusNotUpdated;
 }
 
 - (void)startBridgeSearchWithCompletion:(void(^)(BOOL success))completion {
@@ -234,12 +235,14 @@ static MOHueBridgeFinder *instance = nil;
   // Otherwise, configure alert.
   NSString* title = nil;
   NSString* message = nil;
+  NSString* identifier = nil;
   
   switch ( self.bridgeStatus ) {
     case MOHueBridgeStatusNoWifi:
     {
       title = @"Please connect to WiFi";
       message = @"You must be connected to a WiFi network to communicate with the Hue bridge";
+      identifier = kMOAlertNoWifi;
       break;
     }
     case MOHueBridgeStatusNoInternet:
@@ -247,20 +250,23 @@ static MOHueBridgeFinder *instance = nil;
     {
       title = @"Please connect to the Internet";
       message = @"You must be connected to the Internet to locate the Hue bridge";
+      identifier = kMOAlertNoInternet;
       break;
     }
     case MOHueBridgeStatusNoBridge:
     {
       title = @"No bridge";
       message = @"No Hue-compatibile bridges were found on this WiFi network.  Make sure the Hue bridge is on and connected to the same WiFi network.";
+      identifier = kMOAlertNoBridge;
       break;
     }
     case MOHueBridgeStatusNoAuth:
     {
       title = @"Press the button on your bridge";
       message = @"Press the round button in the middle of your bridge to pair with this app.";
-      _alertView = [[UIAlertView alloc] initWithTitle: title message: message delegate: self cancelButtonTitle: @"Cancel" otherButtonTitles: @"Continue", nil];
-      _alertView.delegate = self;
+      identifier = kMOAlertNoAuth;
+      
+      _alertView = [MOAlertManager alertViewWithIdentifier: identifier title: title message: message delegate: self cancelButtonTitle: @"Cancel" otherButtonTitle: @"Continue"];
       [_alertView show];
       return;
     }
@@ -270,7 +276,7 @@ static MOHueBridgeFinder *instance = nil;
     }
   }
   
-  _alertView = [[UIAlertView alloc] initWithTitle: title message: message delegate: self cancelButtonTitle: nil otherButtonTitles: @"Okay", nil];
+  _alertView = [MOAlertManager alertViewWithIdentifier: identifier title: title message: message delegate: self cancelButtonTitle: nil otherButtonTitle: @"OK"];
   [_alertView show];
 }
 

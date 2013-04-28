@@ -12,6 +12,7 @@
   #import <UIKit/UIKit.h>
   #import <Foundation/Foundation.h>
   #import "NSDictionary+MO.h"
+  #import "MOAlertManager.h"
 #endif
 
 

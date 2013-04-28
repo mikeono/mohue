@@ -58,8 +58,6 @@ static MOHueServiceManager *instance = nil;
   [NSURLConnection sendAsynchronousRequest: request queue: _resultProcessingQueue completionHandler: ^(NSURLResponse* response, NSData* data, NSError* error) {
     
     // Do stuff with response
-    NSString* responseString = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-    //DBG(@"Got response: %@", responseString);
     if ( error ) {
       DBG(@"Got error %@", error);
     }
