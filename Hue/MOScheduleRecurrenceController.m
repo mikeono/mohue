@@ -20,7 +20,7 @@
 - (id)init {
   self = [super initWithStyle: UITableViewStyleGrouped];
   if ( self ) {
-    self.title = @"Recurrence";
+    self.title = @"Repeat";
     
     [self configureSections];
   }

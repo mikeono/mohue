@@ -283,7 +283,7 @@ typedef enum MOScheduleEditSection {
       switch ( indexPath.row ) {
         case kMOScheduleEditTimerDetailsRowDays:
         {
-          cell.textLabel.text = @"Recurrence";
+          cell.textLabel.text = @"Repeat";
           MODayOfWeek dayOfWeekMask;
           if ( _recurrenceController ) {
             dayOfWeekMask = _recurrenceController.dayOfWeekMask;
