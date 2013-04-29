@@ -18,5 +18,7 @@
 + (UIColor*)yellowLight;
 + (UIColor*)yellowBright;
 + (UIColor*)blueBright;
++ (UIColor*)blueLightBackground;
++ (UIColor*)grayMediumText;
 
 @end

@@ -34,4 +34,12 @@
   return [UIColor colorWithRed:0.083 green:0.508 blue:0.883 alpha:1.000];
 }
 
++ (UIColor*)blueLightBackground {
+  return [UIColor colorWithRed:0.859 green:0.873 blue:0.931 alpha:1.000];
+}
+
++ (UIColor*)grayMediumText {
+  return [UIColor colorWithRed:0.298 green:0.337 blue:0.424 alpha:1.000];
+}
+
 @end

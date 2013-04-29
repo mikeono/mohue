@@ -17,8 +17,13 @@
 #import "MOStyles.h"
 #import "MOScheduleOccurrenceService.h"
 #import "MOHueBridgeFinder.h"
+#import "MOPlaceholderView.h"
 
-@interface MOScheduleListController ()
+@interface MOScheduleListController () {
+  UIBarButtonItem* _editButton;
+}
+
+@property (nonatomic, strong) MOPlaceholderView* placeholderView;
 
 @end
 
@@ -34,9 +39,8 @@
     UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemAdd target: self action: @selector(addButtonPressed)];
     self.navigationItem.rightBarButtonItem = addButton;
     
-    UIBarButtonItem* editButton = [[UIBarButtonItem alloc] initWithTitle: @"Edit" style:UIBarButtonItemStyleBordered target: self action: @selector(editButtonPressed)];
-    editButton.possibleTitles = [NSSet setWithObjects: @"Edit", @"Done", nil];
-    self.navigationItem.leftBarButtonItem = editButton;
+    _editButton = [[UIBarButtonItem alloc] initWithTitle: @"Edit" style:UIBarButtonItemStyleBordered target: self action: @selector(editButtonPressed)];
+    _editButton.possibleTitles = [NSSet setWithObjects: @"Edit", @"Done", nil];
     
     // Init refresh control
     if ( NO && [self respondsToSelector: @selector(setRefreshControl:)] ) {
@@ -73,14 +77,87 @@
   self.toolbarItems = @[flexibleSpace, settingsButton];
 }
 
+- (void)viewDidLayoutSubviews {
+  [super viewDidLayoutSubviews];
+  
+  _placeholderView.frame = self.view.bounds;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear: animated];
   
-  // Reload schedules into table from cache
-  self.scheduleList = [MOCache sharedInstance].scheduleList;
+  [self reloadData];
   
   // Sync schedules down from server
   [MOScheduleService syncDownSchedules];
+}
+
+- (void)reloadData {
+  
+  // Load schedules into table from cache
+  self.scheduleList = [MOCache sharedInstance].scheduleList;
+  
+  // Show edit button if list not empty
+  if ( [self.scheduleList.schedules count] > 0 ) {
+    [self.navigationItem setLeftBarButtonItem: _editButton animated: YES];
+  } else {
+    [self.navigationItem setLeftBarButtonItem: nil animated: YES];
+  }
+  
+  // Show placeholder view if list empty
+  if ( [[self.scheduleList schedules] count] == 0 ) {
+    
+    self.placeholderView.messageLabel.text = nil;
+    
+    switch ( [MOHueBridgeFinder sharedInstance].bridgeStatus ) {
+      case MOHueBridgeStatusAuthed:
+      {
+        self.placeholderView.titleLabel.text = @"No Schedules";
+        self.placeholderView.messageLabel.text = @"Create a schedule by tapping [ + ] in the top right.";
+        break;
+      }
+      case MOHueBridgeStatusUpdating:
+      case MOHueBridgeStatusNotUpdated:
+      {
+        self.placeholderView.titleLabel.text = @"Connecting To Bridge...";
+        break;
+      }
+      case MOHueBridgeStatusNoWifi:
+      {
+        self.placeholderView.titleLabel.text = @"No WiFi  :-(";
+        self.placeholderView.messageLabel.text = @"Connect to a WiFi network to manage your schedules.";
+        break;
+      }
+      case MOHueBridgeStatusNoBridge:
+      {
+        self.placeholderView.titleLabel.text = @"No Bridges Found  :-(";
+        self.placeholderView.messageLabel.text = @"Make sure your Philips Hue Bridge is connected to this WiFi network";
+        break;
+      }
+      case MOHueBridgeStatusNoInternet:
+      case MOHueBridgeStatusNoWebsite:
+      {
+        self.placeholderView.titleLabel.text = @"No Internet Connection";
+        self.placeholderView.messageLabel.text = @"Connected to the Internet to locate the Hue bridge.";
+        break;
+      }
+      case MOHueBridgeStatusAuthCancelled:
+      case MOHueBridgeStatusNoAuth:
+      {
+        self.placeholderView.titleLabel.text = @"Not Connected  :-(";
+        self.placeholderView.messageLabel.text = @"Connect to a Philips Hue Bridge to manage your schedules.";
+        break;
+      }
+    }
+    
+    
+    
+    [self.view addSubview: self.placeholderView];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+  } else {
+    [_placeholderView removeFromSuperview];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+  }
 }
 
 #pragma mark - Getters and Setters
@@ -96,6 +173,13 @@
     _scheduleList = [[MOScheduleList alloc] init];
   }
   return _scheduleList;
+}
+
+- (MOPlaceholderView*)placeholderView {
+  if ( _placeholderView == nil ) {
+    _placeholderView = [[MOPlaceholderView alloc] init];
+  }
+  return _placeholderView;
 }
 
 #pragma mark - Table view data source
@@ -144,9 +228,16 @@
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle: @"" message: message delegate: nil cancelButtonTitle: nil otherButtonTitles: @"Ok", nil];
         [alertView show];
       }
+      
+      // Reload data into view
+      [self reloadData];
+      
+      // Reload data from server
       [MOScheduleService syncDownSchedules];
     }];
   }
+  
+  
 }
 
 #pragma mark - Table view delegate
@@ -159,10 +250,13 @@
 #pragma mark - Event Handling
 
 - (void)receivedScheduleFromHue {
-  self.scheduleList = [MOCache sharedInstance].scheduleList;
+  [self reloadData];
 }
 
 - (void)bridgeStatusChanged {
+  
+  [self reloadData];
+  
   if ( [MOHueBridgeFinder sharedInstance].bridgeStatus == MOHueBridgeStatusAuthed ) {
     [MOScheduleService syncDownSchedules];
   }

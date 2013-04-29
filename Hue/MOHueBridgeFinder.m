@@ -36,7 +36,7 @@ static MOHueBridgeFinder *instance = nil;
   if ( self = [super init] ) {
     _wifiReachability = [Reachability reachabilityForLocalWiFi];
     _internetReachability = [Reachability reachabilityForInternetConnection];
-    [_wifiReachability startNotifier];
+    //[_wifiReachability startNotifier];
     [_internetReachability startNotifier];
     _websiteReachability = [Reachability reachabilityWithHostname: @"www.meethue.com"];
     _urlResultProcessingQueue = [[NSOperationQueue alloc] init];
@@ -76,7 +76,7 @@ static MOHueBridgeFinder *instance = nil;
 - (void)updateBridgeStatus {
   
   // Check for wifi reachability
-  if ( ! _wifiReachability.isReachableViaWiFi ) {
+  if ( ! _wifiReachability.isReachableViaWiFi || ! _wifiReachability.isReachable ) {
     self.bridgeStatus = MOHueBridgeStatusNoWifi;
     return;
   }
@@ -127,10 +127,6 @@ static MOHueBridgeFinder *instance = nil;
     }
   }];
   
-}
-
-- (void)resetStatus {
-  self.bridgeStatus = MOHueBridgeStatusNotUpdated;
 }
 
 - (void)startBridgeSearchWithCompletion:(void(^)(BOOL success))completion {
@@ -240,23 +236,23 @@ static MOHueBridgeFinder *instance = nil;
   switch ( self.bridgeStatus ) {
     case MOHueBridgeStatusNoWifi:
     {
-      title = @"Please connect to WiFi";
-      message = @"You must be connected to a WiFi network to communicate with the Hue bridge";
+      title = @"No WiFi";
+      message = @"Connect to a WiFi network to communicate with the Hue bridge";
       identifier = kMOAlertNoWifi;
       break;
     }
     case MOHueBridgeStatusNoInternet:
     case MOHueBridgeStatusNoWebsite:
     {
-      title = @"Please connect to the Internet";
+      title = @"No Internet Connection";
       message = @"You must be connected to the Internet to locate the Hue bridge";
       identifier = kMOAlertNoInternet;
       break;
     }
     case MOHueBridgeStatusNoBridge:
     {
-      title = @"No bridge";
-      message = @"No Hue-compatibile bridges were found on this WiFi network.  Make sure the Hue bridge is on and connected to the same WiFi network.";
+      title = @"No Hue Bridge";
+      message = @"No Hue-compatibile bridges were found on this WiFi network.  Make sure your Hue bridge is on and connected to this WiFi network.";
       identifier = kMOAlertNoBridge;
       break;
     }

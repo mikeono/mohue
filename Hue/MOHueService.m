@@ -58,8 +58,6 @@
   NSData* data = [NSURLConnection sendSynchronousRequest: request returningResponse: &response error: &error];
   
   // Do stuff with response
-  NSString* responseString = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-  //DBG(@"Got response: %@", responseString);
   if ( error ) {
     DBG(@"Got error %@", error);
   }

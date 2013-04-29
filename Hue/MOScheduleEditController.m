@@ -81,6 +81,9 @@ typedef enum MOScheduleEditSection {
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  
+  self.tableView.backgroundView = nil;
+  self.tableView.backgroundColor = [MOStyles blueLightBackground];
 }
 
 - (void)viewDidLayoutSubviews {
