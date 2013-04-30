@@ -7,7 +7,6 @@
 //
 
 #import "MOHueServiceOperationQueue.h"
-#import "MOHueServiceOperation.h"
 
 @interface MOHueServiceOperationQueue () {
   NSMutableArray* _operations;

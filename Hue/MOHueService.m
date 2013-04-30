@@ -9,10 +9,15 @@
 #import "MOHueService.h"
 #import "MOHueServiceRequest.h"
 #import "JSONKit.h"
+#import "MOHueServiceOperationQueue.h"
 
 @interface MOHueService () {
+  MOHueServiceOperationQueue* _requestQueue;
   NSOperationQueue* _resultProcessingQueue;
+  BOOL _requestQueueProcessing;
 }
+
+@property (atomic, strong) NSDate* lastRequestDate;
 
 @end
 
@@ -20,10 +25,11 @@
 
 - (id)init {
   if ( self = [super init] ) {
-    //_serverName = @"192.168.1.5";
     _username = @"ab72e636502d70a68c88ed42b46825a6";
     _defaultTimeout = 5.0f;
     _resultProcessingQueue = [[NSOperationQueue alloc] init];
+    _requestQueue = [[MOHueServiceOperationQueue alloc] init];
+    _lastRequestDate = [NSDate dateWithTimeIntervalSince1970: 0];
   }
   return self;
 }
@@ -69,9 +75,27 @@
   }
 }
 
-- (void)handleAsyncResponse:(NSURLResponse*)response data:(NSData*)data error:(NSError*)error hueRequest:(MOHueServiceRequest*)hueRequest {
-  
+#pragma mark - Request Queue
+
+- (void)enqueueRequest:(MOHueServiceRequest*)hueRequest {
+  [self enqueueRequest: hueRequest withPriority: 0];
 }
+
+- (void)enqueueRequest:(MOHueServiceRequest*)hueRequest withPriority:(float)priority {
+  MOHueServiceOperation* operation = [[MOHueServiceOperation alloc] initWithRequest: hueRequest date: [NSDate date] priority: priority];
+  [_requestQueue enqueueOperation: operation];
+}
+
+- (void)processNextQueuedRequest {
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
+    MOHueServiceRequest* request = [_requestQueue dequeueOperation].request;
+    [self executeSyncRequest: request];
+  });
+}
+
+#pragma mark - Getters and Setters
+
+
 
 #pragma mark - Static Methods
 

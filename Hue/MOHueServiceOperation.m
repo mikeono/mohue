@@ -11,4 +11,13 @@
 
 @implementation MOHueServiceOperation
 
+- (id)initWithRequest:(MOHueServiceRequest*)request date:(NSDate*)date priority:(float)priority {
+  if ( self = [super init] ) {
+    _request = request;
+    _priority = priority;
+    _date = date;
+  }
+  return self;
+}
+
 @end

@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Mike Onorato. All rights reserved.
 //
 
-@class MOHueServiceOperation;
+#import "MOHueServiceOperation.h"
 
 @interface MOHueServiceOperationQueue : NSObject 
 

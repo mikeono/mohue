@@ -14,6 +14,8 @@
 
 @property (nonatomic, strong) MOHueServiceRequest* request;
 @property (nonatomic, strong) NSDate* date;
-@property (nonatomic, assign) NSInteger priority;
+@property (nonatomic, assign) float priority;
+
+- (id)initWithRequest:(MOHueServiceRequest*)request date:(NSDate*)date priority:(float)priority;
 
 @end

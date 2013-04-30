@@ -21,6 +21,11 @@ typedef enum MOHueServiceResponseCode {
 @property (nonatomic, strong) NSString* serverName;
 @property (nonatomic, strong) NSString* username;
 @property (nonatomic, assign) float defaultTimeout;
+@property (nonatomic, assign) BOOL requestQueuePaused;
+
+- (void)enqueueRequest:(MOHueServiceRequest*)hueRequest;
+
+- (void)enqueueRequest:(MOHueServiceRequest*)hueRequest withPriority:(float)priority;
 
 - (void)executeAsyncRequest:(MOHueServiceRequest*)hueRequest;
 
