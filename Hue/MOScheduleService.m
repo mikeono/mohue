@@ -96,13 +96,13 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
   
   MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"schedules" bodyDict: requestBody httpMethod: kMOHTTPRequestMethodPost completionBlock: nil];
   
-  [[MOHueService sharedInstance] enqueueRequest: hueRequest];
+  [[MOHueService sharedInstance] executeRequest: hueRequest];
 }
 
 + (void)postSchedule:(MOSchedule*)schedule {
   
   // Create and post up to 7 occurrences 
-  for (int daysAfterToday = -1; daysAfterToday < 1; daysAfterToday++) {
+  for (int daysAfterToday = -1; daysAfterToday < 6; daysAfterToday++) {
     NSDate* day = [NSDate dateWithTimeIntervalSinceNow: daysAfterToday * 60 * 60 * 24];
     MOScheduleOccurrence* scheduleOccurrence = [[MOScheduleOccurrence alloc] initWithSchedule: schedule day: day];
     [MOScheduleService postScheduleOccurrence: scheduleOccurrence];

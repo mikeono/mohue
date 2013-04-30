@@ -16,6 +16,8 @@ extern NSString* kMOReceivedLightFromHue;
 
 + (void)putStateForAllLights:(MOLightState*)lightState;
 
++ (void)putStateForAllLightsIfReady:(MOLightState*)lightState;
+
 + (void)putState:(MOLightState*)lightState forLightIdString:(NSString*)lightIdString;
 
 + (void)syncDownLightsWithCompletion:(void(^)(BOOL success))completion;
