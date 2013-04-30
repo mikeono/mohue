@@ -28,7 +28,7 @@
     // Add subviews
     _segmentedControl = [[UISegmentedControl alloc] initWithItems: @[@"ON", @"OFF"]];
     _segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
-    _segmentedControl.tintColor = [MOStyles colorLightYellow];
+    _segmentedControl.tintColor = [MOStyles yellowLight];
     self.lightMode = MOLightModeOn;
     [self addSubview: _segmentedControl];
   }

@@ -11,6 +11,11 @@
 #import "MOScheduleListController.h"
 #import "MOStyles.h"
 #import "MOHueBridgeFinder.h"
+#import "MOUIUtil.h"
+
+BOOL iPad;
+BOOL iPhone;
+BOOL iPhone4Inch;
 
 @implementation MOAppDelegate
 
@@ -18,6 +23,10 @@
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
   [MOStyles applyStylesToAppearance];
+  
+  iPad = [MOUIUtil sharedInstance].iPad;
+  iPhone = !iPad;
+  iPhone4Inch = [MOUIUtil sharedInstance].iPhone4Inch;
   
   // Override point for customization after application launch.
   MOScheduleListController* scheduleListController = [[MOScheduleListController alloc] init];
@@ -46,7 +55,6 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
   // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
   
-  [[MOHueBridgeFinder sharedInstance] resetStatus];
   [[MOHueBridgeFinder sharedInstance] updateBridgeStatus];
 }
 

@@ -26,8 +26,6 @@ typedef enum MOHueBridgeStatus {
 
 - (void)updateBridgeStatus;
 
-- (void)resetStatus;
-
 - (MOHueBridgeStatus)bridgeStatus;
 
 - (void)reconnect;

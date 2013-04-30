@@ -67,7 +67,8 @@ typedef enum MOScheduleEditSection {
     self.title = _isScheduleNew ? @"Edit Schedule" : @"Add Schedule";
     
     // Init nav bar buttons
-    UIBarButtonItem* saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemSave target: self action: @selector(saveButtonPressed)];
+    UIBarButtonItem* saveButton = [[UIBarButtonItem alloc] initWithTitle: @"Save" style:UIBarButtonItemStyleDone target: self action: @selector(saveButtonPressed)];
+    saveButton.tintColor = [MOStyles blueBright];
     self.navigationItem.rightBarButtonItem = saveButton;
     
     UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel target: self action: @selector(cancelButtonPressed)];
@@ -80,6 +81,9 @@ typedef enum MOScheduleEditSection {
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  
+  self.tableView.backgroundView = nil;
+  self.tableView.backgroundColor = [MOStyles blueLightBackground];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -282,7 +286,7 @@ typedef enum MOScheduleEditSection {
       switch ( indexPath.row ) {
         case kMOScheduleEditTimerDetailsRowDays:
         {
-          cell.textLabel.text = @"Recurrence";
+          cell.textLabel.text = @"Repeat";
           MODayOfWeek dayOfWeekMask;
           if ( _recurrenceController ) {
             dayOfWeekMask = _recurrenceController.dayOfWeekMask;

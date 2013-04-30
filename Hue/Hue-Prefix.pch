@@ -13,6 +13,13 @@
   #import <Foundation/Foundation.h>
   #import "NSDictionary+MO.h"
   #import "MOAlertManager.h"
+  #import "MOStyles.h"
+  #import "NSMutableArray+MO.h"
+
+extern BOOL iPad;
+extern BOOL iPhone;
+extern BOOL iPhone4Inch;
+
 #endif
 
 

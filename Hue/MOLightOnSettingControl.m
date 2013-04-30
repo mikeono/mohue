@@ -36,8 +36,8 @@
     [self addSubview: _brightnessLabel];
     
     _brightnessSlider = [[UISlider alloc] init];
-    _brightnessSlider.maximumTrackTintColor = [MOStyles colorDarkBrown];
-    _brightnessSlider.minimumTrackTintColor = [MOStyles colorLightYellow];
+    _brightnessSlider.maximumTrackTintColor = [MOStyles brownDark];
+    _brightnessSlider.minimumTrackTintColor = [MOStyles yellowLight];
     [self addSubview: _brightnessSlider];
     
     _ctLabel = [[UILabel alloc] init];
@@ -46,7 +46,7 @@
     [self addSubview: _ctLabel];
     
     _ctSlider = [[UISlider alloc] init];
-    _ctSlider.maximumTrackTintColor = [MOStyles colorBrightYellow];
+    _ctSlider.maximumTrackTintColor = [MOStyles yellowBright];
     //_ctSlider.minimumTrackTintColor = [MOStyles colorLightYellow];
     [self addSubview: _ctSlider];
   }

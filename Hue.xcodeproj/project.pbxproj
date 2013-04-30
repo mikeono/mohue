@@ -41,6 +41,11 @@
 		27634CB117111FA300F95988 /* MOLightState.m in Sources */ = {isa = PBXBuildFile; fileRef = 27634CB017111FA300F95988 /* MOLightState.m */; };
 		27634CB41711279400F95988 /* MOScheduleEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27634CB31711279400F95988 /* MOScheduleEditController.m */; };
 		276A3F0B172DBF74000B71D8 /* MOAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 276A3F0A172DBF74000B71D8 /* MOAlertManager.m */; };
+		276A3F39172DEB0C000B71D8 /* MOPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 276A3F38172DEB0C000B71D8 /* MOPlaceholderView.m */; };
+		276A3F3E172DFD39000B71D8 /* MOUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 276A3F3D172DFD39000B71D8 /* MOUIUtil.m */; };
+		276A3F44172E0974000B71D8 /* MOHueServiceOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 276A3F43172E0974000B71D8 /* MOHueServiceOperation.m */; };
+		276A3F47172E0ABA000B71D8 /* MOHueServiceOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 276A3F46172E0AB9000B71D8 /* MOHueServiceOperationQueue.m */; };
+		276A3F4A172E0BEC000B71D8 /* NSMutableArray+MO.m in Sources */ = {isa = PBXBuildFile; fileRef = 276A3F49172E0BEC000B71D8 /* NSMutableArray+MO.m */; };
 		2789B08E17231DBA00C1D49E /* MOLightService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2789B08D17231DBA00C1D49E /* MOLightService.m */; };
 		2789B0911723457300C1D49E /* MOLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 2789B0901723457300C1D49E /* MOLight.m */; };
 		27ADC2DD172081F100237262 /* MOScheduleRecurrenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ADC2DC172081F100237262 /* MOScheduleRecurrenceController.m */; };
@@ -122,6 +127,16 @@
 		27634CB31711279400F95988 /* MOScheduleEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOScheduleEditController.m; sourceTree = "<group>"; };
 		276A3F09172DBF74000B71D8 /* MOAlertManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAlertManager.h; sourceTree = "<group>"; };
 		276A3F0A172DBF74000B71D8 /* MOAlertManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOAlertManager.m; sourceTree = "<group>"; };
+		276A3F37172DEB0C000B71D8 /* MOPlaceholderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOPlaceholderView.h; sourceTree = "<group>"; };
+		276A3F38172DEB0C000B71D8 /* MOPlaceholderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOPlaceholderView.m; sourceTree = "<group>"; };
+		276A3F3C172DFD39000B71D8 /* MOUIUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOUIUtil.h; sourceTree = "<group>"; };
+		276A3F3D172DFD39000B71D8 /* MOUIUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOUIUtil.m; sourceTree = "<group>"; };
+		276A3F42172E0974000B71D8 /* MOHueServiceOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOHueServiceOperation.h; sourceTree = "<group>"; };
+		276A3F43172E0974000B71D8 /* MOHueServiceOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOHueServiceOperation.m; sourceTree = "<group>"; };
+		276A3F45172E0AB9000B71D8 /* MOHueServiceOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOHueServiceOperationQueue.h; sourceTree = "<group>"; };
+		276A3F46172E0AB9000B71D8 /* MOHueServiceOperationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOHueServiceOperationQueue.m; sourceTree = "<group>"; };
+		276A3F48172E0BEC000B71D8 /* NSMutableArray+MO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+MO.h"; sourceTree = "<group>"; };
+		276A3F49172E0BEC000B71D8 /* NSMutableArray+MO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+MO.m"; sourceTree = "<group>"; };
 		2789B08C17231DBA00C1D49E /* MOLightService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOLightService.h; sourceTree = "<group>"; };
 		2789B08D17231DBA00C1D49E /* MOLightService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOLightService.m; sourceTree = "<group>"; };
 		2789B08F1723457300C1D49E /* MOLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOLight.h; sourceTree = "<group>"; };
@@ -192,7 +207,11 @@
 				27ED396E171B4CA60002836C /* MOHueService.m */,
 				27ED396A171B49A60002836C /* MOHueServiceRequest.h */,
 				27ED396B171B49A60002836C /* MOHueServiceRequest.m */,
+				276A3F42172E0974000B71D8 /* MOHueServiceOperation.h */,
+				276A3F43172E0974000B71D8 /* MOHueServiceOperation.m */,
 				27451D4616F0237E0015A07B /* MOHueServiceManager.h */,
+				276A3F45172E0AB9000B71D8 /* MOHueServiceOperationQueue.h */,
+				276A3F46172E0AB9000B71D8 /* MOHueServiceOperationQueue.m */,
 				27451D4716F0237E0015A07B /* MOHueServiceManager.m */,
 				27ED3983171CF1220002836C /* MOModelService.h */,
 				27ED3984171CF1220002836C /* MOModelService.m */,
@@ -365,6 +384,17 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		276A3F3B172DFD1D000B71D8 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				276A3F3C172DFD39000B71D8 /* MOUIUtil.h */,
+				276A3F3D172DFD39000B71D8 /* MOUIUtil.m */,
+				276A3F48172E0BEC000B71D8 /* NSMutableArray+MO.h */,
+				276A3F49172E0BEC000B71D8 /* NSMutableArray+MO.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		2789B08B17231CF100C1D49E /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -381,6 +411,7 @@
 				27ED394E1718E1E70002836C /* Controller */,
 				27ED394F1718E1EF0002836C /* View */,
 				27077B1016F4B4E4007159DE /* Service */,
+				276A3F3B172DFD1D000B71D8 /* Utils */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -418,6 +449,8 @@
 				27ED39531718E2880002836C /* MOGroupedTableViewCell.m */,
 				2744359A171E418700552AA7 /* MOStyles.h */,
 				2744359B171E418700552AA7 /* MOStyles.m */,
+				276A3F37172DEB0C000B71D8 /* MOPlaceholderView.h */,
+				276A3F38172DEB0C000B71D8 /* MOPlaceholderView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -630,6 +663,11 @@
 				2711C6CB17244276003E6DE4 /* MOHueBridgeFinder.m in Sources */,
 				2711C6D117244F90003E6DE4 /* Reachability.m in Sources */,
 				276A3F0B172DBF74000B71D8 /* MOAlertManager.m in Sources */,
+				276A3F39172DEB0C000B71D8 /* MOPlaceholderView.m in Sources */,
+				276A3F3E172DFD39000B71D8 /* MOUIUtil.m in Sources */,
+				276A3F44172E0974000B71D8 /* MOHueServiceOperation.m in Sources */,
+				276A3F47172E0ABA000B71D8 /* MOHueServiceOperationQueue.m in Sources */,
+				276A3F4A172E0BEC000B71D8 /* NSMutableArray+MO.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
