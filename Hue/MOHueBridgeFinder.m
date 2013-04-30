@@ -190,7 +190,7 @@ static MOHueBridgeFinder *instance = nil;
       }
     }
     
-    DBG(@"response %@", resultObject);
+    //DBG(@"response %@", resultObject);
     
     if ( completion ) {
       dispatch_async(dispatch_get_main_queue(), ^(){
@@ -210,7 +210,7 @@ static MOHueBridgeFinder *instance = nil;
     
     MOHueServiceResponseCode responseCode = [MOHueService parseHueServiceResponseFromResponseObject: resultObject];
     
-    DBG(@"response %@", resultObject);
+    //DBG(@"response %@", resultObject);
     
     if ( completion ) {
       dispatch_async(dispatch_get_main_queue(), ^(){
