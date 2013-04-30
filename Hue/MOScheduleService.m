@@ -96,7 +96,7 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
   
   MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"schedules" bodyDict: requestBody httpMethod: kMOHTTPRequestMethodPost completionBlock: nil];
   
-  [[MOHueService sharedInstance] executeAsyncRequest: hueRequest];
+  [[MOHueService sharedInstance] executeRequest: hueRequest];
 }
 
 + (void)postSchedule:(MOSchedule*)schedule {

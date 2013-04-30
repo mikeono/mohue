@@ -14,8 +14,11 @@
 
 #pragma mark - Colors
 
-+ (UIColor*)colorDarkBrown;
-+ (UIColor*)colorLightYellow;
-+ (UIColor*)colorBrightYellow;
++ (UIColor*)brownDark;
++ (UIColor*)yellowLight;
++ (UIColor*)yellowBright;
++ (UIColor*)blueBright;
++ (UIColor*)blueLightBackground;
++ (UIColor*)grayMediumText;
 
 @end

@@ -9,10 +9,15 @@
 #import "MOHueService.h"
 #import "MOHueServiceRequest.h"
 #import "JSONKit.h"
+#import "MOHueServiceOperationQueue.h"
 
 @interface MOHueService () {
+  MOHueServiceOperationQueue* _requestQueue;
   NSOperationQueue* _resultProcessingQueue;
+  BOOL _requestQueueProcessing;
 }
+
+@property (atomic, strong) NSDate* lastRequestDate;
 
 @end
 
@@ -20,26 +25,67 @@
 
 - (id)init {
   if ( self = [super init] ) {
-    //_serverName = @"192.168.1.5";
     _username = @"ab72e636502d70a68c88ed42b46825a6";
     _defaultTimeout = 5.0f;
+    _maxRequestsPerSecond = 15.0f;
     _resultProcessingQueue = [[NSOperationQueue alloc] init];
+    _requestQueue = [[MOHueServiceOperationQueue alloc] init];
+    _lastRequestDate = [NSDate dateWithTimeIntervalSince1970: 0];
   }
   return self;
 }
 
+#pragma mark - Getters and Setters
+
 #pragma mark - Making requests
 
-- (void)executeAsyncRequest:(MOHueServiceRequest*)hueRequest {
-  NSURLRequest* request = hueRequest.urlRequest;
+- (void)executeRequest:(MOHueServiceRequest*)hueRequest {
+  self.lastRequestDate = [NSDate date];
   
+  NSURLRequest* request = hueRequest.urlRequest;
+  NSError *error = nil;
+  NSHTTPURLResponse *response = nil;
+  
+  NSData* data = [NSURLConnection sendSynchronousRequest: request returningResponse: &response error: &error];
+  
+  if ( error ) {
+    DBG(@"Error %@", error);
+  }
+  
+  id responseObject = [data objectFromJSONData];
+  
+  if ( hueRequest.completionBlock ) {
+    hueRequest.completionBlock(responseObject, error);
+  }
+}
+
+- (void)executeRequestWhenReady:(MOHueServiceRequest*)hueRequest {
+  if ( [self isReady] ) {
+    [self executeRequest: hueRequest];
+  } else {
+    DBG(@"Waiting for service to become ready.");
+    [NSThread sleepUntilDate: [self.lastRequestDate dateByAddingTimeInterval: [self minTimeBetweenRequests]]];
+    [self executeRequestWhenReady: hueRequest];
+  }
+}
+
+- (void)executeRequestIfReady:(MOHueServiceRequest*)hueRequest {
+  if ( [self isReady] ) {
+    [self executeRequest: hueRequest];
+  } else {
+    DBG(@"Service not ready. Skipping request execution");
+  }
+}
+
+- (void)executeAsyncRequest:(MOHueServiceRequest*)hueRequest {
+  
+  self.lastRequestDate = [NSDate date];
+  
+  NSURLRequest* request = hueRequest.urlRequest;
   [NSURLConnection sendAsynchronousRequest: request queue: _resultProcessingQueue completionHandler: ^(NSURLResponse* response, NSData* data, NSError* error) {
     
-    // Do stuff with response
-    //NSString* responseString = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-    //DBG(@"Got response: %@", responseString);
     if ( error ) {
-      DBG(@"Got error %@", error);
+      DBG(@"Error %@", error);
     }
     
     id responseObject = [data objectFromJSONData];
@@ -50,29 +96,55 @@
   }];
 }
 
-- (void)executeSyncRequest:(MOHueServiceRequest*)hueRequest {
-  NSURLRequest* request = hueRequest.urlRequest;
-  NSError *error = nil;
-  NSHTTPURLResponse *response = nil;
-  
-  NSData* data = [NSURLConnection sendSynchronousRequest: request returningResponse: &response error: &error];
-  
-  // Do stuff with response
-  NSString* responseString = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-  //DBG(@"Got response: %@", responseString);
-  if ( error ) {
-    DBG(@"Got error %@", error);
-  }
-  
-  id responseObject = [data objectFromJSONData];
-  
-  if ( hueRequest.completionBlock ) {
-    hueRequest.completionBlock(responseObject, error);
+- (void)executeAsyncRequestWhenReady:(MOHueServiceRequest*)hueRequest {
+  if ( [self isReady] ) {
+    [self executeRequest: hueRequest];
+  } else {
+    DBG(@"Waiting for service to become ready.");
+    NSDate* dateWhenReady = [self.lastRequestDate dateByAddingTimeInterval: [self minTimeBetweenRequests]];
+    NSTimeInterval timeUntilReady = [dateWhenReady timeIntervalSinceDate: [NSDate date]];
+    //[NSTimer scheduledTimerWithTimeInterval: timeUntilReady target: self selector: @selector(executeAsyncRequestWhenReady:) userInfo: hueRequest repeats: NO];
   }
 }
 
-- (void)handleAsyncResponse:(NSURLResponse*)response data:(NSData*)data error:(NSError*)error hueRequest:(MOHueServiceRequest*)hueRequest {
-  
+- (void)executeAsyncRequestIfReady:(MOHueServiceRequest*)hueRequest {
+  if ( [self isReady] ) {
+    [self executeAsyncRequest: hueRequest];
+  } else {
+    DBG(@"Service not ready. Skipping request execution");
+  }
+}
+
+#pragma mark - Rate Limiting 
+
+- (BOOL)isReady {
+  return [self timeSinceLastRequest] >= [self minTimeBetweenRequests];
+}
+
+- (NSTimeInterval)timeSinceLastRequest {
+  return [[NSDate date] timeIntervalSinceDate: self.lastRequestDate];
+}
+
+- (NSTimeInterval)minTimeBetweenRequests {
+  return 1.0 / _maxRequestsPerSecond;
+}
+
+#pragma mark - Managing the request queue
+
+- (void)enqueueRequest:(MOHueServiceRequest*)hueRequest {
+  [self enqueueRequest: hueRequest withPriority: 0];
+}
+
+- (void)enqueueRequest:(MOHueServiceRequest*)hueRequest withPriority:(float)priority {
+  MOHueServiceOperation* operation = [[MOHueServiceOperation alloc] initWithRequest: hueRequest date: [NSDate date] priority: priority];
+  [_requestQueue enqueueOperation: operation];
+}
+
+- (void)processNextQueuedRequest {
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
+    MOHueServiceRequest* request = [_requestQueue dequeueOperation].request;
+    [self executeRequest: request];
+  });
 }
 
 #pragma mark - Static Methods
