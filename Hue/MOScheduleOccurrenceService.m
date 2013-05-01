@@ -47,7 +47,7 @@
     }
     
   }];
-  [[MOHueService sharedInstance] executeAsyncRequest: hueRequest];
+  [[MOHueService sharedInstance] enqueueRequest: hueRequest];
 }
 
 #pragma mark - Mutating Occurrences

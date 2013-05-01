@@ -199,7 +199,7 @@ static MOHueBridgeFinder *instance = nil;
     }
     
   }];
-  [[MOHueService sharedInstance] executeAsyncRequest: hueRequest];
+  [[MOHueService sharedInstance] enqueueRequest: hueRequest];
 }
 
 - (void)startAuthRequestWithCompletion:(void(^)(MOHueServiceResponseCode responseCode))completion {
@@ -219,7 +219,7 @@ static MOHueBridgeFinder *instance = nil;
     }
     
   }];
-  [[MOHueService sharedInstance] executeAsyncRequest: hueRequest];
+  [[MOHueService sharedInstance] enqueueRequest: hueRequest];
 }
 
 - (void)presentAlert {

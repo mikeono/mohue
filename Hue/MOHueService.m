@@ -12,9 +12,6 @@
 #import "MOHueServiceOperationQueue.h"
 
 @interface MOHueService () {
-  MOHueServiceOperationQueue* _requestQueue;
-  NSOperationQueue* _resultProcessingQueue;
-  BOOL _requestQueueProcessing;
 }
 
 @property (atomic, strong) NSDate* lastRequestDate;
@@ -28,8 +25,6 @@
     _username = @"ab72e636502d70a68c88ed42b46825a6";
     _defaultTimeout = 5.0f;
     _maxRequestsPerSecond = 15.0f;
-    _resultProcessingQueue = [[NSOperationQueue alloc] init];
-    _requestQueue = [[MOHueServiceOperationQueue alloc] init];
     _lastRequestDate = [NSDate dateWithTimeIntervalSince1970: 0];
   }
   return self;
@@ -81,54 +76,6 @@
   });
 }
 
-#pragma mark - Old
-
-- (void)executeRequestIfReady:(MOHueServiceRequest*)hueRequest {
-  if ( [self isReady] ) {
-    [self executeRequest: hueRequest];
-  } else {
-    INFO(@"Service not ready. Skipping request execution");
-  }
-}
-
-- (void)executeAsyncRequest:(MOHueServiceRequest*)hueRequest {
-  
-  self.lastRequestDate = [NSDate date];
-  
-  NSURLRequest* request = hueRequest.urlRequest;
-  [NSURLConnection sendAsynchronousRequest: request queue: _resultProcessingQueue completionHandler: ^(NSURLResponse* response, NSData* data, NSError* error) {
-    
-    if ( error ) {
-      ERROR(@"%@ %@ %@", hueRequest.relativePath, hueRequest.httpMethod, error);
-    }
-    
-    id responseObject = [data objectFromJSONData];
-    
-    if ( hueRequest.completionBlock ) {
-      hueRequest.completionBlock(responseObject, error);
-    }
-  }];
-}
-
-- (void)executeAsyncRequestWhenReady:(MOHueServiceRequest*)hueRequest {
-  if ( [self isReady] ) {
-    [self executeRequest: hueRequest];
-  } else {
-    INFO(@"Waiting for service to become ready.");
-    NSDate* dateWhenReady = [self.lastRequestDate dateByAddingTimeInterval: [self minTimeBetweenRequests]];
-    NSTimeInterval timeUntilReady = [dateWhenReady timeIntervalSinceDate: [NSDate date]];
-    //[NSTimer scheduledTimerWithTimeInterval: timeUntilReady target: self selector: @selector(executeAsyncRequestWhenReady:) userInfo: hueRequest repeats: NO];
-  }
-}
-
-- (void)executeAsyncRequestIfReady:(MOHueServiceRequest*)hueRequest {
-  if ( [self isReady] ) {
-    [self executeAsyncRequest: hueRequest];
-  } else {
-    INFO(@"Service not ready. Skipping request execution");
-  }
-}
-
 #pragma mark - Rate Limiting 
 
 - (BOOL)isReady {
@@ -141,24 +88,6 @@
 
 - (NSTimeInterval)minTimeBetweenRequests {
   return 1.0 / _maxRequestsPerSecond;
-}
-
-#pragma mark - Managing the request queue
-
-- (void)enqueueRequest:(MOHueServiceRequest*)hueRequest {
-  [self enqueueRequest: hueRequest withPriority: 0];
-}
-
-- (void)enqueueRequest:(MOHueServiceRequest*)hueRequest withPriority:(float)priority {
-  MOHueServiceOperation* operation = [[MOHueServiceOperation alloc] initWithRequest: hueRequest date: [NSDate date] priority: priority];
-  [_requestQueue enqueueOperation: operation];
-}
-
-- (void)processNextQueuedRequest {
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
-    MOHueServiceRequest* request = [_requestQueue dequeueOperation].request;
-    [self executeRequest: request];
-  });
 }
 
 #pragma mark - Static Methods

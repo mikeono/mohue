@@ -56,7 +56,7 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
     }
     
   }];
-  [[MOHueService sharedInstance] executeAsyncRequest: hueRequest];
+  [[MOHueService sharedInstance] enqueueRequest: hueRequest];
 }
 
 + (void)syncDownScheduleWithHueId:(NSString*)hueScheduleId {

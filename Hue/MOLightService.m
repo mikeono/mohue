@@ -23,7 +23,7 @@ NSString* kMOReceivedLightFromHue = @"ReceivedScheduleFromHue";
   
   MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"groups/0/action" bodyDict: lightState.dictionary httpMethod: kMOHTTPRequestMethodPut completionBlock: nil];
   
-  [[MOHueService sharedInstance] executeAsyncRequest: hueRequest];
+  [[MOHueService sharedInstance] enqueueRequest: hueRequest];
 }
 
 + (void)putState:(MOLightState*)lightState forLightIdString:(NSString*)lightIdString {
@@ -66,7 +66,7 @@ NSString* kMOReceivedLightFromHue = @"ReceivedScheduleFromHue";
     }
     
   }];
-  [[MOHueService sharedInstance] executeAsyncRequest: hueRequest];
+  [[MOHueService sharedInstance] enqueueRequest: hueRequest];
 }
 
 + (void)syncDownLightWithIdString:(NSString*)idString {

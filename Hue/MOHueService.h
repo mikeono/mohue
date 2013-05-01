@@ -28,20 +28,12 @@ typedef enum MOHueServiceResponseCode {
 
 - (void)executeRequest:(MOHueServiceRequest*)hueRequest;
 
+// TODO(MO): remove this from interface
+- (void)executeRequestWhenReady:(MOHueServiceRequest*)hueRequest;
 
 - (void)enqueueRequest:(MOHueServiceRequest*)hueRequest;
 
 - (void)enqueueRequest:(MOHueServiceRequest*)hueRequest priority:(NSInteger)priority;
-
-#pragma mark - Old
-
-- (void)executeRequestWhenReady:(MOHueServiceRequest*)hueRequest;
-
-- (void)executeRequestIfReady:(MOHueServiceRequest*)hueRequest;
-
-- (void)executeAsyncRequest:(MOHueServiceRequest*)hueRequest;
-
-- (void)executeAsyncRequestIfReady:(MOHueServiceRequest*)hueRequest;
 
 #pragma mark - Rate Limiting
 
