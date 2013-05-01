@@ -86,7 +86,8 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
   
   // Create body
   NSDictionary* commandBody = scheduleOccurrence.schedule.lightState.dictionary;
-  NSDictionary* command = @{@"address": @"groups/0/action",
+  NSString* address = [NSString stringWithFormat: @"/api/%@/groups/0/action", [MOHueService sharedInstance].username];
+  NSDictionary* command = @{@"address": address,
                             @"method": kMOHTTPRequestMethodPut,
                             @"body": commandBody};
   NSDictionary* requestBody = @{@"name": scheduleOccurrence.occurrenceIdentifier,
@@ -95,6 +96,9 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
                                 @"time": scheduleOccurrence.date.hueDateString};
   
   MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"schedules" bodyDict: requestBody httpMethod: kMOHTTPRequestMethodPost completionBlock: nil];
+  
+  DBG(@"hueRequest.urlRequest.URL %@", hueRequest.urlRequest.URL);
+  DBG(@"requestBody %@", requestBody);
   
   [[MOHueService sharedInstance] executeRequest: hueRequest];
 }
