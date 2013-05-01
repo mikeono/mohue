@@ -39,7 +39,7 @@
     UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemAdd target: self action: @selector(addButtonPressed)];
     self.navigationItem.rightBarButtonItem = addButton;
     
-    _editButton = [[UIBarButtonItem alloc] initWithTitle: @"Edit" style:UIBarButtonItemStyleBordered target: self action: @selector(editButtonPressed)];
+    _editButton = [[UIBarButtonItem alloc] initWithTitle: @"Edit" style:UIBarButtonItemStyleBordered target: self action: @selector(toggleEditMode)];
     _editButton.possibleTitles = [NSSet setWithObjects: @"Edit", @"Done", nil];
     
     // Init refresh control
@@ -91,6 +91,14 @@
   // Sync schedules down from server
   if ( [MOHueBridgeFinder sharedInstance].bridgeStatus == MOHueBridgeStatusAuthed ) {
     [MOScheduleService syncDownSchedules];
+  }
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+  [super viewDidDisappear: animated];
+  
+  if ( self.tableView.editing ) {
+    [self toggleEditMode];
   }
 }
 
@@ -268,7 +276,7 @@
   [self pushScheduleEditControllerForSchedule: nil];
 }
 
-- (void)editButtonPressed {
+- (void)toggleEditMode {
   [self.tableView setEditing: ! self.tableView.editing animated: YES];
   self.navigationItem.leftBarButtonItem.title = self.tableView.editing ? @"Done" : @"Edit";
 }

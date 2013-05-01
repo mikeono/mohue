@@ -28,6 +28,13 @@ typedef enum MOHueServiceResponseCode {
 
 - (void)executeRequest:(MOHueServiceRequest*)hueRequest;
 
+
+- (void)enqueueRequest:(MOHueServiceRequest*)hueRequest;
+
+- (void)enqueueRequest:(MOHueServiceRequest*)hueRequest priority:(NSInteger)priority;
+
+#pragma mark - Old
+
 - (void)executeRequestWhenReady:(MOHueServiceRequest*)hueRequest;
 
 - (void)executeRequestIfReady:(MOHueServiceRequest*)hueRequest;
@@ -39,12 +46,6 @@ typedef enum MOHueServiceResponseCode {
 #pragma mark - Rate Limiting
 
 - (BOOL)isReady;
-
-#pragma mark - Managing the request queue
-
-- (void)enqueueRequest:(MOHueServiceRequest*)hueRequest;
-
-- (void)enqueueRequest:(MOHueServiceRequest*)hueRequest withPriority:(float)priority;
 
 #pragma mark - Static Methods
 

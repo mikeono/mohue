@@ -25,6 +25,8 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
 
 + (void)syncDownSchedules {
   
+  DBG(@"Syncing down schedules");
+  
   // Create request
   MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"schedules" bodyDict: nil httpMethod: kMOHTTPRequestMethodGet completionBlock:^(id resultObject, NSError* error) {
     
@@ -77,7 +79,7 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
       });
     }
   }];
-  [[MOHueService sharedInstance] executeAsyncRequest: hueRequest];
+  [[MOHueService sharedInstance] executeRequestWhenReady: hueRequest];
 }
 
 #pragma mark - Posting Schedules
@@ -97,7 +99,7 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
   
   MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"schedules" bodyDict: requestBody httpMethod: kMOHTTPRequestMethodPost completionBlock: nil];
 
-  [[MOHueService sharedInstance] executeRequest: hueRequest];
+  [[MOHueService sharedInstance] executeRequestWhenReady: hueRequest];
 }
 
 + (void)postSchedule:(MOSchedule*)schedule {

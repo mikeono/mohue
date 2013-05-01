@@ -69,6 +69,20 @@
   }
 }
 
+- (void)enqueueRequest:(MOHueServiceRequest*)hueRequest {
+  [self enqueueRequest: hueRequest priority: 0];
+}
+
+- (void)enqueueRequest:(MOHueServiceRequest*)hueRequest priority:(NSInteger)priority {
+  
+  // TODO(MO): Change this to use an actual queue
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
+    [self executeRequestWhenReady: hueRequest];
+  });
+}
+
+#pragma mark - Old
+
 - (void)executeRequestIfReady:(MOHueServiceRequest*)hueRequest {
   if ( [self isReady] ) {
     [self executeRequest: hueRequest];

@@ -88,7 +88,7 @@
     }
     
   }];
-  [[MOHueService sharedInstance] executeAsyncRequest: hueRequest];
+  [[MOHueService sharedInstance] executeRequestWhenReady: hueRequest];
 }
 
 @end
