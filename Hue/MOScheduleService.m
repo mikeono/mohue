@@ -96,10 +96,7 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
                                 @"time": scheduleOccurrence.date.hueDateString};
   
   MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"schedules" bodyDict: requestBody httpMethod: kMOHTTPRequestMethodPost completionBlock: nil];
-  
-  DBG(@"hueRequest.urlRequest.URL %@", hueRequest.urlRequest.URL);
-  DBG(@"requestBody %@", requestBody);
-  
+
   [[MOHueService sharedInstance] executeRequest: hueRequest];
 }
 
