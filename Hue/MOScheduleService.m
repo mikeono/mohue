@@ -79,7 +79,7 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
       });
     }
   }];
-  [[MOHueService sharedInstance] executeRequestWhenReady: hueRequest];
+  [[MOHueService sharedInstance] enqueueRequest: hueRequest];
 }
 
 #pragma mark - Posting Schedules
@@ -99,7 +99,7 @@ NSString* kMOReceivedScheduleFromHue = @"ReceivedScheduleFromHue";
   
   MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: @"schedules" bodyDict: requestBody httpMethod: kMOHTTPRequestMethodPost completionBlock: nil];
 
-  [[MOHueService sharedInstance] executeRequestWhenReady: hueRequest];
+  [[MOHueService sharedInstance] enqueueRequest: hueRequest];
 }
 
 + (void)postSchedule:(MOSchedule*)schedule {

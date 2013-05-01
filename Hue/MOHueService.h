@@ -28,9 +28,6 @@ typedef enum MOHueServiceResponseCode {
 
 - (void)executeRequest:(MOHueServiceRequest*)hueRequest;
 
-// TODO(MO): remove this from interface
-- (void)executeRequestWhenReady:(MOHueServiceRequest*)hueRequest;
-
 - (void)enqueueRequest:(MOHueServiceRequest*)hueRequest;
 
 - (void)enqueueRequest:(MOHueServiceRequest*)hueRequest priority:(NSInteger)priority;

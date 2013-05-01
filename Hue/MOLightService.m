@@ -33,7 +33,7 @@ NSString* kMOReceivedLightFromHue = @"ReceivedScheduleFromHue";
   NSString* relativePath = [NSString stringWithFormat: @"lights/%@/state", lightIdString];
   MOHueServiceRequest* hueRequest = [[MOHueServiceRequest alloc] initWithRelativePath: relativePath bodyDict: lightState.dictionary httpMethod: kMOHTTPRequestMethodPut completionBlock: nil];
   
-  [[MOHueService sharedInstance] executeRequestWhenReady: hueRequest];
+  [[MOHueService sharedInstance] enqueueRequest: hueRequest];
 }
 
 
@@ -93,7 +93,7 @@ NSString* kMOReceivedLightFromHue = @"ReceivedScheduleFromHue";
       });
     }
   }];
-  [[MOHueService sharedInstance] executeRequestWhenReady: hueRequest];
+  [[MOHueService sharedInstance] enqueueRequest: hueRequest];
 }
 
 @end
