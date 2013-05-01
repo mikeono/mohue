@@ -16,17 +16,20 @@
   #import "MOStyles.h"
   #import "NSMutableArray+MO.h"
 
-extern BOOL iPad;
-extern BOOL iPhone;
-extern BOOL iPhone4Inch;
-
+  extern BOOL iPad;
+  extern BOOL iPhone;
+  extern BOOL iPhone4Inch;
 #endif
 
 
 #ifdef MO_DEBUG
-#define DBG(...) NSLog(__VA_ARGS__)
-#define WARN(...) NSLog(__VA_ARGS__)
+  #define DBG(...) NSLog(@"DBG: %@", [NSString stringWithFormat: __VA_ARGS__])
+  #define INFO(...) NSLog(@"INFO: %@", [NSString stringWithFormat: __VA_ARGS__])
+  #define WARN(...) NSLog(@"WARN: %@", [NSString stringWithFormat: __VA_ARGS__])
+  #define ERROR(...) NSLog(@"ERROR: %@", [NSString stringWithFormat: __VA_ARGS__])
 #else
-#define DBG(...)
-#define WARN(...)
+  #define DBG(...)
+  #define INFO(...)
+  #define WARN(...) NSLog(@"WARN: %@", [NSString stringWithFormat: __VA_ARGS__])
+  #define ERROR(...) NSLog(@"ERROR: %@", [NSString stringWithFormat: __VA_ARGS__])
 #endif

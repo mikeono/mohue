@@ -89,7 +89,9 @@
   [self reloadData];
   
   // Sync schedules down from server
-  [MOScheduleService syncDownSchedules];
+  if ( [MOHueBridgeFinder sharedInstance].bridgeStatus == MOHueBridgeStatusAuthed ) {
+    [MOScheduleService syncDownSchedules];
+  }
 }
 
 - (void)reloadData {

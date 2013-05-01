@@ -29,7 +29,6 @@ NSString* kMOLightColorModeCT = @"ct";
 - (id)initWithHueStateDict:(NSDictionary*)dict {
   if ( self = [super init] ) {
     // Structure {"bri":bri,"ct":ct,"colorMode":colorMode,"on":on}
-    DBG(@"dict %@", dict);
     _on = [dict numberForKey: @"on"].boolValue;
     _bri = [dict numberForKey: @"bri"].integerValue;
     _hue = [dict numberForKey: @"hue"].integerValue;

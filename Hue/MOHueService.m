@@ -49,7 +49,7 @@
   NSData* data = [NSURLConnection sendSynchronousRequest: request returningResponse: &response error: &error];
   
   if ( error ) {
-    DBG(@"Error %@", error);
+    ERROR(@"%@ %@ %@", hueRequest.relativePath, hueRequest.httpMethod, error);
   }
   
   id responseObject = [data objectFromJSONData];
@@ -63,7 +63,7 @@
   if ( [self isReady] ) {
     [self executeRequest: hueRequest];
   } else {
-    DBG(@"Waiting for service to become ready.");
+    INFO(@"Waiting for service to become ready.");
     [NSThread sleepUntilDate: [self.lastRequestDate dateByAddingTimeInterval: [self minTimeBetweenRequests]]];
     [self executeRequestWhenReady: hueRequest];
   }
@@ -73,7 +73,7 @@
   if ( [self isReady] ) {
     [self executeRequest: hueRequest];
   } else {
-    DBG(@"Service not ready. Skipping request execution");
+    INFO(@"Service not ready. Skipping request execution");
   }
 }
 
@@ -85,7 +85,7 @@
   [NSURLConnection sendAsynchronousRequest: request queue: _resultProcessingQueue completionHandler: ^(NSURLResponse* response, NSData* data, NSError* error) {
     
     if ( error ) {
-      DBG(@"Error %@", error);
+      ERROR(@"%@ %@ %@", hueRequest.relativePath, hueRequest.httpMethod, error);
     }
     
     id responseObject = [data objectFromJSONData];
@@ -100,7 +100,7 @@
   if ( [self isReady] ) {
     [self executeRequest: hueRequest];
   } else {
-    DBG(@"Waiting for service to become ready.");
+    INFO(@"Waiting for service to become ready.");
     NSDate* dateWhenReady = [self.lastRequestDate dateByAddingTimeInterval: [self minTimeBetweenRequests]];
     NSTimeInterval timeUntilReady = [dateWhenReady timeIntervalSinceDate: [NSDate date]];
     //[NSTimer scheduledTimerWithTimeInterval: timeUntilReady target: self selector: @selector(executeAsyncRequestWhenReady:) userInfo: hueRequest repeats: NO];
@@ -111,7 +111,7 @@
   if ( [self isReady] ) {
     [self executeAsyncRequest: hueRequest];
   } else {
-    DBG(@"Service not ready. Skipping request execution");
+    INFO(@"Service not ready. Skipping request execution");
   }
 }
 
